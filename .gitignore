@@ -1,10 +1,20 @@
+# Secrets & Environment Credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+*service_account*.json
+*credentials*.json
+
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 backend/venv/
 .venv/
-.env
 .pytest_cache/
 
 # Node / Frontend
