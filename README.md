@@ -25,82 +25,89 @@ Enterprise banks and financial services institutions across JAPAC face a trillio
 
 ## 📐 System Architecture
 
+<p align="center">
+  <img src="docs/assets/system-architecture.svg" alt="AegisGov AI Enterprise System Architecture" width="100%" />
+</p>
+
+<p align="center">
+  🔗 <em>Explore the interactive diagram with dark/light themes and component inspection: <strong><a href="docs/assets/system-architecture.html">Open Archify Interactive Diagram (HTML)</a></strong></em>
+</p>
+
 ```mermaid
-flowchart TD
-    subgraph JAPAC_Inputs["JAPAC BFSI Data & Regulatory Policies"]
-        RegPolicies["Regulatory Policies<br>(MAS FEAT, RBI, Singapore PDPA, India DPDP)"]
-        RawStreams["Raw JAPAC Financial Streams<br>(SGD PayNow, INR UPI/IMPS, FAST Transfers, KYC Documents)"]
+flowchart LR
+    subgraph Inputs["1. JAPAC INGESTION & REGULATION"]
+        direction TB
+        Policies["📜 Regulatory Mandates<br/><i>(MAS FEAT · RBI · DPDP)</i>"]
+        Streams["💳 Financial Streams<br/><i>(SGD PayNow · INR UPI/IMPS)</i>"]
+        Users["👤 Enterprise Users<br/><i>(Compliance & Analysts)</i>"]
     end
 
-    subgraph Agent_1["Agent 1: Policy-as-Code Compiler (Gemini 1.5 Pro)"]
-        Compiler["Policy-to-Code Agent"]
-        Contracts["Machine-Executable Data Contracts<br>& RBAC/ABAC/TBAC Matrix (Pydantic / JSON)"]
-        RegPolicies --> Compiler --> Contracts
+    subgraph CompilerTier["2. POLICY COMPILER (AGENT 1)"]
+        direction TB
+        Agent1["🤖 Policy-to-Code Compiler<br/><b>Gemini 1.5 Pro</b>"]
+        Contracts["📑 Machine Data Contracts<br/><i>(Pydantic & RBAC/TBAC Matrix)</i>"]
     end
 
-    subgraph Agent_2["Agent 2: Medallion Contract Inspector (DuckDB Lakehouse)"]
-        Bronze["Bronze (Raw JAPAC Lakehouse)<br>Dirty Schemas, Plaintext NRIC/PAN/UPI"]
-        Silver["Silver (Cleaned & Vault-Tokenized)<br>Curated SGD/INR Transactions, Masked PII"]
-        Gold["Gold (Certified AI-Ready Tier)<br>Risk Metrics, Basel III / AML Certified Aggregations"]
-        Quarantine["Quarantine Vault<br>Malformed Schemas & Contract Breaches"]
-
-        RawStreams --> Bronze
-        Contracts -->|Enforce Contracts| Bronze
-        Bronze -->|Schema Validation & PII Tokenization| Silver
-        Bronze -.->|Policy Breach| Quarantine
-        Silver -->|Certified Financial Aggregations & SLAs| Gold
+    subgraph LakehouseTier["3. MEDALLION LAKEHOUSE (AGENT 2)"]
+        direction TB
+        Bronze[("🥉 Bronze Tier<br/><i>Raw Ingestion</i>")]
+        Silver[("🥈 Silver Tier<br/><i>Masked & Vault-Tokenized</i>")]
+        Gold[("🥇 Gold Tier<br/><i>Certified AI-Ready Facts</i>")]
+        Quarantine[("🛑 Quarantine Vault<br/><i>Policy & Schema Breaches</i>")]
     end
 
-    subgraph Defense_Harness["Agentic AI Governance & Safety Harness (Gemini 1.5 Flash + Deterministic Guard)"]
-        subgraph Ingress["1. Ingress Guard"]
-            UserPrompt["Employee / System Prompt"]
-            AccessCheck["RBAC / ABAC / TBAC Verification (PoLP)"]
-            ThreatScanner["Prompt Injection & Attack Scanner"]
-            TokenizePII["Dynamic JAPAC PII Tokenizer (NRIC/PAN)"]
-            UserPrompt --> AccessCheck --> ThreatScanner --> TokenizePII
-        end
-
-        subgraph Core_Agent["2. Enterprise Financial Agent (Gemini 1.5 Pro / Flash)"]
-            LLM["Financial Analyst Copilot"]
-            CircuitBreaker["Circuit Breaker & Four-Eyes Gate<br>(Actions > S$ 10,000 / ₹ 5 Lakhs)"]
-            TokenizePII --> LLM
-            LLM -->|Proposed Tool Action| CircuitBreaker
-            CircuitBreaker -->|Certified Queries Only| Gold
-            CircuitBreaker -->|Gate Approval / Execution| LLM
-        end
-
-        subgraph HITL_Approval["3. Human-in-the-Loop (HITL) Center"]
-            PendingQueue["HITL Approval Drawer"]
-            HumanOfficer{"Authorized Reviewer<br>(Compliance / Risk Officer)"}
-            CircuitBreaker -->|Mandatory Gate| PendingQueue
-            PendingQueue --> HumanOfficer
-        end
-
-        subgraph Egress["4. Egress Guard"]
-            GroundingCheck["Hallucination & Gold Factuality Verifier"]
-            MASFilter["MAS FEAT Bias & Advisory Filter"]
-            SecretLeakFilter["Secret & Token Leak Scanner"]
-            LLM --> GroundingCheck --> MASFilter --> SecretLeakFilter
-            HumanOfficer -->|Approved Action| GroundingCheck
-        end
+    subgraph DefenseHarness["4. 5-STAGE AI DEFENSE HARNESS"]
+        direction TB
+        Ingress["🛡️ Stage 1: Ingress Guard<br/><i>PoLP Check · Zero-PII Tokenizer</i>"]
+        Copilot["🤖 Stage 2: Financial Copilot<br/><b>Gemini 1.5 Flash (Agent 3)</b>"]
+        CircuitBreaker{"⚡ Stage 3: Circuit Breaker<br/><i>Four-Eyes Gate >S$10K / ₹5L</i>"}
+        HITL["👥 Stage 4: HITL Approval<br/><i>Dual-Custody Risk Officer</i>"]
+        Egress["🔒 Stage 5: Egress Guard<br/><i>MAS FEAT Bias & Secret Scanner</i>"]
     end
 
-    subgraph Telemetry_Console["Enterprise Governance Console (React + Vite + Tailwind)"]
-        LineageGraph["Interactive Medallion Lineage"]
-        HarnessMonitor["Live AI Safety Harness Telemetry & Threat Radar"]
-        AuditLedger["Cryptographic Tamper-Evident Audit Ledger"]
-        PolicyStudio["Natural Language -> Policy-as-Code Studio"]
+    subgraph SovereignSurface["5. GOVERNANCE & AUDIT SURFACE"]
+        direction TB
+        SafeResponse["✅ Sanitized Response<br/><i>Verified Financial Intelligence</i>"]
+        Console["📊 Governance Console<br/><i>React 18 + Vite Real-time Radar</i>"]
+        AuditLedger[("🔐 Cryptographic Ledger<br/><i>SHA-256 Tamper-Evident Chain</i>")]
     end
 
-    SecretLeakFilter -->|Sanitized Compliant Output| FinalOutput["Safe Response to Employee / Customer"]
-    Gold --> LineageGraph
-    Quarantine --> LineageGraph
-    Quarantine --> AuditLedger
-    ThreatScanner --> HarnessMonitor
-    CircuitBreaker --> HarnessMonitor
-    CircuitBreaker --> AuditLedger
-    SecretLeakFilter --> AuditLedger
-    Contracts --> PolicyStudio
+    %% Flow Connections
+    Policies --> Agent1 --> Contracts
+    Contracts -->|Contract Enforce| Bronze
+    Streams --> Bronze
+    Bronze -->|Tokenize PII| Silver
+    Silver -->|Certify SLAs| Gold
+    Bronze -.->|Breach| Quarantine
+
+    Users --> Ingress --> Copilot
+    Gold ==>|Grounded Facts| Copilot
+    Copilot --> CircuitBreaker
+
+    CircuitBreaker -->|Action <= S$10K| Egress
+    CircuitBreaker -->|Action > S$10K| HITL -->|Sign-Off| Egress
+
+    Egress --> SafeResponse
+    Egress -.->|Audit Trace| AuditLedger
+    Quarantine -.->|Breach Event| AuditLedger
+    Gold -.->|Lineage Telemetry| Console
+    CircuitBreaker -.->|Risk Radar| Console
+
+    %% Professional Color Palettes
+    classDef inputStyle fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc;
+    classDef compilerStyle fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
+    classDef lakehouseStyle fill:#022c22,stroke:#34d399,stroke-width:1.5px,color:#f8fafc;
+    classDef harnessStyle fill:#311042,stroke:#c084fc,stroke-width:1.5px,color:#f8fafc;
+    classDef egressStyle fill:#172554,stroke:#60a5fa,stroke-width:1.5px,color:#f8fafc;
+    classDef surfaceStyle fill:#18181b,stroke:#a1a1aa,stroke-width:1.5px,color:#f8fafc;
+    classDef gateStyle fill:#450a0a,stroke:#f87171,stroke-width:2px,color:#f8fafc;
+
+    class Policies,Streams,Users inputStyle;
+    class Agent1,Contracts compilerStyle;
+    class Bronze,Silver,Gold,Quarantine lakehouseStyle;
+    class Ingress,Copilot,HITL,Egress harnessStyle;
+    class CircuitBreaker gateStyle;
+    class SafeResponse,Console,AuditLedger surfaceStyle;
 ```
 
 ---
