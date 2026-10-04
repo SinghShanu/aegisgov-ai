@@ -1,0 +1,29 @@
+[
+  {
+    "policy_id": "MAS-TRM-FEAT-2026",
+    "title": "MAS Notice 644 & FEAT Principles for Financial AI Systems",
+    "authority": "Monetary Authority of Singapore (MAS)",
+    "jurisdiction": "SG",
+    "summary": "Mandates strict accountability, fairness, auditability, and Four-Eyes dual control for high-value financial AI actions exceeding S$ 10,000.",
+    "raw_policy_text": "Monetary Authority of Singapore (MAS) Notice 644 on Technology Risk Management and Principles to Promote Fairness, Ethics, Accountability, and Transparency (FEAT) in the Use of Artificial Intelligence and Data Analytics in Singapore's Financial Sector.\n\nSection 4.1: Human Oversight and Dual Control\nFinancial institutions (FIs) deploying autonomous AI agents or automated workflow tools must implement deterministic circuit breakers for actions involving high-risk financial commitments. Any automated fund transfer, high-risk credit underwriting, or balance restructuring exceeding SGD 10,000 (S$ 10,000) mandates independent dual-human sign-off (Four-Eyes Principle) before execution.\n\nSection 5.3: Explainability and Hallucination Suppression\nAI models generating outputs consumed by financial analysts or consumers must provide grounded factuality linked directly to verified financial records. Any ungrounded factual claims or speculative investment advice without appropriate suitability warnings are strictly prohibited.\n\nSection 6.2: Auditability and Data Sovereignty\nAll prompts, agent tool executions, and security decisions must be immutably recorded in a tamper-evident audit log with cryptographic hash verification.",
+    "is_active": true
+  },
+  {
+    "policy_id": "RBI-DL-CYBER-2023",
+    "title": "RBI Digital Lending Guidelines & Cybersecurity Framework",
+    "authority": "Reserve Bank of India (RBI)",
+    "jurisdiction": "IN",
+    "summary": "Enforces sensitive PII protection (PAN, Aadhaar), maker-checker validation for transactions over ₹ 5,00,000, and data localization.",
+    "raw_policy_text": "Reserve Bank of India (RBI) Guidelines on Digital Lending (DOR.CRE.REC.65/21.04.048/2022-23) and Master Direction on Information Technology Governance, Risk, Controls and Assurance.\n\nClause 3.4: Data Privacy and Storage of Sensitive Data\nRegulated Entities (REs) and their lending service providers shall not store personal identity documents of borrowers (including Aadhaar, Permanent Account Number [PAN], and biometric data) in cleartext in any analytics or reporting layer. All national identity numbers must be dynamically masked or tokenized prior to consumption by internal analytics, LLMs, or reporting pipelines.\n\nClause 5.1: Transaction Guardrails\nAny automated digital loan disbursement or credit adjustment exceeding INR 5,00,000 (₹ 5 Lakhs) must pass through a multi-tier authorization gate requiring explicit sign-off from an authorized Risk Officer or Credit Approver.\n\nClause 6.7: Adversarial Defense\nAI systems operating over core banking APIs must incorporate real-time threat detection against injection attacks, API probing, and automated data exfiltration attempts.",
+    "is_active": true
+  },
+  {
+    "policy_id": "JAPAC-PRIVACY-PDPA-DPDP",
+    "title": "Singapore PDPA & India DPDP Act 2023 Harmonized Privacy Contract",
+    "authority": "PDPC Singapore & Data Protection Board of India",
+    "jurisdiction": "GLOBAL",
+    "summary": "Establishes automated Policy-as-Code standards for PII tokenization, purpose limitation, and cross-border transfer prevention across Medallion tiers.",
+    "raw_policy_text": "Harmonized Data Protection and Data Contract Standard under the Singapore Personal Data Protection Act (PDPA) and India Digital Personal Data Protection (DPDP) Act 2023.\n\nSection 12: Medallion Architecture Data Contracts\n1. Bronze Layer (Ingestion): Raw streams may contain original customer identifiers but access must be restricted to certified ETL services under strict TBAC single-session tokens.\n2. Silver Layer (Curated): Direct identifiers including Singapore NRIC/FIN, Indian PAN, Aadhaar, bank account numbers, and credit card numbers must be pseudonymized or replaced with vault-managed synthetic tokens (e.g. TOK_SG_NRIC_XXXX).\n3. Gold Layer (AI-Certified): Only aggregated, de-identified metrics and certified compliance dimensions may be exposed to downstream generative AI copilots and analysts.\n\nSection 18: Cross-Border Restriction\nCustomer data originating in Singapore (SG) or India (IN) must not be transferred or queried by external unverified web services or non-sovereign endpoints without explicit regulatory compliance approval.",
+    "is_active": true
+  }
+]

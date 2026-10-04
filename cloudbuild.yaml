@@ -1,0 +1,43 @@
+steps:
+  # 1. Build Container Image using Cloud Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/aegisgov-repo/aegisgov-app:latest'
+      - '-t'
+      - 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/aegisgov-repo/aegisgov-app:$BUILD_ID'
+      - '.'
+
+  # 2. Push Container Image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/aegisgov-repo/aegisgov-app:latest'
+
+  # 3. Deploy to Google Cloud Run in Singapore (asia-southeast1) with Free-Tier Safety Bounds
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'aegisgov-ai'
+      - '--image'
+      - 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/aegisgov-repo/aegisgov-app:latest'
+      - '--region'
+      - 'asia-southeast1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--max-instances'
+      - '2'
+      - '--memory'
+      - '512Mi'
+      - '--cpu'
+      - '1'
+      - '--set-env-vars'
+      - 'BASE_CURRENCY=SGD,ENVIRONMENT=production,GCP_MODE=local'
+
+images:
+  - 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/aegisgov-repo/aegisgov-app:latest'
+  - 'asia-southeast1-docker.pkg.dev/$PROJECT_ID/aegisgov-repo/aegisgov-app:$BUILD_ID'
