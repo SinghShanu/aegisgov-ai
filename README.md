@@ -45,7 +45,7 @@ flowchart TD
         Quarantine["Quarantine Vault<br>Malformed Schemas & Contract Breaches"]
 
         RawStreams --> Bronze
-        Contracts --> Agent_2
+        Contracts -->|Enforce Contracts| Bronze
         Bronze -->|Schema Validation & PII Tokenization| Silver
         Bronze -.->|Policy Breach| Quarantine
         Silver -->|Certified Financial Aggregations & SLAs| Gold
@@ -64,8 +64,9 @@ flowchart TD
             LLM["Financial Analyst Copilot"]
             CircuitBreaker["Circuit Breaker & Four-Eyes Gate<br>(Actions > S$ 10,000 / ₹ 5 Lakhs)"]
             TokenizePII --> LLM
-            LLM <-->|Tool Execution| CircuitBreaker
-            CircuitBreaker <-->|Certified Queries Only| Gold
+            LLM -->|Proposed Tool Action| CircuitBreaker
+            CircuitBreaker -->|Certified Queries Only| Gold
+            CircuitBreaker -->|Gate Approval / Execution| LLM
         end
 
         subgraph HITL_Approval["3. Human-in-the-Loop (HITL) Center"]
@@ -92,10 +93,13 @@ flowchart TD
     end
 
     SecretLeakFilter -->|Sanitized Compliant Output| FinalOutput["Safe Response to Employee / Customer"]
-    Agent_2 --> LineageGraph
-    Agent_2 --> AuditLedger
-    Defense_Harness --> HarnessMonitor
-    Defense_Harness --> AuditLedger
+    Gold --> LineageGraph
+    Quarantine --> LineageGraph
+    Quarantine --> AuditLedger
+    ThreatScanner --> HarnessMonitor
+    CircuitBreaker --> HarnessMonitor
+    CircuitBreaker --> AuditLedger
+    SecretLeakFilter --> AuditLedger
     Contracts --> PolicyStudio
 ```
 
