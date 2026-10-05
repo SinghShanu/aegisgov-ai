@@ -16,7 +16,7 @@ POLICIES_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "japac_reg
 
 def load_policies() -> List[Dict[str, Any]]:
     if os.path.exists(POLICIES_PATH):
-        with open(POLICIES_PATH, "r") as f:
+        with open(POLICIES_PATH, "r", encoding="utf-8") as f:
             return json.load(f)
     return []
 

@@ -137,45 +137,66 @@ You can get the entire system running locally in **under 3 minutes**.
 
 ### Step 1: Create Virtual Environment & Install Dependencies
 ```bash
-# Navigate to project root
-cd /Users/shanusingh/Google_AI_Builder_Cup_2026
+### 🖥️ Option A: Windows (1-Click or Manual Setup)
 
-# Create Python virtual environment
+#### 1-Click Automated Setup (Windows)
+Double-click [`scripts/run_local.bat`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/scripts/run_local.bat) in File Explorer, or open PowerShell and run:
+```powershell
+.\scripts\run_local.ps1
+```
+*This automatically checks Python, creates `backend\venv`, installs dependencies, copies `.env.example`, and boots the server!*
+
+#### Manual Setup (Windows PowerShell / CMD)
+```powershell
+# 1. Create and activate virtual environment
+python -m venv backend\venv
+.\backend\venv\Scripts\Activate.ps1    # In PowerShell
+# (Or in CMD: backend\venv\Scripts\activate.bat)
+
+# 2. Install dependencies
+pip install -r backend\requirements.txt
+
+# 3. Configure environment
+copy .env.example .env
+
+# 4. Run automated test suite (37/37 tests)
+python -m pytest backend\tests -v
+
+# 5. Start the local server
+python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8080 --reload
+```
+
+---
+
+### 🍎 Option B: macOS / Linux Setup
+
+```bash
+# 1. Create and activate virtual environment
 python3 -m venv backend/venv
-
-# Activate environment
 source backend/venv/bin/activate
 
-# Install lightweight dependencies (< 15 seconds)
+# 2. Install dependencies
 pip install -r backend/requirements.txt
-```
 
-### Step 2: Configure Environment Variables
-```bash
-# Copy template configuration
+# 3. Configure environment
 cp .env.example .env
-```
-*(Optional)* Add your `GEMINI_API_KEY` in `.env`. If left blank, the platform automatically runs in **Deterministic Governance Mode**, simulating full agent execution without making external Google Cloud API calls.
 
-### Step 3: Run the Test Suite (37 / 37 Tests)
-```bash
-PYTHONPATH=. backend/venv/bin/pytest backend/tests -v
-```
-All 37 unit, integration, and security tests run in **< 1.0 second**.
+# 4. Run automated test suite (37/37 tests)
+python -m pytest backend/tests -v
 
-### Step 4: Start the Local Full-Stack Server
-```bash
+# 5. Start the local server
 uvicorn backend.app.main:app --host 0.0.0.0 --port 8080 --reload
 ```
+
 Open **`http://localhost:8080`** in your browser. You will see the live AegisGov AI Sovereign Governance Console!
 
-*(Optional) Modifying the React Frontend:*
-If you want to edit React components:
+*(Optional) Modifying the React Frontend (Any OS):*
+The production frontend is already pre-compiled into `frontend/dist`. If you want to modify UI code:
 ```bash
 cd frontend
 npm install
 npm run dev   # Runs Vite dev server at http://localhost:5173
-# Or compile into backend static:
+# Or recompile into production bundle:
 npm run build
 ```
 

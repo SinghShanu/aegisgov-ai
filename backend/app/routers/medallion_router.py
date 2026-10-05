@@ -13,7 +13,7 @@ SAMPLE_TX_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "sample_j
 
 def initialize_bronze_data():
     if os.path.exists(SAMPLE_TX_PATH):
-        with open(SAMPLE_TX_PATH, "r") as f:
+        with open(SAMPLE_TX_PATH, "r", encoding="utf-8") as f:
             records = json.load(f)
             medallion_lakehouse.ingest_bronze(records)
 

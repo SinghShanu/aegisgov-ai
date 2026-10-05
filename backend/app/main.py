@@ -98,7 +98,7 @@ if os.path.exists(frontend_dist_path):
     async def serve_spa(full_path: str):
         # Resolve target canonical path and prevent directory traversal
         target_path = os.path.abspath(os.path.join(frontend_dist_path, full_path))
-        if target_path.startswith(frontend_dist_path) and os.path.isfile(target_path):
+        if os.path.normcase(target_path).startswith(os.path.normcase(frontend_dist_path)) and os.path.isfile(target_path):
             return FileResponse(target_path)
         return FileResponse(os.path.join(frontend_dist_path, "index.html"))
 
