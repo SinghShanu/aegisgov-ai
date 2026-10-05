@@ -150,7 +150,7 @@ SLIDE 6: PROCESS FLOW / USE-CASE DIAGRAM
 * **Step 6 (Dual-Custody Approval):** Compliance Officer inspects transaction in the HITL Drawer and grants cryptographic approval.
 * **Step 7 (Egress & Audit):** Egress guard checks for credential leaks; the action is executed and permanently recorded in the SHA-256 audit ledger.
 
-*(Embed Process Flow / Sequence diagram from `docs/assets/system-architecture.svg`)*
+*(Embed Process Flow / Swimlane diagram from `docs/assets/process-flow-diagram.svg`)*
 
 ---
 

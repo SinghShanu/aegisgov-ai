@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" width="1200" height="820" role="img" aria-label="AegisGov AI Process Flow Diagram">
+  <defs>
+    <style type="text/css"><![CDATA[
+      text {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      }
+      .bg-canvas { fill: #0a0f1d; }
+      .grid-line { stroke: #1e293b; stroke-width: 0.5; stroke-dasharray: 2, 4; opacity: 0.4; }
+      .lane-bg-1 { fill: rgba(14, 165, 233, 0.04); stroke: rgba(56, 189, 248, 0.25); stroke-width: 1; }
+      .lane-bg-2 { fill: rgba(16, 185, 129, 0.04); stroke: rgba(52, 211, 153, 0.25); stroke-width: 1; }
+      .lane-bg-3 { fill: rgba(139, 92, 246, 0.04); stroke: rgba(167, 139, 250, 0.25); stroke-width: 1; }
+      .lane-bg-4 { fill: rgba(244, 63, 94, 0.04); stroke: rgba(251, 113, 133, 0.25); stroke-width: 1; }
+      
+      .lane-header { font-size: 13px; font-weight: 700; letter-spacing: 0.5px; }
+      .lane-header-1 { fill: #38bdf8; }
+      .lane-header-2 { fill: #34d399; }
+      .lane-header-3 { fill: #c084fc; }
+      .lane-header-4 { fill: #fb7185; }
+
+      .card-mask { fill: #0f172a; }
+      .card-1 { fill: rgba(8, 51, 68, 0.65); stroke: #0284c7; stroke-width: 1.5; }
+      .card-2 { fill: rgba(6, 78, 59, 0.65); stroke: #059669; stroke-width: 1.5; }
+      .card-3 { fill: rgba(88, 28, 135, 0.65); stroke: #7c3aed; stroke-width: 1.5; }
+      .card-gate { fill: rgba(136, 19, 55, 0.65); stroke: #e11d48; stroke-width: 1.8; }
+      .card-hitl { fill: rgba(120, 53, 15, 0.65); stroke: #d97706; stroke-width: 1.8; }
+      .card-4 { fill: rgba(30, 41, 59, 0.75); stroke: #64748b; stroke-width: 1.5; }
+
+      .step-badge { font-size: 9px; font-weight: 800; }
+      .badge-1 { fill: #38bdf8; }
+      .badge-2 { fill: #34d399; }
+      .badge-3 { fill: #c084fc; }
+      .badge-gate { fill: #fb7185; }
+      .badge-hitl { fill: #fbbf24; }
+      .badge-4 { fill: #94a3b8; }
+
+      .card-title { fill: #f8fafc; font-size: 12px; font-weight: 600; }
+      .card-desc { fill: #94a3b8; font-size: 10px; }
+      .card-fine { fill: #64748b; font-size: 8.5px; }
+
+      .flow-arrow { stroke: #64748b; stroke-width: 1.8; fill: none; }
+      .flow-arrow-emp { stroke: #38bdf8; stroke-width: 2; fill: none; }
+      .flow-arrow-success { stroke: #34d399; stroke-width: 2; fill: none; }
+      .flow-arrow-alert { stroke: #fb7185; stroke-width: 1.8; stroke-dasharray: 4, 3; fill: none; }
+      .flow-arrow-hitl { stroke: #fbbf24; stroke-width: 1.8; fill: none; }
+
+      .arrow-label { font-size: 9.5px; font-weight: 600; text-anchor: middle; }
+      .lbl-default { fill: #94a3b8; }
+      .lbl-success { fill: #34d399; }
+      .lbl-alert { fill: #fb7185; }
+      .lbl-hitl { fill: #fbbf24; }
+
+      .m-default { fill: #64748b; }
+      .m-emp { fill: #38bdf8; }
+      .m-success { fill: #34d399; }
+      .m-alert { fill: #fb7185; }
+      .m-hitl { fill: #fbbf24; }
+    ]]></style>
+
+    <marker id="arr-default" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="m-default" />
+    </marker>
+    <marker id="arr-emp" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="m-emp" />
+    </marker>
+    <marker id="arr-success" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="m-success" />
+    </marker>
+    <marker id="arr-alert" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="m-alert" />
+    </marker>
+    <marker id="arr-hitl" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="m-hitl" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="bg-canvas" rx="10" />
+
+  <!-- Title Header -->
+  <text x="40" y="42" fill="#f8fafc" font-size="18" font-weight="700">AegisGov AI: End-to-End Enterprise Process Flow &amp; Safety Execution</text>
+  <text x="40" y="62" fill="#94a3b8" font-size="11">Sequential Step-by-Step Architecture: From Natural Language Mandate to Cryptographic Tamper-Proof Audit</text>
+
+  <!-- ======================================================== -->
+  <!-- 4 HORIZONTAL SWIMLANES -->
+  <!-- ======================================================== -->
+
+  <!-- Lane 1: Policy-as-Code Compiler (Agent 1) -->
+  <rect x="30" y="80" width="1140" height="155" rx="8" class="lane-bg-1" />
+  <rect x="30" y="80" width="250" height="28" rx="4" fill="rgba(14, 165, 233, 0.15)" />
+  <text x="42" y="99" class="lane-header lane-header-1">1. POLICY COMPILER (AGENT 1)</text>
+
+  <!-- Lane 2: Medallion Lakehouse Hygiene (Agent 2) -->
+  <rect x="30" y="250" width="1140" height="175" rx="8" class="lane-bg-2" />
+  <rect x="30" y="250" width="280" height="28" rx="4" fill="rgba(16, 185, 129, 0.15)" />
+  <text x="42" y="269" class="lane-header lane-header-2">2. MEDALLION LAKEHOUSE (AGENT 2)</text>
+
+  <!-- Lane 3: 5-Stage AI Safety Harness (Agent 3) -->
+  <rect x="30" y="440" width="1140" height="215" rx="8" class="lane-bg-3" />
+  <rect x="30" y="440" width="300" height="28" rx="4" fill="rgba(139, 92, 246, 0.15)" />
+  <text x="42" y="459" class="lane-header lane-header-3">3. 5-STAGE SAFETY HARNESS (AGENT 3)</text>
+
+  <!-- Lane 4: Sovereign Governance Surface -->
+  <rect x="30" y="670" width="1140" height="125" rx="8" class="lane-bg-4" />
+  <rect x="30" y="670" width="310" height="28" rx="4" fill="rgba(244, 63, 94, 0.15)" />
+  <text x="42" y="689" class="lane-header lane-header-4">4. SOVEREIGN GOVERNANCE &amp; AUDIT</text>
+
+  <!-- ======================================================== -->
+  <!-- STEP CARDS & FLOW (ORTHOGONAL STRAIGHT ARROWS) -->
+  <!-- ======================================================== -->
+
+  <!-- [Step 01] Ingest Mandates (Lane 1, Col 1) -->
+  <g transform="translate(50, 120)">
+    <rect width="170" height="95" rx="6" class="card-mask" />
+    <rect width="170" height="95" rx="6" class="card-1" />
+    <text x="12" y="20" class="step-badge badge-1">STEP 01</text>
+    <text x="12" y="38" class="card-title">Ingest Mandates</text>
+    <text x="12" y="54" class="card-desc">MAS FEAT · RBI Guidelines</text>
+    <text x="12" y="68" class="card-desc">Singapore PDPA · India DPDP</text>
+    <text x="12" y="84" class="card-fine">Legal Text &amp; Policy PDFs</text>
+  </g>
+
+  <!-- Arrow: Step 01 -> Step 02 (Straight Horizontal) -->
+  <path d="M 220 167 L 270 167" class="flow-arrow-emp" marker-end="url(#arr-emp)" />
+  <text x="245" y="160" class="arrow-label lbl-default">Extract</text>
+
+  <!-- [Step 02] Compile Machine Contracts (Lane 1, Col 2) -->
+  <g transform="translate(270, 120)">
+    <rect width="180" height="95" rx="6" class="card-mask" />
+    <rect width="180" height="95" rx="6" class="card-1" />
+    <text x="12" y="20" class="step-badge badge-1">STEP 02 · GEMINI 1.5 PRO</text>
+    <text x="12" y="38" class="card-title">Policy-as-Code Compiler</text>
+    <text x="12" y="54" class="card-desc">Compiles Machine Contracts</text>
+    <text x="12" y="68" class="card-desc">Pydantic Schemas + Matrix</text>
+    <text x="12" y="84" class="card-fine">RBAC / ABAC / TBAC Rules</text>
+  </g>
+
+  <!-- Arrow: Step 02 -> Step 03 (Straight Down to Lane 2) -->
+  <path d="M 360 215 L 360 285" class="flow-arrow-emp" marker-end="url(#arr-emp)" />
+  <text x="405" y="248" class="arrow-label lbl-default">Enforce Schema</text>
+
+  <!-- [Step 03] Financial Streams & Bronze Landing (Lane 2, Col 1) -->
+  <g transform="translate(50, 290)">
+    <rect width="170" height="105" rx="6" class="card-mask" />
+    <rect width="170" height="105" rx="6" class="card-2" />
+    <text x="12" y="20" class="step-badge badge-2">STEP 03</text>
+    <text x="12" y="38" class="card-title">Financial Streams</text>
+    <text x="12" y="54" class="card-desc">SGD FAST / PayNow</text>
+    <text x="12" y="68" class="card-desc">INR UPI / IMPS Rails</text>
+    <text x="12" y="84" class="card-desc">→ Bronze Tier (Raw Vault)</text>
+    <text x="12" y="98" class="card-fine">DuckDB In-Memory Landing</text>
+  </g>
+
+  <!-- Arrow: Step 03 -> Step 04 Gate (Straight Horizontal) -->
+  <path d="M 220 342 L 270 342" class="flow-arrow-success" marker-end="url(#arr-success)" />
+  <text x="245" y="335" class="arrow-label lbl-default">Inspect</text>
+
+  <!-- [Step 04] Contract Validation Gate (Lane 2, Col 2) -->
+  <g transform="translate(270, 290)">
+    <rect width="180" height="105" rx="6" class="card-mask" />
+    <rect width="180" height="105" rx="6" class="card-2" />
+    <text x="12" y="20" class="step-badge badge-2">STEP 04 · INSPECTION</text>
+    <text x="12" y="38" class="card-title">Contract Validation</text>
+    <text x="12" y="54" class="card-desc">Agent 2 Schema Check</text>
+    <text x="12" y="68" class="card-desc">NRIC &amp; PAN/Aadhaar Masking</text>
+    <text x="12" y="84" class="card-desc">Dynamic Tokenization</text>
+    <text x="12" y="98" class="card-fine">Zero-Trust Data Boundary</text>
+  </g>
+
+  <!-- Arrow: Step 04 Pass -> Step 05 Gold (Straight Horizontal) -->
+  <path d="M 450 342 L 510 342" class="flow-arrow-success" marker-end="url(#arr-success)" />
+  <text x="480" y="335" class="arrow-label lbl-success">Passed</text>
+
+  <!-- [Step 04 Alert] Quarantine Vault (Lane 2, Below Gate) -->
+  <g transform="translate(270, 400)">
+    <rect width="180" height="18" rx="3" class="card-mask" />
+    <rect width="180" height="18" rx="3" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1" stroke-dasharray="3, 2" />
+    <text x="90" y="412" fill="#fb7185" font-size="9" font-weight="600" text-anchor="middle">Quarantine Vault (Breach Isolation)</text>
+  </g>
+
+  <!-- Arrow: Step 04 -> Quarantine -->
+  <path d="M 360 395 L 360 400" class="flow-arrow-alert" />
+
+  <!-- [Step 05] Certified Gold Facts (Lane 2, Col 3) -->
+  <g transform="translate(510, 290)">
+    <rect width="180" height="105" rx="6" class="card-mask" />
+    <rect width="180" height="105" rx="6" class="card-2" />
+    <text x="12" y="20" class="step-badge badge-2">STEP 05 · CERTIFIED</text>
+    <text x="12" y="38" class="card-title">Gold Tier Lakehouse</text>
+    <text x="12" y="54" class="card-desc">Clean Reconciled Facts</text>
+    <text x="12" y="68" class="card-desc">Certified SLA Lineage</text>
+    <text x="12" y="84" class="card-desc">Zero PII Leakage</text>
+    <text x="12" y="98" class="card-fine">Audit-Ready In-Memory DB</text>
+  </g>
+
+  <!-- Arrow: Step 05 Gold -> Step 07 Copilot (Orthogonal Down to Lane 3) -->
+  <path d="M 600 395 L 600 480 L 450 480" class="flow-arrow-success" marker-end="url(#arr-success)" />
+  <text x="545" y="473" class="arrow-label lbl-success">Grounded Facts</text>
+
+  <!-- [Step 06] User Query Ingress (Lane 3, Col 1) -->
+  <g transform="translate(50, 480)">
+    <rect width="170" height="125" rx="6" class="card-mask" />
+    <rect width="170" height="125" rx="6" class="card-3" />
+    <text x="12" y="20" class="step-badge badge-3">STEP 06 · STAGE 1</text>
+    <text x="12" y="38" class="card-title">Ingress Guard</text>
+    <text x="12" y="54" class="card-desc">Enterprise User Query</text>
+    <text x="12" y="68" class="card-desc">RBAC Clearance Verified</text>
+    <text x="12" y="84" class="card-desc">PoLP Capability Token Issued</text>
+    <text x="12" y="98" class="card-desc">Prompt Injection Defense</text>
+    <text x="12" y="114" class="card-fine">Ephemeral TBAC TTL</text>
+  </g>
+
+  <!-- Arrow: Step 06 -> Step 07 Copilot (Straight Horizontal) -->
+  <path d="M 220 542 L 270 542" class="flow-arrow" marker-end="url(#arr-default)" />
+  <text x="245" y="535" class="arrow-label lbl-default">Authorized</text>
+
+  <!-- [Step 07] Financial Copilot Agent 3 (Lane 3, Col 2) -->
+  <g transform="translate(270, 480)">
+    <rect width="180" height="125" rx="6" class="card-mask" />
+    <rect width="180" height="125" rx="6" class="card-3" />
+    <text x="12" y="20" class="step-badge badge-3">STEP 07 · STAGE 2</text>
+    <text x="12" y="38" class="card-title">Financial Copilot</text>
+    <text x="12" y="54" class="card-desc">Gemini 1.5 Flash (Agent 3)</text>
+    <text x="12" y="68" class="card-desc">Strict Grounding on Gold</text>
+    <text x="12" y="84" class="card-desc">Proposes Action / Query</text>
+    <text x="12" y="98" class="card-desc">Zero Hallucination</text>
+    <text x="12" y="114" class="card-fine">Deterministic Execution</text>
+  </g>
+
+  <!-- Arrow: Step 07 -> Step 08 Circuit Breaker (Straight Horizontal) -->
+  <path d="M 450 542 L 500 542" class="flow-arrow" marker-end="url(#arr-default)" />
+  <text x="475" y="535" class="arrow-label lbl-default">Evaluate</text>
+
+  <!-- [Step 08] Circuit Breaker Gate (Lane 3, Col 3) -->
+  <g transform="translate(500, 480)">
+    <rect width="180" height="125" rx="6" class="card-mask" />
+    <rect width="180" height="125" rx="6" class="card-gate" />
+    <text x="12" y="20" class="step-badge badge-gate">STEP 08 · STAGE 3 GATE</text>
+    <text x="12" y="38" class="card-title">Circuit Breaker</text>
+    <text x="12" y="54" class="card-desc">Value &gt; S,000</text>
+    <text x="12" y="68" class="card-desc">or INR 5,00,000 Threshold?</text>
+    <text x="12" y="84" class="card-desc">Egress Webhook Check</text>
+    <text x="12" y="98" class="card-desc">KYC / PII Export Detection</text>
+    <text x="12" y="114" class="card-fine">Deterministic Risk Interceptor</text>
+  </g>
+
+  <!-- Arrow: Step 08 Gate High Risk -> Step 09 HITL (Straight Upwards to HITL) -->
+  <path d="M 590 480 L 590 450 L 730 450 L 730 480" class="flow-arrow-hitl" marker-end="url(#arr-hitl)" />
+  <text x="660" y="444" class="arrow-label lbl-hitl">&gt; SK: Dual Custody Gate</text>
+
+  <!-- [Step 09] HITL Approval Center (Lane 3, Col 4 Top) -->
+  <g transform="translate(720, 480)">
+    <rect width="190" height="58" rx="6" class="card-mask" />
+    <rect width="190" height="58" rx="6" class="card-hitl" />
+    <text x="12" y="18" class="step-badge badge-hitl">STEP 09 · STAGE 4 HITL</text>
+    <text x="12" y="34" class="card-title">Dual-Custody Sign-Off</text>
+    <text x="12" y="48" class="card-desc">Four-Eyes Review by Risk Officer</text>
+  </g>
+
+  <!-- Arrow: Step 09 HITL -> Step 10 Egress (Straight Down) -->
+  <path d="M 815 538 L 815 565" class="flow-arrow-success" marker-end="url(#arr-success)" />
+  <text x="855" y="555" class="arrow-label lbl-success">Approved</text>
+
+  <!-- Arrow: Step 08 Gate Normal Risk -> Step 10 Egress (Straight Horizontal) -->
+  <path d="M 680 580 L 720 580" class="flow-arrow" marker-end="url(#arr-default)" />
+  <text x="700" y="573" class="arrow-label lbl-default">≤ SK</text>
+
+  <!-- [Step 10] Egress Guard (Lane 3, Col 4 Bottom) -->
+  <g transform="translate(720, 565)">
+    <rect width="190" height="60" rx="6" class="card-mask" />
+    <rect width="190" height="60" rx="6" class="card-3" />
+    <text x="12" y="18" class="step-badge badge-3">STEP 10 · STAGE 5</text>
+    <text x="12" y="34" class="card-title">Egress Guard</text>
+    <text x="12" y="48" class="card-desc">MAS FEAT Bias Scanner &amp; Secret Filter</text>
+  </g>
+
+  <!-- [Step 11] Verified Response Delivery (Lane 4, Col 2) -->
+  <g transform="translate(480, 700)">
+    <rect width="200" height="75" rx="6" class="card-mask" />
+    <rect width="200" height="75" rx="6" class="card-4" />
+    <text x="12" y="20" class="step-badge badge-4">STEP 11 · DELIVERY</text>
+    <text x="12" y="38" class="card-title">Verified Response</text>
+    <text x="12" y="54" class="card-desc">React 18 Governance Radar</text>
+    <text x="12" y="68" class="card-fine">Real-time Telemetry &amp; Confidence</text>
+  </g>
+
+  <!-- [Step 12] Cryptographic Tamper-Proof Ledger (Lane 4, Col 4) -->
+  <g transform="translate(720, 700)">
+    <rect width="200" height="75" rx="6" class="card-mask" />
+    <rect width="200" height="75" rx="6" class="card-4" stroke="#fbbf24" stroke-width="1.5" />
+    <text x="12" y="20" class="step-badge badge-hitl">STEP 12 · IMMUTABLE PROOF</text>
+    <text x="12" y="38" class="card-title">Cryptographic Audit Ledger</text>
+    <text x="12" y="54" class="card-desc">SHA-256 Chained Hash Block</text>
+    <text x="12" y="68" class="card-fine">Mathematical Audit Verification (MAS/RBI)</text>
+  </g>
+
+  <!-- Arrow: Step 10 Egress -> Step 11 Verified Response (Orthogonal Left into Step 11) -->
+  <path d="M 720 600 L 580 600 L 580 700" class="flow-arrow-success" marker-end="url(#arr-success)" />
+  <text x="640" y="593" class="arrow-label lbl-success">Release Response</text>
+
+  <!-- Arrow: Step 10 Egress -> Step 12 Audit Ledger (Straight Down into Step 12) -->
+  <path d="M 820 625 L 820 700" class="flow-arrow-emp" marker-end="url(#arr-emp)" />
+  <text x="865" y="665" class="arrow-label lbl-default">Hash Block</text>
+
+</svg>

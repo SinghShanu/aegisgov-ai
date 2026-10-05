@@ -35,82 +35,110 @@ Enterprise banks and financial services institutions across JAPAC face a trillio
   🔗 <em>Explore the interactive diagram with dark/light themes and component inspection: <strong><a href="docs/assets/system-architecture.html">Open Archify Interactive Diagram (HTML)</a></strong></em>
 </p>
 
+### 🔄 End-to-End Enterprise Process Flow (Swimlane Execution)
+
+<p align="center">
+  <a href="docs/assets/process-flow-diagram.svg">
+    <img src="docs/assets/process-flow-diagram.svg" alt="AegisGov AI End-to-End Enterprise Process Flow Diagram" width="100%" />
+  </a>
+</p>
+
 ```mermaid
-flowchart LR
-    subgraph Inputs["1. JAPAC INGESTION & REGULATION"]
+flowchart TD
+    %% ========================================================
+    %% SWIMLANE 1: POLICY-AS-CODE COMPILATION (AGENT 1)
+    %% ========================================================
+    subgraph Lane1["🏛️ SWIMLANE 1: POLICY-AS-CODE COMPILER (AGENT 1)"]
         direction TB
-        Policies["📜 Regulatory Mandates<br/><i>(MAS FEAT · RBI · DPDP)</i>"]
-        Streams["💳 Financial Streams<br/><i>(SGD PayNow · INR UPI/IMPS)</i>"]
-        Users["👤 Enterprise Users<br/><i>(Compliance & Analysts)</i>"]
+        S1["<b>Step 1: Regulatory Policy Ingestion</b><br/>MAS Notice 644 · MAS FEAT · RBI Guidelines · Singapore PDPA · India DPDP"]
+        S2["<b>Step 2: Policy Compiler Execution (Gemini 1.5 Pro)</b><br/>Compiles natural language into Machine Contracts (Pydantic & RBAC/TBAC Matrix)"]
+        S1 --> S2
     end
 
-    subgraph CompilerTier["2. POLICY COMPILER (AGENT 1)"]
+    %% ========================================================
+    %% SWIMLANE 2: MEDALLION LAKEHOUSE HYGIENE (AGENT 2)
+    %% ========================================================
+    subgraph Lane2["💾 SWIMLANE 2: MEDALLION LAKEHOUSE ENGINE (AGENT 2)"]
         direction TB
-        Agent1["🤖 Policy-to-Code Compiler<br/><b>Gemini 1.5 Pro</b>"]
-        Contracts["📑 Machine Data Contracts<br/><i>(Pydantic & RBAC/TBAC Matrix)</i>"]
+        S3["<b>Step 3: Financial Streaming Ingestion</b><br/>SGD PayNow/FAST · INR UPI/IMPS &rarr; In-Memory Bronze Tier Landing"]
+        S4{"<b>Step 4: Data Contract Gate</b><br/>Schema & Policy Match?"}
+        S4_Pass["<b>Promote to Silver Tier</b><br/>Dynamic Masking: Singapore NRIC & India PAN/Aadhaar Tokenized"]
+        S4_Fail["🛑 <b>Quarantine Vault</b><br/>Breached Record Isolated · Alert Dispatched"]
+        S5["<b>Step 5: Metric Certification & SLA Reconcile</b><br/>DuckDB Certified Gold Tier Facts (AI-Ready, Zero PII)"]
+
+        S3 --> S4
+        S4 -->|Compliant| S4_Pass --> S5
+        S4 -->|Violation| S4_Fail
     end
 
-    subgraph LakehouseTier["3. MEDALLION LAKEHOUSE (AGENT 2)"]
+    %% ========================================================
+    %% SWIMLANE 3: 5-STAGE AI SAFETY HARNESS (AGENT 3)
+    %% ========================================================
+    subgraph Lane3["🛡️ SWIMLANE 3: 5-STAGE AI SAFETY HARNESS (AGENT 3)"]
         direction TB
-        Bronze[("🥉 Bronze Tier<br/><i>Raw Ingestion</i>")]
-        Silver[("🥈 Silver Tier<br/><i>Masked & Vault-Tokenized</i>")]
-        Gold[("🥇 Gold Tier<br/><i>Certified AI-Ready Facts</i>")]
-        Quarantine[("🛑 Quarantine Vault<br/><i>Policy & Schema Breaches</i>")]
+        S6["<b>Step 6: User Query Ingress (Stage 1)</b><br/>RBAC/ABAC Clearance Validated · Ephemeral TBAC Token · Injection Defense"]
+        S7["<b>Step 7: Financial Copilot Execution (Stage 2)</b><br/>Gemini 1.5 Flash grounded strictly on Certified Gold Facts"]
+        S8{"<b>Step 8: Circuit Breaker Evaluation (Stage 3)</b><br/>Action Value > S$10,000 or ₹5,00,000?"}
+        S9_HITL["👥 <b>Step 9: Dual-Custody HITL Approval (Stage 4)</b><br/>Execution Halted · Four-Eyes Sign-Off Required by Risk Officer"]
+        S10_Egress["🔒 <b>Step 10: Egress Guard Validation (Stage 5)</b><br/>MAS FEAT Bias Scanner · Secret & Data Leak Defense"]
+
+        S6 --> S7 --> S8
+        S8 -->|Exceeds Limit| S9_HITL --> S10_Egress
+        S8 -->|Within Limit| S10_Egress
     end
 
-    subgraph DefenseHarness["4. 5-STAGE AI DEFENSE HARNESS"]
+    %% ========================================================
+    %% SWIMLANE 4: SOVEREIGN GOVERNANCE & AUDIT SURFACE
+    %% ========================================================
+    subgraph Lane4["🔐 SWIMLANE 4: SOVEREIGN AUDIT & GOVERNANCE SURFACE"]
         direction TB
-        Ingress["🛡️ Stage 1: Ingress Guard<br/><i>PoLP Check · Zero-PII Tokenizer</i>"]
-        Copilot["🤖 Stage 2: Financial Copilot<br/><b>Gemini 1.5 Flash (Agent 3)</b>"]
-        CircuitBreaker{"⚡ Stage 3: Circuit Breaker<br/><i>Four-Eyes Gate >S$10K / ₹5L</i>"}
-        HITL["👥 Stage 4: HITL Approval<br/><i>Dual-Custody Risk Officer</i>"]
-        Egress["🔒 Stage 5: Egress Guard<br/><i>MAS FEAT Bias & Secret Scanner</i>"]
+        S11["<b>Step 11: Verified Response Delivery</b><br/>Sanitized Result Rendered on React 18 Governance Radar"]
+        S12[("<b>Step 12: Immutable Ledger Chaining</b><br/>SHA-256 Block Appended (previous_hash &rarr; entry_hash)")]
+
+        S11 --> S12
     end
 
-    subgraph SovereignSurface["5. GOVERNANCE & AUDIT SURFACE"]
-        direction TB
-        SafeResponse["✅ Sanitized Response<br/><i>Verified Financial Intelligence</i>"]
-        Console["📊 Governance Console<br/><i>React 18 + Vite Real-time Radar</i>"]
-        AuditLedger[("🔐 Cryptographic Ledger<br/><i>SHA-256 Tamper-Evident Chain</i>")]
-    end
+    %% ========================================================
+    %% STRAIGHT SEQUENTIAL INTER-LANE TRANSITIONS
+    %% ========================================================
+    Lane1 -->|Contracts Enforced| Lane2
+    Lane2 -->|Certified Gold Facts| Lane3
+    Lane3 -->|Sanitized Execution| Lane4
 
-    %% Flow Connections
-    Policies --> Agent1 --> Contracts
-    Contracts -->|Contract Enforce| Bronze
-    Streams --> Bronze
-    Bronze -->|Tokenize PII| Silver
-    Silver -->|Certify SLAs| Gold
-    Bronze -.->|Breach| Quarantine
-
-    Users --> Ingress --> Copilot
-    Gold ==>|Grounded Facts| Copilot
-    Copilot --> CircuitBreaker
-
-    CircuitBreaker -->|Action <= S$10K| Egress
-    CircuitBreaker -->|Action > S$10K| HITL -->|Sign-Off| Egress
-
-    Egress --> SafeResponse
-    Egress -.->|Audit Trace| AuditLedger
-    Quarantine -.->|Breach Event| AuditLedger
-    Gold -.->|Lineage Telemetry| Console
-    CircuitBreaker -.->|Risk Radar| Console
-
-    %% Professional Color Palettes
-    classDef inputStyle fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc;
-    classDef compilerStyle fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
+    %% ========================================================
+    %% PROFESSIONAL COLOR SCHEMES
+    %% ========================================================
+    classDef compilerStyle fill:#0f172a,stroke:#38bdf8,stroke-width:1.5px,color:#f8fafc;
     classDef lakehouseStyle fill:#022c22,stroke:#34d399,stroke-width:1.5px,color:#f8fafc;
-    classDef harnessStyle fill:#311042,stroke:#c084fc,stroke-width:1.5px,color:#f8fafc;
-    classDef egressStyle fill:#172554,stroke:#60a5fa,stroke-width:1.5px,color:#f8fafc;
+    classDef harnessStyle fill:#1e1b4b,stroke:#818cf8,stroke-width:1.5px,color:#f8fafc;
     classDef surfaceStyle fill:#18181b,stroke:#a1a1aa,stroke-width:1.5px,color:#f8fafc;
     classDef gateStyle fill:#450a0a,stroke:#f87171,stroke-width:2px,color:#f8fafc;
+    classDef hitlStyle fill:#451a03,stroke:#fbbf24,stroke-width:2px,color:#f8fafc;
 
-    class Policies,Streams,Users inputStyle;
-    class Agent1,Contracts compilerStyle;
-    class Bronze,Silver,Gold,Quarantine lakehouseStyle;
-    class Ingress,Copilot,HITL,Egress harnessStyle;
-    class CircuitBreaker gateStyle;
-    class SafeResponse,Console,AuditLedger surfaceStyle;
+    class S1,S2 compilerStyle;
+    class S3,S4_Pass,S5 lakehouseStyle;
+    class S6,S7,S10_Egress harnessStyle;
+    class S4,S8,S4_Fail gateStyle;
+    class S9_HITL hitlStyle;
+    class S11,S12 surfaceStyle;
 ```
+
+#### 📋 Step-by-Step Execution Lifecycle Runbook
+
+| Step | Phase / Swimlane | Primary Actor / Agent | Function / Enforced Rule | Output / Artifact |
+| :---: | :--- | :--- | :--- | :--- |
+| **01** | **Ingestion & Regulation** | Compliance Officer | Ingest natural language compliance regulations | MAS FEAT, RBI, PDPA, DPDP policy documents |
+| **02** | **Policy Compiler** | **Agent 1** (Gemini 1.5 Pro) | Compiles natural policies into machine contracts | Pydantic Schemas & RBAC/ABAC/TBAC Matrix |
+| **03** | **Medallion Ingestion** | Ingestion Stream | Ingests real-time payment rails (PayNow, UPI) | In-Memory Bronze Tier Landing Vault |
+| **04** | **Lakehouse Inspector** | **Agent 2** (DuckDB) | Validates schemas & dynamically masks NRIC/PAN | Clean Silver Tier (or Quarantine Vault if breached) |
+| **05** | **Certification Tier** | **Agent 2** (DuckDB) | Aggregates and certifies SLA metrics | Certified Gold Tier Facts (AI-ready, zero PII) |
+| **06** | **Ingress Guard** | Stage 1 Defense | Verifies user credentials, clears tokens, screens prompt | Ephemeral Capability Token (PoLP), Sanitized Query |
+| **07** | **Financial Copilot** | **Agent 3** (Gemini 1.5 Flash)| Generates grounded analytical insights & actions | Action Proposal strictly grounded in Gold Facts |
+| **08** | **Circuit Breaker** | Stage 3 Defense | Evaluates financial thresholds (> S\$10K / ₹5L) | Gate decision: Fast-track or Halt execution |
+| **09** | **HITL Approval** | Stage 4 Dual Custody | Four-Eyes approval gate by Senior Risk Officer | Dual-custody sign-off or action abort |
+| **10** | **Egress Guard** | Stage 5 Defense | Scans for MAS FEAT algorithmic bias & secret leaks | Final certified safe response payload |
+| **11** | **Console Display** | Governance Console | Displays verified response with real-time confidence | React 18 Real-Time Governance Radar |
+| **12** | **Audit Chaining** | Tamper-Evident Ledger| SHA-256 cryptographically chained audit block | Verifiable mathematical proof of audit integrity |
 
 ---
 
