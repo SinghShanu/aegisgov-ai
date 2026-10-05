@@ -26,7 +26,9 @@ Enterprise banks and financial services institutions across JAPAC face a trillio
 ## 📐 System Architecture
 
 <p align="center">
-  <img src="docs/assets/system-architecture.svg" alt="AegisGov AI Enterprise System Architecture" width="100%" />
+  <a href="docs/assets/system-architecture.html">
+    <img src="docs/assets/system-architecture.svg" alt="AegisGov AI Enterprise System Architecture" width="100%" />
+  </a>
 </p>
 
 <p align="center">
