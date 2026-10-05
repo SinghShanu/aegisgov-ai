@@ -1,38 +1,47 @@
 # AegisGov AI: New Team Member Onboarding & Architectural Briefing
-*A Data & Platform Engineer's Guide to our Google Cloud AI Builder Cup 2026 Solution*
+*A Data & Platform Engineer's Comprehensive Guide to our Google Cloud AI Builder Cup 2026 Solution*
 
 ---
 
 ## 🎯 Executive Summary (The 2-Minute Briefing)
 
-**Project Name:** AegisGov AI  
-**Team Identity:** Team AegisGov  
-**Competition Track:** Google Cloud AI Builder Cup 2026 (JAPAC) — *Future of Work & Enterprise Productivity*  
-**Core Problem Statement:** Generative AI copilots and autonomous financial agents are entering institutional banking, but **compliance policies are written in human legal language**, while **data systems run on code**. Because agents operate in milliseconds without built-in guardrails, banks face massive regulatory fines, PII exfiltration, prompt injections, and catastrophic unapproved fund movements.  
-**Our Solution:** An end-to-end **Policy-as-Code (PaC) & Multi-Agent Safety Harness Platform** built specifically for regulated BFSI institutions across JAPAC (Singapore, India, Japan, Australia). It bridges legal regulations directly to the data layer by:
-1. Translating natural language banking policies into machine-executable **Data Contracts**.
-2. Enforcing contracts across a **Medallion Lakehouse** (Bronze $\rightarrow$ Silver $\rightarrow$ Gold + Quarantine).
-3. Wrapping internal AI copilots in a deterministic **5-Stage Defense Harness** with human-in-the-loop (HITL) maker-checker approval.
+* **Project Name:** AegisGov AI  
+* **Team Identity:** Team AegisGov  
+* **Competition:** Google Cloud AI Builder Cup 2026 (JAPAC)  
+* **Target Domain:** **BFSI (Banking, Financial Services & Insurance)** *(Theme: Multi-Agent AI Safety & Governance)*  
+* **Core Problem Statement:** Generative AI copilots and autonomous financial agents are entering institutional banking, but **compliance policies are written in human legal language**, while **data systems run on code**. Because agents operate in milliseconds without built-in guardrails, banks face massive regulatory fines, PII exfiltration, prompt injections, and catastrophic unapproved fund movements.  
+* **Our Solution:** An end-to-end **Policy-as-Code (PaC) & Multi-Agent Safety Harness Platform** built specifically for regulated BFSI institutions across JAPAC (Singapore, India, Japan, Australia). It bridges legal regulations directly to the data layer by:
+  1. Translating natural language banking policies into machine-executable **Data Contracts** (Agent 1: Gemini 1.5 Pro).
+  2. Enforcing contracts across an in-memory **Medallion Lakehouse** (Bronze $\rightarrow$ Silver $\rightarrow$ Gold + Quarantine Vault) with dynamic NRIC/PAN/Aadhaar tokenization (Agent 2: DuckDB).
+  3. Wrapping internal AI copilots in a deterministic **5-Stage Defense Harness** with automated Circuit Breakers and Human-in-the-Loop (HITL) maker-checker approval (Agent 3: Gemini 1.5 Flash).
+  4. Logging all events, validations, and approvals into an immutable, **SHA-256 Cryptographic Audit Ledger**.
 
 ---
 
-## 🏛️ Why We Chose This Use Case & Domain
+## 📅 Hackathon Milestones & Delivery Timeline
+
+Keep these non-negotiable hackathon deadlines in your calendar:
+
+| Deadline / Milestone | Date & Time | Mandatory Requirements | Status |
+| :--- | :--- | :--- | :--- |
+| **Team Formation Freeze** | **October 11, 2026 (11:59 PM IST)** | All participants **must** belong to a registered team of **2 to 4 members** on Hack2skill. Solo participation leads to disqualification. | 🟡 In Progress |
+| **Final Submission Freeze** | **October 18, 2026 (11:59 PM IST)** | Complete submission package: 3–5 min demo video, Pitch Deck (PPTX/PDF), Public GitHub repo, Live Google Cloud Run URL. | 🟢 Ready for Submission |
+| **Winner Announcement** | **November 2026** | Evaluation on Technical Depth, Google Cloud & Gemini Integration, ROI & Business Viability, Presentation Quality. | ⏳ Pending Review |
+
+---
+
+## 🏛️ Why We Chose This Use Case & Domain (BFSI Focus)
 
 ### 1. The "Policy-to-Code" Chasm
-In traditional banking, regulatory teams write 100-page compliance manuals (MAS Notice 644, MAS FEAT, RBI Digital Lending, Singapore PDPA, India DPDP Act). Meanwhile, data engineers build pipelines and software teams build AI copilots. There is **zero programmatic link** between legal mandates and the underlying lakehouse tables or agent APIs.
+In traditional banking, regulatory teams write 100-page compliance manuals (MAS Notice 644, MAS FEAT, RBI Digital Lending, Singapore PDPA, India DPDP Act). Meanwhile, data engineers build pipelines and software teams build AI copilots. There is **zero programmatic link** between legal mandates and the underlying lakehouse tables or agent APIs. AegisGov AI transforms legal prose directly into enforceable code.
 
 ### 2. High-Stakes Regulatory Urgency in JAPAC
-* **Singapore's Shared Responsibility Framework (SRF):** Banks now face direct financial liability for scam restitution if unauthorized digital transfers bypass anti-phishing or anti-mule controls.
+* **Singapore's Shared Responsibility Framework (SRF):** Banks face direct financial liability for scam restitution if unauthorized digital transfers bypass anti-phishing or anti-mule controls.
 * **MAS Notice 644 & FEAT Principles:** Autonomous AI agents are strictly forbidden from executing high-value financial actions ($> \text{S}\$ 10,000$) without an auditable **Four-Eyes Principle (Dual-Control)** maker-checker review.
 * **India DPDP Act 2023 & RBI Digital Lending:** Prohibits storing raw national identity documents (PAN, Aadhaar) in cleartext across analytical and reporting tiers.
 
----
-
-## 📊 Business Metrics & Hard ROI Targeted
-
-When presenting this project to judges and executives, we focus on hard quantitative outcomes, not just "AI accuracy":
-
-| Use Case & Risk Category | Traditional Banking Baseline | With AegisGov AI | Business Metric / ROI Targeted |
+### 3. Business Metrics & Hard ROI
+| Risk & Use Case | Traditional Banking Baseline | With AegisGov AI | Quantifiable Impact / Hard ROI |
 | :--- | :--- | :--- | :--- |
 | **Cross-Rail Scam & Mule Ring Bypass** | Manual L1 AML review queues; days of delay; banks absorb scam restitution. | Real-time Ingress Guard + Lakehouse Quarantine isolates mule payloads instantly. | **Saves ~$2.8M** in Level-1 AML operational headcount; **$0 scam liability** under Singapore SRF. |
 | **SME Commercial Credit / Lease Payout** | Multi-day email/paper underwriting; 5 business days turnaround. | Deterministic Circuit Breaker escalates disbursements $> \text{S}\$ 10\text{k}$ to HITL in seconds. | **45-second decisioning** (down from 5 days); 100% adherence to MAS Notice 644. |
@@ -42,162 +51,215 @@ When presenting this project to judges and executives, we focus on hard quantita
 
 ---
 
-## 🏗️ End-to-End Architecture: A Data & Platform Engineer's View
+## 🗺️ Visual Architecture & Master Documentation Map
 
-As a platform and data engineer, you will immediately recognize the core architectural pillars:
+Before exploring the code, review the core diagrams and documentation blueprints:
+
+1. **Enterprise System Architecture:**
+   * Vector Diagram: [`docs/assets/system-architecture.svg`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/assets/system-architecture.svg)
+   * Interactive Inspection Viewer: [`docs/assets/system-architecture.html`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/assets/system-architecture.html) *(Features dark/light themes, component inspection, and edge tracing).*
+2. **End-to-End Swimlane Process Flow:**
+   * Vector Graphic: [`docs/assets/process-flow-diagram.svg`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/assets/process-flow-diagram.svg)
+   * Markdown Specification: See [`README.md`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/README.md#L38-L124) for the 12-Step Sequential Execution Flowchart.
+3. **Master Pitch Deck Blueprint:**
+   * Presentation Content Guide: [`docs/PITCH_DECK_CONTENT_MASTER.md`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/PITCH_DECK_CONTENT_MASTER.md) *(Slide-by-slide copy deck mapped to the official AI Builder Cup template).*
+4. **Safe Cloud Deployment Runbook:**
+   * Account Isolation Guide: [`docs/SAFE_CLOUD_DEPLOYMENT.md`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/SAFE_CLOUD_DEPLOYMENT.md) *(Guarantees deployment exclusively to free-tier account).*
+5. **JAPAC Regulatory Dictionary:**
+   * Compliance Lexicon: [`docs/REGULATORY_DICTIONARY.md`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/REGULATORY_DICTIONARY.md) *(MAS Notice 644, FEAT, RBI, PDPA, FAST, PayNow, UPI).*
+
+---
+
+## 📂 Codebase Directory Navigation Map
+
+The codebase is organized into a clean, decoupled full-stack monorepo:
 
 ```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                                    JAPAC INGRESS RAILS                                │
-│                   (Singapore FAST / PayNow, India UPI / IMPS, SWIFT)                   │
-└───────────────────────────────────────────┬────────────────────────────────────────────┘
-                                            ▼
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                     LAYER 1: POLICY-AS-CODE COMPILER (AGENT 1)                         │
-│  Input: Natural Language Policy (e.g. MAS Notice 644 / RBI Digital Lending)            │
-│  Output: Machine-Readable Data Contracts (Pydantic / JSON Schema with Masking Rules)  │
-│  Governance Gate: PENDING_APPROVAL ──► Compliance Officer Sign-off ──► ACTIVE_ENFORCING│
-└───────────────────────────────────────────┬────────────────────────────────────────────┘
-                                            ▼
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                     LAYER 2: MEDALLION LAKEHOUSE PIPELINE (AGENT 2)                    │
-│                                                                                        │
-│   ┌────────────────────────┐         ┌────────────────────────┐                        │
-│   │   1. BRONZE (Raw Lake) │         │   3. QUARANTINE VAULT  │                        │
-│   │   Raw cleartext NRIC,  │         │   Negative amounts,    │                        │
-│   │   PAN, dirty schemas   │ ──────► │   corrupted payloads,  │                        │
-│   │   [PoLP: Data Engineer │         │   breaches isolated    │                        │
-│   │    Access ONLY]        │         └────────────────────────┘                        │
-│   └───────────┬────────────┘                                                           │
-│               │ (Schema Validation & Dynamic Vault Tokenization)                       │
-│               ▼                                                                        │
-│   ┌────────────────────────┐         ┌────────────────────────┐                        │
-│   │   2. SILVER (Curated)  │         │   4. GOLD (Certified)  │                        │
-│   │   Pseudonymized PII,   │ ──────► │   Audited aggregates,  │ ──► Downstream Copilot │
-│   │   FX normalized (SGD)  │         │   AI-ready analytics   │     & BI Reporting     │
-│   └────────────────────────┘         └────────────────────────┘                        │
-└────────────────────────────────────────────────────────────────────────────────────────┘
-                                            │
-                                            ▼
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│               LAYER 3: AGENTIC AI 5-STAGE DEFENSE HARNESS (AGENT 3)                    │
-│                                                                                        │
-│  1. Ingress Guard     ──► Prompt injection scanner + PII tokenization                  │
-│  2. Identity Auth     ──► RBAC (Role) + ABAC (Jurisdiction) + TBAC (30-min TTL)       │
-│  3. Circuit Breaker   ──► Deterministic trigger (> S$ 10,000 / > ₹ 5 Lakhs)            │
-│  4. HITL Center       ──► Four-Eyes Maker-Checker Review (Risk Officer Sign-Off)       │
-│  5. Egress DLP        ──► Secret/key interception + Tamper-Evident SHA-256 Ledger      │
-└────────────────────────────────────────────────────────────────────────────────────────┘
-                                            │
-                                            ▼
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│               LAYER 4: REGRESSION GUARDIAN & QA VAULT (AGENT 4)                        │
-│  Automated test catalog ensuring prompt or logic tweaks never re-introduce regressions │
-└────────────────────────────────────────────────────────────────────────────────────────┘
+Google_AI_Builder_Cup_2026/
+├── backend/
+│   ├── app/
+│   │   ├── main.py                  # FastAPI Application, OWASP security headers, static SPA mounting
+│   │   ├── api/                     # REST API Routers
+│   │   │   ├── copilot.py           # Copilot chat endpoint, 5-stage harness invocation
+│   │   │   ├── contracts.py         # Data contract lifecycle (compile, approve, enforce)
+│   │   │   ├── medallion.py         # DuckDB lakehouse tier queries (Bronze PoLP, Silver, Gold, Quarantine)
+│   │   │   ├── hitl.py              # Human-in-the-Loop ticket approval / rejection drawer
+│   │   │   ├── audit.py             # SHA-256 cryptographic ledger endpoints & chain verifier
+│   │   │   └── health.py            # /api/health endpoint for Cloud Run liveness probes
+│   │   ├── agents/                  # Autonomous Gemini & Lakehouse Agents
+│   │   │   ├── policy_compiler.py   # Agent 1: Compiles legal text into Pydantic DataContracts
+│   │   │   ├── lakehouse_inspector.py # Agent 2: Enforces contracts on DuckDB & quarantines breaches
+│   │   │   ├── analyst_copilot.py   # Agent 3: Grounded financial copilot (Gemini 1.5 Flash)
+│   │   │   └── qa_guardian.py       # Agent 4: Continuous security regression test runner
+│   │   ├── core/                    # Core Security, Privacy & Governance Engines
+│   │   │   ├── defense_harness.py   # 5-Stage Defense Harness (Ingress, Auth, CircuitBreaker, HITL, Egress)
+│   │   │   ├── pii_vault.py         # Dynamic JAPAC Tokenizer (NRIC/FIN, PAN, Aadhaar)
+│   │   │   ├── audit_ledger.py      # Tamper-evident SHA-256 cryptographic hash-chain ledger
+│   │   │   ├── token_manager.py     # Ephemeral capability tokens (TBAC / PoLP with 30-min TTL)
+│   │   │   └── config.py            # Environment settings via Pydantic Settings
+│   │   ├── db/                      # In-Memory Lakehouse
+│   │   │   └── duckdb_client.py     # Embedded DuckDB client managing Bronze, Silver, Gold, Quarantine
+│   │   └── static/                  # Production-compiled React 18 SPA (pre-bundled!)
+│   ├── tests/                       # Pytest Test Suite (37/37 passing tests)
+│   │   ├── test_copilot_api.py      # API tests & security regression tests
+│   │   ├── test_data_contracts.py   # Contract validation & compilation tests
+│   │   ├── test_defense_harness.py  # 5-stage harness unit tests
+│   │   ├── test_medallion_db.py     # Bronze PoLP, Silver masking, Gold SLA tests
+│   │   └── test_pii_vault.py        # Tokenizer & cryptographic ledger integrity tests
+│   ├── requirements.txt             # Python dependencies
+│   └── Dockerfile                   # Hardened multi-stage Docker build (CIS Benchmark 4.1 non-root)
+├── frontend/                        # React 18 + Vite + Tailwind CSS Source Code
+│   ├── src/
+│   │   ├── App.tsx                  # Root layout, persona switcher, navigation tabs
+│   │   ├── components/
+│   │   │   ├── CopilotConsole.tsx   # AI Copilot chat & real-time 5-stage radar display
+│   │   │   ├── PolicyStudio.tsx     # Policy-as-Code compilation studio & contract approval
+│   │   │   ├── MedallionLineage.tsx # Lakehouse visualizer (Bronze, Silver, Gold, Quarantine)
+│   │   │   ├── AuditLedger.tsx      # Cryptographic audit ledger & 1-click chain verifier
+│   │   │   ├── HITLDrawer.tsx       # Four-Eyes maker-checker approval drawer
+│   │   │   └── QAGuardian.tsx       # Continuous regression guardian vault
+│   │   └── services/api.ts          # Typed API client
+│   └── package.json
+├── scripts/                         # Operational & Deployment Automation
+│   ├── verify_gcp_account.sh        # Pre-flight account isolation guardrail (blocks personal accounts)
+│   └── deploy.sh                    # Automated Cloud Build & Cloud Run deployment script
+└── docs/                            # Architecture, Guides, Pitch Deck & Regulatory Lexicon
 ```
 
 ---
 
-## 🔑 Key Engineering Concepts to Know
+## ⚡ 5-Minute Zero-Friction Developer Setup
 
-### 1. Dynamic Data Contracts (Not Just Static Pydantic Schemas)
-* **What it is:** Instead of hardcoding data contracts in code, our **Policy Compiler Agent** reads regulatory text and compiles a `DataContract` object containing:
-  - Governing regulation (`MAS Notice 644`, `RBI Digital Lending`)
-  - Target Lakehouse Tier (`SILVER`)
-  - Column rules: `column_name`, `data_type`, `nullable`, `pii_type`, `masking_strategy`
-* **Change Management Lifecycle (SOC 2 CC8.1):** When generated, a contract enters `PENDING_APPROVAL`. Only a user with `COMPLIANCE_OFFICER` or `RISK_OFFICER` role can review and approve it. Once approved, it transitions to `ACTIVE_ENFORCING`, triggers an automated lakehouse inspection cycle, records telemetry, and logs to the cryptographic ledger.
+You can get the entire system running locally in **under 3 minutes**. 
 
-### 2. Principle of Least Privilege (PoLP) on the Bronze Layer
-* **The Problem:** Many data lakehouses accidentally grant broad read access to the raw Bronze tier, exposing unmasked customer NRICs, PANs, and bank accounts to analysts and AI models.
-* **Our Solution:** The backend API (`/api/medallion/tier/BRONZE`) enforces **strict PoLP tier-gating**:
-  - Only **Alex Wong (Principal Data Platform Engineer)** with `view_bronze_raw` clearance can inspect raw Bronze cleartext data.
-  - Junior Analysts, Wealth Advisors, and Compliance Auditors receive an immediate `HTTP 403 Forbidden` and an institutional **Zero-Trust Access Blocked Banner** directing them to curated Silver or Gold tiers.
+> [!TIP]
+> **No Node.js/npm Required for Backend Testing:** The production React 18 frontend is already pre-compiled into `backend/app/static/`. Starting the Python backend automatically serves the full-stack UI at `http://localhost:8080`.
 
-### 3. Cryptographic SHA-256 Audit Ledger (Tamper-Evident Chain)
-* Every prompt, security denial, policy compilation, HITL ticket resolution, and stream burst is logged into a sequential, hash-chained ledger (`AuditLedger`).
-* Each block contains `previous_hash`, `timestamp`, `user_id`, `decision`, and its own `entry_hash`.
-* **Privacy Hardening:** Prior to hashing, all action strings automatically pass through `pii_vault.scan_and_sanitize_text()`, ensuring that **zero cleartext customer PII is ever sealed into the immutable chain**.
-
-### 4. Continuous QA Regression Guardian (Agent 4)
-* A specialized agent pre-seeded with 6 certified baseline security test scenarios.
-* When developers or testers discover subtle prompt injection vulnerabilities or RBAC edge cases, they can click `[🛡️ Save to QA Vault]` to permanently retain the verbatim prompt, expected status, and discovery notes.
-* The 1-click **Regression Runner** executes the suite, benchmarking latency, evaluating keyword assertions, and computing a **Regression Risk Level**.
-
----
-
-## 🛠️ The Tech Stack & GCP Infrastructure
-
-| Layer / Component | Technology Used | Why We Chose It |
-| :--- | :--- | :--- |
-| **Frontend UI** | React 18, TypeScript, Tailwind CSS, Lucide Icons, Vite | Single-page application compiled into a single static distribution; fast, zero lag. |
-| **Backend API** | Python 3.11, FastAPI, Uvicorn, Pydantic v2 | High-throughput asynchronous REST API; native OpenAPI docs; strict schema typing. |
-| **In-Memory Lakehouse** | DuckDB (Embedded OLAP) + BigQuery compatibility | Blazing-fast SQL analytics on Parquet/JSON streams without heavy cluster overhead. |
-| **Generative AI Core** | Google GenAI SDK (`google-genai`), Gemini 2.0 Flash & Gemini 1.5 Pro | Sub-second agentic reasoning, structured JSON Schema extraction, enterprise SLA. |
-| **Cloud Hosting** | Google Cloud Run (`asia-southeast1` Singapore) | Serverless container execution; scale-to-zero ($0 idle cost); capped at 2 instances (Free Tier). |
-| **Cloud CI/CD** | Google Cloud Build + Artifact Registry | Automated cloud packaging; CIS Docker Benchmark 4.1 non-root container (`appuser`). |
-| **Security & Privacy** | Custom PII Vault Tokenizer, SHA-256 Hash Chain, OWASP Defense Headers | Bank-grade zero-trust perimeter defense; compliant with PDPA, DPDP, and MAS TRM. |
-
----
-
-## 🚦 How to Run & Demo the System (5-Minute Quickstart)
-
-### 1. Start the Local Server
+### Step 1: Create Virtual Environment & Install Dependencies
 ```bash
+# Navigate to project root
 cd /Users/shanusingh/Google_AI_Builder_Cup_2026
-source backend/venv/bin/activate
-uvicorn backend.app.main:app --host 0.0.0.0 --port 8080 --reload
-```
-Open your browser at **`http://localhost:8080`**.
 
-### 2. Run the Automated Test Suite (37 / 37 Tests)
+# Create Python virtual environment
+python3 -m venv backend/venv
+
+# Activate environment
+source backend/venv/bin/activate
+
+# Install lightweight dependencies (< 15 seconds)
+pip install -r backend/requirements.txt
+```
+
+### Step 2: Configure Environment Variables
+```bash
+# Copy template configuration
+cp .env.example .env
+```
+*(Optional)* Add your `GEMINI_API_KEY` in `.env`. If left blank, the platform automatically runs in **Deterministic Governance Mode**, simulating full agent execution without making external Google Cloud API calls.
+
+### Step 3: Run the Test Suite (37 / 37 Tests)
 ```bash
 PYTHONPATH=. backend/venv/bin/pytest backend/tests -v
 ```
-All 37 unit and integration tests execute in **< 1.0 second**.
+All 37 unit, integration, and security tests run in **< 1.0 second**.
 
-### 3. Key Golden Paths to Demo
+### Step 4: Start the Local Full-Stack Server
+```bash
+uvicorn backend.app.main:app --host 0.0.0.0 --port 8080 --reload
+```
+Open **`http://localhost:8080`** in your browser. You will see the live AegisGov AI Sovereign Governance Console!
 
-#### Demo 1: The 5-Stage Safety Harness & Four-Eyes HITL Escalation
-1. In the top navbar, select **`Vikram Mehta (Senior Wealth Advisor)`**.
-2. Go to Console 1: **`AI Copilot & Live Defense`**.
-3. Click the preset: **`Commercial Credit & Lease Payout`** (or submit: *"Please execute commercial lease deposit of S$ 75,000 via FAST to Sentosa Real Estate..."*).
-4. Watch the 5-Stage Harness execute:
-   - Stage 1: Role authorized (`WEALTH_ADVISOR`).
-   - Stage 2: Ingress clean.
-   - Stage 3: **Circuit Breaker Triggers!** S$ 75,000 exceeds single-agent operational limits ($\text{S}\$ 10,000$).
-   - Returns `PENDING_HITL_APPROVAL` and dispatches ticket `#HITL-SG-109X`.
-5. Switch persona to **`Kenji Sato (Director of Risk)`** in the top navbar.
-6. Open the **HITL Approval Center** (amber button in header) and click **`[Approve Transaction]`**.
-7. Return to the Copilot and resubmit: the transaction settles immediately with Four-Eyes replay protection verified!
-
-#### Demo 2: Medallion Lakehouse Bronze PoLP Access Gating
-1. Switch persona to **`Rachel Lim (Junior Analyst)`**.
-2. Navigate to Console 2: **`Policy-as-Code & Lakehouse`** $\rightarrow$ **`Medallion Lakehouse Lineage`**.
-3. Click **`1. Bronze (Raw Lake)`**:
-   - Notice the **`HTTP 403 Forbidden` Zero-Trust Access Blocked Banner** explaining why raw PII is hidden from analysts under MAS TRM guidelines.
-   - Click **`[View Silver Tier]`** to see the pseudonymized tokens (`S****234A`).
-4. Switch persona in the header to **`Alex Wong (Principal Data Platform Engineer)`**:
-   - Click **`1. Bronze (Raw Lake)`**:
-   - The unmasked records table unlocks with an active **`Data Platform Engineer Clearance Verified`** banner!
-
-#### Demo 3: Policy-as-Code Compilation & Lifecycle Approval
-1. Select persona **`Priya Sharma (Principal Compliance Auditor)`**.
-2. Go to Console 2 $\rightarrow$ **`Policy-as-Code Studio`**.
-3. Select **MAS Notice 644 Cross-Border Fast Contract** and click **`[⚡ Compile Policy to Code]`**.
-4. Observe the contract initialize in **`PENDING GOVERNANCE APPROVAL`**.
-5. As Compliance Auditor, click **`[Approve & Deploy to Pipeline]`**:
-   - Watch the contract transition to **`ACTIVE ENFORCING`**.
-   - An interactive 4-stage lifecycle stepper renders live telemetry counters (Promoted to Silver, Quarantined Breaches, Compliance Health Score).
-   - Click **`[View in Medallion Lineage]`** to jump directly to the live lakehouse view!
+*(Optional) Modifying the React Frontend:*
+If you want to edit React components:
+```bash
+cd frontend
+npm install
+npm run dev   # Runs Vite dev server at http://localhost:5173
+# Or compile into backend static:
+npm run build
+```
 
 ---
 
-## 🤝 Where You Can Jump In
+## 🎮 The 3 Golden Path Demos (Must-Run)
 
-Now that you understand the architecture, here are the highest-impact areas where platform & data engineering expertise shines:
-1. **Streaming Rails Integration:** Extending `transaction_streamer.py` to connect directly to Google Cloud Pub/Sub topics for live multi-region ingestion.
-2. **Lakehouse Connectors:** Adding a BigQuery BigLake Iceberg table sync to mirror our embedded DuckDB tiers directly into cloud storage.
-3. **Advanced Data Contract Rules:** Adding custom anomaly detection or statistical schema-drift checks to the Policy Compiler Agent.
-4. **Cloud Run Infrastructure:** Helping test and verify our automated deployment scripts (`./scripts/deploy.sh`) on Google Cloud Run.
+To understand how the system works end to end, run these 3 live scenarios:
 
-Welcome to **Team AegisGov**! Let's build the future of autonomous, compliant banking! 🚀
+### Demo 1: The 5-Stage Safety Harness & Four-Eyes HITL Escalation
+1. In the top navbar persona selector, choose **`Vikram Mehta (Senior Wealth Advisor)`**.
+2. Open Tab 1: **`AI Copilot & Live Defense`**.
+3. Click the preset: **`Commercial Credit & Lease Payout`** (or submit: *"Please execute commercial lease deposit of S$ 75,000 via FAST to Sentosa Real Estate..."*).
+4. Watch the 5-Stage Harness evaluate the request:
+   * **Stage 1 (Ingress):** Clearance verified (`WEALTH_ADVISOR`), prompt sanitized.
+   * **Stage 2 (Copilot):** Gemini 1.5 Flash proposes the payout transaction grounded on Gold facts.
+   * **Stage 3 (Circuit Breaker):** **Triggered!** `S$ 75,000` exceeds single-agent operational limits ($\text{S}\$ 10,000$). Execution is immediately halted; ticket `#HITL-SG-109X` is dispatched.
+5. In the top navbar, switch persona to **`Kenji Sato (Director of Risk)`**.
+6. Open the **HITL Approval Drawer** (amber button in header) and click **`[Approve Transaction]`**.
+7. Return to the Copilot and resubmit: the transaction settles immediately with Four-Eyes maker-checker verification permanently logged!
+
+### Demo 2: Medallion Lakehouse Bronze PoLP Access Gating
+1. Switch persona to **`Rachel Lim (Junior Analyst)`**.
+2. Open Tab 2: **`Policy-as-Code & Lakehouse`** $\rightarrow$ **`Medallion Lakehouse Lineage`**.
+3. Click **`1. Bronze (Raw Lake)`**:
+   * Observe the **`HTTP 403 Forbidden` Zero-Trust Access Blocked Banner** explaining why raw cleartext PII is withheld from analysts under MAS TRM and PDPA guidelines.
+   * Click **`[View Silver Tier]`** to see the pseudonymized tokens (`S****234A`).
+4. Switch persona in the header to **`Alex Wong (Principal Data Platform Engineer)`**:
+   * Click **`1. Bronze (Raw Lake)`**:
+   * The unmasked records table unlocks with an active **`Data Platform Engineer Clearance Verified`** banner!
+
+### Demo 3: Policy-as-Code Compilation & Lifecycle Approval
+1. Select persona **`Priya Sharma (Principal Compliance Auditor)`**.
+2. Go to Tab 2 $\rightarrow$ **`Policy-as-Code Studio`**.
+3. Select **MAS Notice 644 Cross-Border Fast Contract** and click **`[⚡ Compile Policy to Code]`**.
+4. Observe the contract initialize in **`PENDING GOVERNANCE APPROVAL`**.
+5. As Compliance Auditor, click **`[Approve & Deploy to Pipeline]`**:
+   * The contract transitions to **`ACTIVE ENFORCING`**.
+   * An interactive 4-stage lifecycle stepper renders live telemetry counters (Promoted to Silver, Quarantined Breaches, Compliance Health Score).
+   * Click **`[View in Medallion Lineage]`** to jump directly to the live lakehouse view!
+
+---
+
+## 🔒 Cloud Deployment Mechanics & Account Safety Guardrails
+
+We enforce a strict **4-Layer Account Isolation Framework** to guarantee that all cloud deployments occur **exclusively on the designated free-tier account and project**, preventing accidental billing on personal accounts:
+
+```
+[ Developer Runs deploy.sh ]
+             │
+             ▼
+[ Layer 1: scripts/verify_gcp_account.sh ] ──► Fails if active account != GCP_DEPLOY_ACCOUNT
+             │ (Matches shanusingh684@gmail.com)
+             ▼
+[ Layer 2: Explicit CLI Flags ] ──────────────► Hardcodes --account and --project on all gcloud calls
+             │
+             ▼
+[ Layer 3: Cloud Build Packaging ] ──────────► Submits build to Artifact Registry (Singapore asia-southeast1)
+             │
+             ▼
+[ Layer 4: Cloud Run Free-Tier Caps ] ────────► Deploys with --max-instances=2, --memory=512Mi, --cpu=1
+```
+
+### Dry-Run Verification Command
+Before running any deployment, always run the account verification check:
+```bash
+./scripts/verify_gcp_account.sh
+```
+* If your active `gcloud` account is not `shanusingh684@gmail.com`, the script **immediately halts execution** with a clear resolution command (`gcloud config set account ...`).
+* When ready to deploy:
+  ```bash
+  ./scripts/deploy.sh
+  ```
+  The script enables required APIs, verifies the Artifact Registry repo, builds the container via Cloud Build, dynamically forwards `GEMINI_API_KEY` (if set), deploys to Cloud Run with free-tier caps, and outputs the live HTTPS production URL!
+
+---
+
+## 🤝 Where You Can Jump In & Collaborate
+
+Now that you are up to speed with the architecture, here are the highest-impact areas where platform & data engineering expertise will shine before our submission:
+
+1. **BigQuery BigLake / Iceberg Table Mirroring:** Exploring a periodic background sync from our in-memory DuckDB Gold tier to BigQuery external tables for long-term historical analytics.
+2. **Cloud Pub/Sub Streaming Connectors:** Adding a Cloud Pub/Sub subscriber option to `transaction_streamer.py` to ingest real-time mock Swift/FAST streams in Google Cloud.
+3. **Pitch Deck & Video Demo Review:** Reviewing [`docs/PITCH_DECK_CONTENT_MASTER.md`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/PITCH_DECK_CONTENT_MASTER.md) and assisting with the 3–5 minute presentation demo script.
+4. **Custom Data Contract Rule Generators:** Adding domain-specific banking rules (e.g., cross-border FX slippage caps or sanctions list matching) to `policy_compiler.py`.
+
+Welcome to **Team AegisGov**! Let's build the gold standard for sovereign AI governance in institutional finance! 🚀
