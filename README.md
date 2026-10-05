@@ -37,12 +37,6 @@ Enterprise banks and financial services institutions across JAPAC face a trillio
 
 ### 🔄 End-to-End Enterprise Process Flow (Swimlane Execution)
 
-<p align="center">
-  <a href="docs/assets/process-flow-diagram.svg">
-    <img src="docs/assets/process-flow-diagram.svg" alt="AegisGov AI End-to-End Enterprise Process Flow Diagram" width="100%" />
-  </a>
-</p>
-
 ```mermaid
 flowchart TD
     %% ========================================================
