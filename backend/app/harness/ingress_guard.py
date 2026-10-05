@@ -16,13 +16,14 @@ class IngressInspectionResult(BaseModel):
 class IngressGuard:
     # Known adversarial heuristics & jailbreak vectors
     INJECTION_PATTERNS = [
-        (re.compile(r'ignore\s+(all\s+)?(previous|prior)\s+(instructions|prompts|rules|policies|guardrails|safety|security)', re.IGNORECASE), "DIRECT_JAILBREAK_OVERRIDE"),
-        (re.compile(r'system\s+override|admin\s+override|sudo\s+mode', re.IGNORECASE), "PRIVILEGE_ESCALATION_OVERRIDE"),
-        (re.compile(r'you\s+are\s+now\s+(DAN|unrestricted|godmode|jailbroken)', re.IGNORECASE), "ROLEPLAY_JAILBREAK"),
-        (re.compile(r'dump\s+(all\s+)?(tables|schemas|passwords|database|secrets)', re.IGNORECASE), "DATABASE_EXFILTRATION_ATTACK"),
-        (re.compile(r'reveal\s+(your\s+)?(system\s+prompt|developer\s+instructions)', re.IGNORECASE), "SYSTEM_PROMPT_EXTRACTION"),
-        (re.compile(r'bypass\s+(all\s+)?(compliance|guardrails|safety|mas|rbi)', re.IGNORECASE), "COMPLIANCE_BYPASS_ATTACK"),
-        (re.compile(r'base64\s+decode|execute\s+script|<\s*script\s*>', re.IGNORECASE), "CODE_INJECTION_VECTOR")
+        (re.compile(r'(ignore|disregard|forget)\s+(all\s+)?(previous|prior|initial|system)\s+(instructions|prompts|rules|policies|guardrails|safety|security|directives)', re.IGNORECASE), "DIRECT_JAILBREAK_OVERRIDE", 0.85),
+        (re.compile(r'system\s+override|admin\s+override|sudo\s+mode|elevate\s+privilege', re.IGNORECASE), "PRIVILEGE_ESCALATION_OVERRIDE", 0.85),
+        (re.compile(r'you\s+are\s+now\s+(DAN|unrestricted|godmode|jailbroken|developer\s+mode)', re.IGNORECASE), "ROLEPLAY_JAILBREAK", 0.85),
+        (re.compile(r'dump\s+(all\s+)?(tables|schemas|passwords|database|secrets|credentials)', re.IGNORECASE), "DATABASE_EXFILTRATION_ATTACK", 0.85),
+        (re.compile(r'(reveal|show|display|print|output|repeat|tell\s+me|what\s+(is|are))\s+(your\s+)?(system\s+prompt|developer\s+instructions|system\s+instructions|hidden\s+rules|internal\s+guidelines|meta\s+prompt)', re.IGNORECASE), "SYSTEM_PROMPT_EXTRACTION", 0.85),
+        (re.compile(r'repeat\s+(everything|all|the\s+text|the\s+words)\s+(above|before|previously)', re.IGNORECASE), "SYSTEM_PROMPT_EXTRACTION", 0.85),
+        (re.compile(r'bypass\s+(all\s+)?(compliance|guardrails|safety|mas|rbi|controls)', re.IGNORECASE), "COMPLIANCE_BYPASS_ATTACK", 0.85),
+        (re.compile(r'base64\s+decode|execute\s+script|<\s*script\s*>', re.IGNORECASE), "CODE_INJECTION_VECTOR", 0.50)
     ]
 
     @classmethod
@@ -31,10 +32,10 @@ class IngressGuard:
         threat_score = 0.0
 
         # 1. Adversarial Pattern Check
-        for regex, tag in cls.INJECTION_PATTERNS:
+        for regex, tag, weight in cls.INJECTION_PATTERNS:
             if regex.search(raw_prompt):
                 attack_indicators.append(tag)
-                threat_score += 0.45
+                threat_score += weight
 
         # 2. Heuristic checks for payload anomalies (Context Poisoning / Delimiter Abuse)
         if raw_prompt.count("```") > 4 or raw_prompt.count("<|im_start|>") > 0:

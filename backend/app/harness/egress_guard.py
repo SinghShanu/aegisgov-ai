@@ -20,6 +20,13 @@ class EgressGuard:
         (re.compile(r'postgres://|mysql://|mongodb(\+srv)?://[^\s]+'), "DATABASE_CONNECTION_STRING"),
     ]
 
+    SYSTEM_PROMPT_CANARY_PATTERNS = [
+        (re.compile(r'CONFIDENTIALITY\s*&\s*SECURITY\s*DIRECTIVES', re.IGNORECASE), "SYSTEM_PROMPT_DIRECTIVES_LEAK"),
+        (re.compile(r'Ground\s+Truth\s+Certified\s+Gold\s+Metrics:', re.IGNORECASE), "INTERNAL_PROMPT_CANARY_LEAK"),
+        (re.compile(r'You\s+are\s+AegisGov\s+Copilot,\s+an\s+enterprise\s+financial\s+assistant', re.IGNORECASE), "SYSTEM_PERSONA_INSTRUCTION_LEAK"),
+        (re.compile(r'system\s+instruction(s)?:', re.IGNORECASE), "SYSTEM_INSTRUCTION_PREFIX_LEAK"),
+    ]
+
     UNLICENSED_ADVICE_TRIGGERS = [
         (re.compile(r'I\s+guarantee\s+you\s+will\s+make\s+\d+%', re.IGNORECASE), "GUARANTEED_RETURN_PROHIBITED"),
         (re.compile(r'you\s+must\s+immediately\s+invest\s+all\s+your\s+funds', re.IGNORECASE), "UNSUITABLE_FINANCIAL_ADVICE"),
@@ -37,6 +44,12 @@ class EgressGuard:
             if regex.search(sanitized):
                 leaks.append(tag)
                 sanitized = regex.sub("[REDACTED_CREDENTIAL_KEY]", sanitized)
+
+        # 1b. System Prompt Leak & Canary Interception
+        for regex, tag in cls.SYSTEM_PROMPT_CANARY_PATTERNS:
+            if regex.search(sanitized):
+                leaks.append(tag)
+                sanitized = regex.sub("[REDACTED_SYSTEM_INSTRUCTION]", sanitized)
 
         # 2. PII Interception
         sanitized, pii_detected = pii_vault.scan_and_sanitize_text(sanitized, tokenize=False)
