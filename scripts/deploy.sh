@@ -89,6 +89,14 @@ gcloud builds submit "${ROOT_DIR}" \
 
 echo ""
 echo "🌟 Step 4: Deploying to Google Cloud Run with Free-Tier Guardrails..."
+ENV_VARS="BASE_CURRENCY=SGD,ENVIRONMENT=production,GCP_MODE=local,GCP_PROJECT_ID=${TARGET_PROJECT}"
+if [ -n "${GEMINI_API_KEY:-}" ]; then
+    ENV_VARS="${ENV_VARS},GEMINI_API_KEY=${GEMINI_API_KEY}"
+    echo "   Gemini API Key: Configured (Forwarding to Cloud Run)"
+else
+    echo "   Gemini API Key: None (Using Deterministic Governance Engine)"
+fi
+
 gcloud run deploy "${SERVICE_NAME}" \
     --account="${TARGET_ACCOUNT}" \
     --project="${TARGET_PROJECT}" \
@@ -99,7 +107,7 @@ gcloud run deploy "${SERVICE_NAME}" \
     --max-instances=2 \
     --memory=512Mi \
     --cpu=1 \
-    --set-env-vars="BASE_CURRENCY=SGD,ENVIRONMENT=production,GCP_MODE=local,GCP_PROJECT_ID=${TARGET_PROJECT}"
+    --set-env-vars="${ENV_VARS}"
 
 echo ""
 echo "======================================================"
