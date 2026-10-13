@@ -40,7 +40,7 @@ class IngressGuard:
         # 2. Heuristic checks for payload anomalies (Context Poisoning / Delimiter Abuse)
         if raw_prompt.count("```") > 4 or raw_prompt.count("<|im_start|>") > 0:
             attack_indicators.append("CONTEXT_DELIMITER_POISONING")
-            threat_score += 0.35
+            threat_score += 0.45
 
         # 3. PII Detection and Tokenization
         sanitized_prompt, pii_detected = pii_vault.scan_and_sanitize_text(raw_prompt, tokenize=True)

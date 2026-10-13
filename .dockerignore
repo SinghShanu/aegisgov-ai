@@ -1,6 +1,15 @@
 .git
 .gitignore
+.gcloudignore
 .env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+*service_account*.json
+*credentials*.json
 .venv
 backend/venv
 frontend/node_modules
@@ -11,3 +20,9 @@ __pycache__
 *.pyo
 *.pyd
 .DS_Store
+*.log
+*.pdf
+*.pptx
+*.odp
+*.eml
+aegisgov-ai-shareable-bundle.zip

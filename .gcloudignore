@@ -1,0 +1,35 @@
+# ==============================================================================
+# Google Cloud Build & gcloud Ignore Rules
+# Strict zero-leak defense: Prevents secrets, venvs, and artifacts from cloud upload
+# ==============================================================================
+.gcloudignore
+.git
+.gitignore
+
+# Secrets & Local Configurations (DO NOT UPLOAD)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+*service_account*.json
+*credentials*.json
+
+# Virtual Environments & Caches
+backend/venv/
+.venv/
+frontend/node_modules/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+
+# System & Local Artefacts
+.DS_Store
+*.log
+*.pdf
+*.pptx
+*.odp
+*.eml
+aegisgov-ai-shareable-bundle.zip
