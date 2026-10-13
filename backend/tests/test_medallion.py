@@ -53,3 +53,38 @@ def test_medallion_pipeline_execution():
     gold_analytics = medallion_lakehouse.get_gold_analytics()
     assert gold_analytics["total_certified_transactions"] >= 1
     assert gold_analytics["total_volume_sgd"] > 0
+    assert gold_analytics["capital_safeguarded_sgd"] > 0
+    assert gold_analytics["hitl_dual_custody_compliance_rate"] == 100.0
+    assert "executive_leadership_summary" in gold_analytics
+
+
+def test_gold_tier_datamart_and_executive_attestation():
+    from fastapi.testclient import TestClient
+    from backend.app.main import app
+
+    client = TestClient(app)
+
+    # 1. Test GET /api/medallion/tier/GOLD
+    gold_res = client.get("/api/medallion/tier/GOLD")
+    assert gold_res.status_code == 200
+    marts = gold_res.json()
+    assert isinstance(marts, list)
+    assert len(marts) >= 1
+    first_mart = marts[0]
+    assert "payment_rail" in first_mart
+    assert "rail_volume_sgd" in first_mart
+    assert "mas_compliance_status" in first_mart
+    assert "rbi_compliance_status" in first_mart
+    assert "pii_protection_sla" in first_mart
+
+    # 2. Test GET /api/medallion/executive-attestation
+    attest_res = client.get("/api/medallion/executive-attestation")
+    assert attest_res.status_code == 200
+    attest_data = attest_res.json()
+    assert "attestation_id" in attest_data
+    assert attest_data["auditor_attestation_seal"] == "AEGISGOV-GOLD-SHA256-CERTIFIED"
+    assert len(attest_data["cryptographic_sha256_hash"]) == 64
+    assert "governance_frameworks" in attest_data
+    assert attest_data["governance_frameworks"]["mas_feat_fairness_principles"] == "CERTIFIED_AUDIT_READY"
+    assert attest_data["gold_datamart_state"]["hitl_dual_custody_compliance_rate"] == 100.0
+

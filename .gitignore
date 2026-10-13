@@ -30,3 +30,7 @@ yarn-error.log*
 .idea/
 *.log
 *.pdf
+*.pptx
+*.odp
+*.eml
+aegisgov-ai-shareable-bundle.zip

@@ -97,8 +97,32 @@ export interface GoldAnalytics {
   avg_transaction_sgd: number;
   compliance_health_score: number;
   quarantine_count: number;
+  capital_safeguarded_sgd?: number;
+  hitl_dual_custody_compliance_rate?: number;
+  pdpa_pii_tokenization_rate?: number;
+  basel_iii_liquidity_classification?: string;
   payment_rails_breakdown: Array<{ payment_rail: string; count: number; rail_volume_sgd: number }>;
   currency_distribution: Array<{ currency: string; count: number; total_native: number }>;
+  certified_status?: string;
+  executive_leadership_summary?: {
+    executive_question: string;
+    certified_answer: string;
+    auditor_attestation_seal: string;
+    attestation_timestamp: string;
+  };
+}
+
+export interface GoldMartRecord {
+  payment_rail: string;
+  currency: string;
+  settlement_count: number;
+  rail_volume_sgd: number;
+  rail_volume_inr: number;
+  avg_ticket_sgd: number;
+  peak_single_exposure_sgd: number;
+  mas_compliance_status: string;
+  rbi_compliance_status: string;
+  pii_protection_sla: string;
 }
 
 export interface CopilotResponse {

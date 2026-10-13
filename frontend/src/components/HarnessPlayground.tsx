@@ -121,6 +121,13 @@ export const HarnessPlayground: React.FC<HarnessPlaygroundProps> = ({
       badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
       desc: 'Grounded aggregate telemetry across Singapore FAST, PayNow, India UPI, and SWIFT',
       text: 'What is our total certified transaction volume in SGD and INR across all payment rails today?'
+    },
+    {
+      label: 'Executive CRO Regulatory Audit & Exposure',
+      badge: 'Executive ROI: Instant Compliance Audit',
+      badgeColor: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+      desc: 'C-Suite query: Net cross-rail exposure, capital safeguarded from scams, and Four-Eyes dual-custody SLA status',
+      text: 'What is our net cross-rail exposure, how much capital was safeguarded from fraudulent/injection memos, and are our high-value corporate disbursements dual-authorized under our Four-Eyes circuit breaker?'
     }
   ];
 
