@@ -264,9 +264,10 @@ def render_dashboard(t):
 
     # Section 4: Billing Impact
     print(f"\n{BOLD}4. Free Tier Consumption & Billing:{RESET}")
-    print(f"   • Monthly Allowance  : {ft.get('monthly_request_allowance'):,} requests free")
-    print(f"   • Quota Utilized     : {ft.get('percent_quota_used')}%")
-    print(f"   • Estimated Cost     : {GREEN}{BOLD}{ft.get('estimated_cost_usd')}{RESET} (Safely within 100% Free Tier)")
+    allowance = ft.get('monthly_request_allowance') or 2000000
+    print(f"   • Monthly Allowance  : {allowance:,} requests free")
+    print(f"   • Quota Utilized     : {ft.get('percent_quota_used') or 0.0}%")
+    print(f"   • Estimated Cost     : {GREEN}{BOLD}{ft.get('estimated_cost_usd') or '$0.00'}{RESET} (Safely within 100% Free Tier)")
 
     # Alerts
     if t["alerts"]:
