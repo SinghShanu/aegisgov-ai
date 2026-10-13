@@ -114,22 +114,23 @@ SLIDE 5: LIST OF FEATURES OFFERED
 1. **Policy-as-Code Compiler (Agent 1):**
    * Natural Language to machine contracts using **Gemini 1.5 Pro**.
    * Emits validated Pydantic schemas, RBAC/ABAC/TBAC matrices, and SLA rules.
-2. **Medallion Lakehouse Inspector (Agent 2):**
-   * **Bronze:** High-speed raw stream ingestion (PayNow, UPI, FAST).
+2. **Medallion Lakehouse Engine (Agent 2):**
+   * **Bronze:** High-speed raw stream ingestion with Zero-Trust PoLP gating.
    * **Silver:** Dynamic PII tokenization (NRIC/PAN masked into secure tokens).
-   * **Gold:** Basel III & AML certified AI-ready metrics.
-   * **Quarantine Vault:** Auto-isolates malformed schemas and contract breaches.
+   * **Quarantine Vault:** Auto-isolates malformed schemas and contract breaches ($124.5k safeguarded).
+   * **Gold Datamart:** C-Suite Executive Leadership Cockpit & cryptographic regulatory attestations.
 3. **Financial Analyst Copilot (Agent 3):**
    * Powered by **Gemini 1.5 Flash**.
    * Answers queries grounded *strictly* in certified Gold facts with automated citations.
 4. **5-Stage AI Defense Harness:**
    * **Stage 1 (Ingress):** PoLP RBAC verification & prompt injection scanner.
-   * **Stage 3 (Circuit Breaker):** Deterministic financial threshold gate.
+   * **Stage 3 (Circuit Breaker):** Deterministic financial threshold gate (> S$ 10k / ₹ 5L).
    * **Stage 5 (Egress):** MAS FEAT bias filter, factuality verifier & secret leak scanner.
-5. **Human-in-the-Loop (HITL) Dual Custody:**
-   * Escalation drawer requiring verified compliance officer sign-off before executing high-risk financial actions.
+5. **Continuous Quality & Audit Assurance (Agents 4 & 5):**
+   * **HITL Regression Guardian (Agent 4):** Living test catalog preventing policy regressions.
+   * **SOC 2 Audit Inspector (Agent 5):** Continuous automated compliance against Trust Services Criteria.
 6. **Cryptographic Tamper-Evident Audit Ledger:**
-   * SHA-256 hash-chained immutable audit log providing non-repudiation and instant SOC 2 Type II audit readiness.
+   * SHA-256 hash-chained immutable audit log providing mathematical non-repudiation and instant MAS/RBI audit readiness.
 
 ---
 
@@ -144,10 +145,10 @@ SLIDE 6: PROCESS FLOW / USE-CASE DIAGRAM
 ### Workflow Narrative:
 * **Step 1 (Ingestion):** Raw financial events (PayNow / UPI) and regulatory guidelines (MAS / RBI) enter the platform.
 * **Step 2 (Compilation):** Gemini 1.5 Pro compiles policies into executable data contracts; DuckDB cleans and tokenizes records into Silver/Gold tiers.
-* **Step 3 (Agent Request):** Employee asks Copilot: *"Process vendor payment of S\$ 45,000 to Account #8821"*.
+* **Step 3 (Agent Request):** Employee asks Copilot: *"Process commercial lease deposit of S$ 75,000 via FAST to Sentosa Commercial Realty Hub"*.
 * **Step 4 (Ingress Defense):** Ingress guard verifies user RBAC permissions and tokenizes any sensitive NRIC/PAN.
-* **Step 5 (Circuit Breaker Interception):** Transfer exceeds **S\$ 10,000 threshold**. Execution is instantly halted; status set to `PENDING_HUMAN_APPROVAL`.
-* **Step 6 (Dual-Custody Approval):** Compliance Officer inspects transaction in the HITL Drawer and grants cryptographic approval.
+* **Step 5 (Circuit Breaker Interception):** Transfer exceeds **S\$ 10,000 threshold**. Execution is instantly halted; status set to `PENDING_HITL_APPROVAL`.
+* **Step 6 (Dual-Custody Approval):** Senior Risk Officer inspects transaction in the HITL Drawer and grants cryptographic approval.
 * **Step 7 (Egress & Audit):** Egress guard checks for credential leaks; the action is executed and permanently recorded in the SHA-256 audit ledger.
 
 *(Embed Process Flow / Swimlane diagram from `docs/assets/process-flow-diagram.svg`)*
@@ -164,9 +165,9 @@ SLIDE 7: WIREFRAMES & INTERACTION CONSOLE
 
 ### Content / Layout:
 *(Place 3 UI screenshot mockups here)*
-1. **Policy Studio:** Split-screen natural language policy input on the left; auto-generated Pydantic contract and RBAC rules on the right.
-2. **Medallion Lakehouse Lineage:** Interactive data flow displaying real-time record distribution across Bronze (Raw), Silver (Tokenized), Gold (Certified), and Quarantine (Breaches).
-3. **HITL Approval Center:** High-value action alert drawer featuring audit details, amount thresholds, and single-click compliance sign-off.
+1. **Policy Studio & Safety Harness:** Split-screen natural language policy input and real-time copilot defense playground.
+2. **Medallion Lakehouse Lineage:** Interactive data flow displaying Bronze (PoLP Blocked), Silver (Masked), Quarantine (Violations), and Gold (C-Suite CRO Cockpit).
+3. **HITL Approval Center & Regression Guardian:** Dual-custody four-eyes sign-off drawer and living regression test suite.
 
 ---
 
@@ -181,11 +182,12 @@ SLIDE 8: ARCHITECTURE DIAGRAM
 *(Embed the Archify vector diagram: `docs/assets/system-architecture.svg`)*
 
 ### Architectural Summary:
-* **Layer 1: External Sourcing:** MAS FEAT, RBI Circulars, SGD PayNow, INR UPI.
+* **Layer 1: External Sourcing:** MAS FEAT, RBI Directives, SGD PayNow/FAST, INR UPI/IMPS.
 * **Layer 2: Agent 1 (Policy-as-Code):** Gemini 1.5 Pro generating Pydantic validation contracts.
-* **Layer 3: Agent 2 (Lakehouse):** Zero-egress DuckDB engine managing Bronze, Silver, Gold, and Quarantine.
+* **Layer 3: Agent 2 (Lakehouse):** Zero-egress DuckDB engine managing Bronze, Silver, Quarantine, and Gold Data Marts.
 * **Layer 4: Agent 3 (Copilot) & 5-Stage Harness:** PoLP Ingress $\rightarrow$ Gemini 1.5 Flash $\rightarrow$ Four-Eyes Gate $\rightarrow$ HITL $\rightarrow$ Egress Sanitizer.
-* **Layer 5: Governance Surface:** React 18 + Vite dashboard with SHA-256 cryptographic ledger.
+* **Layer 5: Continuous Assurance (Agents 4 & 5):** Regression Guardian living test runner and SOC 2 compliance scanner.
+* **Layer 6: Governance Surface:** React 18 + Vite dashboard with SHA-256 cryptographic ledger and one-click regulatory attestations.
 
 ---
 

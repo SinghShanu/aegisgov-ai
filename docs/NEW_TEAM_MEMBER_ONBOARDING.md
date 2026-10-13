@@ -12,9 +12,11 @@
 * **Core Problem Statement:** Generative AI copilots and autonomous financial agents are entering institutional banking, but **compliance policies are written in human legal language**, while **data systems run on code**. Because agents operate in milliseconds without built-in guardrails, banks face massive regulatory fines, PII exfiltration, prompt injections, and catastrophic unapproved fund movements.  
 * **Our Solution:** An end-to-end **Policy-as-Code (PaC) & Multi-Agent Safety Harness Platform** built specifically for regulated BFSI institutions across JAPAC (Singapore, India, Japan, Australia). It bridges legal regulations directly to the data layer by:
   1. Translating natural language banking policies into machine-executable **Data Contracts** (Agent 1: Gemini 1.5 Pro).
-  2. Enforcing contracts across an in-memory **Medallion Lakehouse** (Bronze $\rightarrow$ Silver $\rightarrow$ Gold + Quarantine Vault) with dynamic NRIC/PAN/Aadhaar tokenization (Agent 2: DuckDB).
+  2. Enforcing contracts across an in-memory **Medallion Lakehouse** (Bronze $\rightarrow$ Silver $\rightarrow$ Quarantine + Gold C-Suite Datamart & Attestation) with dynamic NRIC/PAN/Aadhaar tokenization (Agent 2: DuckDB).
   3. Wrapping internal AI copilots in a deterministic **5-Stage Defense Harness** with automated Circuit Breakers and Human-in-the-Loop (HITL) maker-checker approval (Agent 3: Gemini 1.5 Flash).
-  4. Logging all events, validations, and approvals into an immutable, **SHA-256 Cryptographic Audit Ledger**.
+  4. Guarding against security and policy regressions via a living test catalog with automated root-cause diagnostics (Agent 4: HITL Regression Guardian).
+  5. Conducting continuous automated compliance scans against SOC 2 Type II trust criteria and generating cryptographic audit attestations (Agent 5: SOC 2 & Regulatory Audit Inspector).
+  6. Logging all events, validations, and approvals into an immutable, **SHA-256 Cryptographic Audit Ledger**.
 
 ---
 
