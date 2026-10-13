@@ -48,7 +48,11 @@ echo "   Limits   : max-instances=2, 512Mi RAM, 1 vCPU"
 echo "======================================================"
 echo ""
 
-read -rp "Proceed with build & deployment to ${TARGET_PROJECT} using ${TARGET_ACCOUNT}? (y/N) " confirm
+if [[ "${1:-}" =~ ^(-y|--yes)$ ]]; then
+    confirm="y"
+else
+    read -rp "Proceed with build & deployment to ${TARGET_PROJECT} using ${TARGET_ACCOUNT}? (y/N) " confirm
+fi
 if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
     echo "Deployment cancelled by user."
     exit 0

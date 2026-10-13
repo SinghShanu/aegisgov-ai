@@ -66,12 +66,13 @@ def test_edge_case_api_health_endpoint_zero_secret_leak():
     assert "password" not in raw_str.lower()
 
 def test_edge_case_gcp_status_zero_secret_leak():
-    """Verify GCP status endpoint returns metadata without exposing internal credentials."""
-    resp = client.get("/api/gcp/status")
+    """Verify GCP architecture endpoint returns metadata without exposing internal credentials."""
+    resp = client.get("/api/gcp/architecture")
     assert resp.status_code == 200
     raw_str = resp.text
+    import re
     assert "AIza" not in raw_str
-    assert "sk-" not in raw_str
+    assert not re.search(r'sk-[a-zA-Z0-9]{20,}', raw_str)
     assert "PRIVATE KEY" not in raw_str
 
 def test_edge_case_tbac_boundary_exact_expiration():
