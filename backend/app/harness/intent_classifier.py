@@ -72,7 +72,7 @@ class FinancialIntentClassifier:
             elif cls.INVESTMENT_PATTERN.search(prompt):
                 target_action = "propose_investment_plan"
             else:
-                target_action = "query_financial_copilot_basic"
+                target_action = "query_financial_sentinel_basic"
 
         return FinancialIntent(
             raw_amount=raw_amt,

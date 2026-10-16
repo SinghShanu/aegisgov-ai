@@ -23,16 +23,16 @@ import {
   ChevronRight
 } from 'lucide-react';
 
-type MainConsole = 'copilot_defense' | 'policy_lakehouse' | 'compliance_cloud' | 'regression';
-type CopilotSubView = 'copilot' | 'threats';
+type MainConsole = 'sentinel_defense' | 'policy_lakehouse' | 'compliance_cloud' | 'regression';
+type SentinelSubView = 'sentinel' | 'threats';
 type LakehouseSubView = 'policies' | 'medallion';
 type ComplianceSubView = 'soc2' | 'architecture' | 'audit';
 
 export const App: React.FC = () => {
   const [personas, setPersonas] = useState<Record<string, UserPersona>>({});
   const [selectedPersonaKey, setSelectedPersonaKey] = useState<string>('wealth_advisor');
-  const [activeConsole, setActiveConsole] = useState<MainConsole>('copilot_defense');
-  const [copilotSubView, setCopilotSubView] = useState<CopilotSubView>('copilot');
+  const [activeConsole, setActiveConsole] = useState<MainConsole>('sentinel_defense');
+  const [sentinelSubView, setSentinelSubView] = useState<SentinelSubView>('sentinel');
   const [lakehouseSubView, setLakehouseSubView] = useState<LakehouseSubView>('policies');
   const [complianceSubView, setComplianceSubView] = useState<ComplianceSubView>('soc2');
 
@@ -157,15 +157,15 @@ export const App: React.FC = () => {
           <nav className="flex items-center space-x-2.5 overflow-x-auto py-0.5">
             {/* Console 1 */}
             <button
-              onClick={() => setActiveConsole('copilot_defense')}
+              onClick={() => setActiveConsole('sentinel_defense')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold transition ${
-                activeConsole === 'copilot_defense'
+                activeConsole === 'sentinel_defense'
                   ? 'bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               <ShieldCheck className="w-4 h-4 text-indigo-600" />
-              <span>AI Copilot & Live Defense</span>
+              <span>Financial Sentinel & Live Defense</span>
             </button>
 
             {/* Console 2 */}
@@ -220,29 +220,29 @@ export const App: React.FC = () => {
       {/* Main Content Workspace with Generous Spacing */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-6 md:p-8">
         {/* ========================================================================= */}
-        {/* CONSOLE 1: AI Copilot & Live Defense Hub */}
+        {/* CONSOLE 1: Financial Sentinel & Live Defense Hub */}
         {/* ========================================================================= */}
-        {activeConsole === 'copilot_defense' && (
+        {activeConsole === 'sentinel_defense' && (
           <div>
             {/* Sub-view Navigation Pill Bar */}
             <div className="flex items-center justify-between bg-white border border-slate-200 rounded-xl p-1.5 mb-6 shadow-2xs">
               <div className="flex items-center space-x-1.5">
                 <button
-                  onClick={() => setCopilotSubView('copilot')}
+                  onClick={() => setSentinelSubView('sentinel')}
                   className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${
-                    copilotSubView === 'copilot'
+                    sentinelSubView === 'sentinel'
                       ? 'bg-indigo-600 text-white shadow-xs'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                   }`}
                 >
                   <Bot className="w-3.5 h-3.5" />
-                  <span>Financial Copilot & 5-Stage Harness</span>
+                  <span>Aegis Financial Sentinel & 5-Stage Harness</span>
                 </button>
 
                 <button
-                  onClick={() => setCopilotSubView('threats')}
+                  onClick={() => setSentinelSubView('threats')}
                   className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${
-                    copilotSubView === 'threats'
+                    sentinelSubView === 'threats'
                       ? 'bg-indigo-600 text-white shadow-xs'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                   }`}
@@ -257,14 +257,14 @@ export const App: React.FC = () => {
               </div>
             </div>
 
-            {copilotSubView === 'copilot' && (
+            {sentinelSubView === 'sentinel' && (
               <HarnessPlayground
                 currentUser={currentPersona}
                 selectedPersonaKey={selectedPersonaKey}
                 onRefreshTickets={refreshTickets}
               />
             )}
-            {copilotSubView === 'threats' && <ThreatRadar />}
+            {sentinelSubView === 'threats' && <ThreatRadar />}
           </div>
         )}
 

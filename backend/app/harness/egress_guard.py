@@ -23,6 +23,7 @@ class EgressGuard:
     SYSTEM_PROMPT_CANARY_PATTERNS = [
         (re.compile(r'CONFIDENTIALITY\s*&\s*SECURITY\s*DIRECTIVES', re.IGNORECASE), "SYSTEM_PROMPT_DIRECTIVES_LEAK"),
         (re.compile(r'Ground\s+Truth\s+Certified\s+Gold\s+Metrics:', re.IGNORECASE), "INTERNAL_PROMPT_CANARY_LEAK"),
+        (re.compile(r'You\s+are\s+Aegis(?:\s+Financial)?\s+Sentinel', re.IGNORECASE), "SYSTEM_PERSONA_INSTRUCTION_LEAK"),
         (re.compile(r'You\s+are\s+AegisGov\s+Copilot,\s+an\s+enterprise\s+financial\s+assistant', re.IGNORECASE), "SYSTEM_PERSONA_INSTRUCTION_LEAK"),
         (re.compile(r'system\s+instruction(s)?:', re.IGNORECASE), "SYSTEM_INSTRUCTION_PREFIX_LEAK"),
     ]

@@ -24,9 +24,9 @@
 > **Team AegisGov** builds enterprise-grade AI governance and multi-agent safety harnesses for regulated banking and capital markets. Powered by Google Cloud (Vertex AI, Cloud DLP, Pub/Sub, and BigLake), our solution solves the multi-million dollar challenge of financial prompt injections, PII exfiltration, and cross-rail scam rings. We pioneer Policy-as-Code and Human-in-the-Loop circuit breakers that satisfy strict MAS and RBI regulatory frameworks without slowing down enterprise velocity.
 
 ### 3. Executive Mission Statement (~150 Words — For Pitch Deck & Executive Summary)
-> In regulated financial services, adopting autonomous GenAI copilots is stalled by existential risks: prompt injections, PII leakage, regulatory non-compliance, and hallucinated payouts. **Team AegisGov** solves this gap by creating **AegisGov AI**: a multi-layered, zero-trust safety harness and continuous governance platform tailored for JAPAC (MAS & RBI).
+> In regulated financial services, adopting autonomous GenAI agents is stalled by existential risks: prompt injections, PII leakage, regulatory non-compliance, and hallucinated payouts. **Team AegisGov** solves this gap by creating **AegisGov AI**: a multi-layered, zero-trust safety harness and continuous governance platform tailored for JAPAC (MAS & RBI).
 > 
-> Leveraging Google Cloud's Vertex AI Agent Development Kit, Sensitive Data Protection, BigQuery BigLake, and Cloud Run, our multi-agent architecture enforces deterministic Policy-as-Code, Four-Eyes human approvals, real-time cross-rail scam isolation, and cryptographic audit ledgers. We empower tier-1 financial institutions to deploy high-velocity AI copilots with mathematical trust, provable SOC 2 compliance, and zero data leakage.
+> Leveraging Google Cloud's Vertex AI Agent Development Kit, Sensitive Data Protection, BigQuery BigLake, and Cloud Run, our multi-agent architecture enforces deterministic Policy-as-Code, Four-Eyes human approvals, real-time cross-rail scam isolation, and cryptographic audit ledgers. We empower tier-1 financial institutions to deploy high-velocity AI agents with mathematical trust, provable SOC 2 compliance, and zero data leakage.
 
 ---
 

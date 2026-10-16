@@ -193,7 +193,7 @@
     <text x="12" y="98" class="card-fine">Audit-Ready In-Memory DB</text>
   </g>
 
-  <!-- Arrow: Step 05 Gold -> Step 07 Copilot (Orthogonal Down to Lane 3) -->
+  <!-- Arrow: Step 05 Gold -> Step 07 Sentinel (Orthogonal Down to Lane 3) -->
   <path d="M 600 395 L 600 480 L 450 480" class="flow-arrow-success" marker-end="url(#arr-success)" />
   <text x="545" y="473" class="arrow-label lbl-success">Grounded Facts</text>
 
@@ -210,16 +210,16 @@
     <text x="12" y="114" class="card-fine">Ephemeral TBAC TTL</text>
   </g>
 
-  <!-- Arrow: Step 06 -> Step 07 Copilot (Straight Horizontal) -->
+  <!-- Arrow: Step 06 -> Step 07 Sentinel (Straight Horizontal) -->
   <path d="M 220 542 L 270 542" class="flow-arrow" marker-end="url(#arr-default)" />
   <text x="245" y="535" class="arrow-label lbl-default">Authorized</text>
 
-  <!-- [Step 07] Financial Copilot Agent 3 (Lane 3, Col 2) -->
+  <!-- [Step 07] Aegis Financial Sentinel Agent 3 (Lane 3, Col 2) -->
   <g transform="translate(270, 480)">
     <rect width="180" height="125" rx="6" class="card-mask" />
     <rect width="180" height="125" rx="6" class="card-3" />
     <text x="12" y="20" class="step-badge badge-3">STEP 07 · STAGE 2</text>
-    <text x="12" y="38" class="card-title">Financial Copilot</text>
+    <text x="12" y="38" class="card-title">Financial Sentinel</text>
     <text x="12" y="54" class="card-desc">Gemini 1.5 Flash (Agent 3)</text>
     <text x="12" y="68" class="card-desc">Strict Grounding on Gold</text>
     <text x="12" y="84" class="card-desc">Proposes Action / Query</text>

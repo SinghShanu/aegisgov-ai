@@ -67,7 +67,7 @@ This dictionary explains every regulatory guideline, legal policy, technical acr
 ### 1. PoLP (Principle of Least Privilege)
 - **The Concept:** A foundational cybersecurity paradigm dictating that a user, program, or AI agent should be granted only the minimum levels of access or permissions necessary to perform their specific job—and nothing more.
 - **In Our Code:** 
-  - `Rachel Lim` is a **Junior Analyst**. Under PoLP, she has permissions to `view_gold_metrics` and `query_financial_copilot_basic`. She is explicitly denied `initiate_payment_order`.
+  - `Rachel Lim` is a **Junior Analyst**. Under PoLP, she has permissions to `view_gold_metrics` and `query_financial_sentinel_basic`. She is explicitly denied `initiate_payment_order`.
   - When Rachel asks to disburse a commercial loan or lease payout, Stage 1 immediately rejects the request with a `DENIED_ACCESS` event. The prompt never touches the LLM.
 
 ### 2. The Triple-Access Control Model: RBAC, ABAC, and TBAC
@@ -123,7 +123,7 @@ AegisGov AI evaluates three distinct access dimensions simultaneously:
 A data design pattern that organizes data into progressive refinement tiers:
 1. **Bronze Tier (Raw Ingestion):** Unprocessed, raw transaction events streaming in from payment rails (FAST/UPI). Contains raw timestamps and sender/recipient payloads.
 2. **Silver Tier (Cleansed & Masked):** Validated data where PII has been masked (`S****921A`) or replaced with vault tokens. Cleaned of anomalies.
-3. **Gold Tier (Certified Business Aggregates):** Curated, highly aggregated financial metrics (Total Certified Volume, Currency Conversions, Compliance Health Score). This is the **only** tier that the AI Copilot queries to answer financial questions.
+3. **Gold Tier (Certified Business Aggregates):** Curated, highly aggregated financial metrics (Total Certified Volume, Currency Conversions, Compliance Health Score). This is the **only** tier that the Aegis Financial Sentinel queries to answer financial questions.
 4. **Quarantine Tier (Security Vault):** An isolated holding area for transactions flagged as malicious, high-risk fraud, or schema contract violations. Quarantined records are barred from advancing to Silver or Gold.
 
 ### 2. Policy-as-Code (PaC) & Data Contracts

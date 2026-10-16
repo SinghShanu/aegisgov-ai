@@ -13,7 +13,7 @@
 * **Our Solution:** An end-to-end **Policy-as-Code (PaC) & Multi-Agent Safety Harness Platform** built specifically for regulated BFSI institutions across JAPAC (Singapore, India, Japan, Australia). It bridges legal regulations directly to the data layer by:
   1. Translating natural language banking policies into machine-executable **Data Contracts** (Agent 1: Gemini 1.5 Pro).
   2. Enforcing contracts across an in-memory **Medallion Lakehouse** (Bronze $\rightarrow$ Silver $\rightarrow$ Quarantine + Gold C-Suite Datamart & Attestation) with dynamic NRIC/PAN/Aadhaar tokenization (Agent 2: DuckDB).
-  3. Wrapping internal AI copilots in a deterministic **5-Stage Defense Harness** with automated Circuit Breakers and Human-in-the-Loop (HITL) maker-checker approval (Agent 3: Gemini 1.5 Flash).
+  3. Wrapping internal financial agents in a deterministic **5-Stage Defense Harness** with automated Circuit Breakers and Human-in-the-Loop (HITL) maker-checker approval (Agent 3: Aegis Financial Sentinel powered by Gemini 1.5 Flash).
   4. Guarding against security and policy regressions via a living test catalog with automated root-cause diagnostics (Agent 4: HITL Regression Guardian).
   5. Conducting continuous automated compliance scans against SOC 2 Type II trust criteria and generating cryptographic audit attestations (Agent 5: SOC 2 & Regulatory Audit Inspector).
   6. Logging all events, validations, and approvals into an immutable, **SHA-256 Cryptographic Audit Ledger**.
@@ -35,7 +35,7 @@ Keep these non-negotiable hackathon deadlines in your calendar:
 ## 🏛️ Why We Chose This Use Case & Domain (BFSI Focus)
 
 ### 1. The "Policy-to-Code" Chasm
-In traditional banking, regulatory teams write 100-page compliance manuals (MAS Notice 644, MAS FEAT, RBI Digital Lending, Singapore PDPA, India DPDP Act). Meanwhile, data engineers build pipelines and software teams build AI copilots. There is **zero programmatic link** between legal mandates and the underlying lakehouse tables or agent APIs. AegisGov AI transforms legal prose directly into enforceable code.
+In traditional banking, regulatory teams write 100-page compliance manuals (MAS Notice 644, MAS FEAT, RBI Digital Lending, Singapore PDPA, India DPDP Act). Meanwhile, data engineers build pipelines and software teams build AI agents. There is **zero programmatic link** between legal mandates and the underlying lakehouse tables or agent APIs. AegisGov AI transforms legal prose directly into enforceable code.
 
 ### 2. High-Stakes Regulatory Urgency in JAPAC
 * **Singapore's Shared Responsibility Framework (SRF):** Banks face direct financial liability for scam restitution if unauthorized digital transfers bypass anti-phishing or anti-mule controls.
@@ -49,7 +49,7 @@ In traditional banking, regulatory teams write 100-page compliance manuals (MAS 
 | **SME Commercial Credit / Lease Payout** | Multi-day email/paper underwriting; 5 business days turnaround. | Deterministic Circuit Breaker escalates disbursements $> \text{S}\$ 10\text{k}$ to HITL in seconds. | **45-second decisioning** (down from 5 days); 100% adherence to MAS Notice 644. |
 | **Fiduciary Wealth Advisory (Suitability)** | Undetected rogue AI portfolio recommendations; mis-selling lawsuits. | Dynamic RBAC/ABAC blocks speculative advice from unlicensed junior analysts. | **Eliminates $1M+ regulatory fines** under MAS FEAT; 0% mis-selling liability. |
 | **National PII Exfiltration (NRIC / PAN)** | Plaintext PII ingested into LLM context windows; PDPA breach penalties. | Dynamic cryptographic tokenization vault replaces identifiers with synthetic tokens. | **100% PII containment**; compliant with Singapore PDPA and India DPDP 2023. |
-| **Financial Hallucinations & Governance** | LLMs hallucinate portfolio balances or transaction volumes. | AI copilots are grounded strictly against certified **Gold Lakehouse** tables. | **Zero financial hallucinations**; 100% mathematically verified audit metrics. |
+| **Financial Hallucinations & Governance** | LLMs hallucinate portfolio balances or transaction volumes. | Financial Sentinels are grounded strictly against certified **Gold Lakehouse** tables. | **Zero financial hallucinations**; 100% mathematically verified audit metrics. |
 
 ---
 
@@ -82,17 +82,17 @@ Google_AI_Builder_Cup_2026/
 │   ├── app/
 │   │   ├── main.py                  # FastAPI Application, OWASP security headers, static SPA mounting
 │   │   ├── api/                     # REST API Routers
-│   │   │   ├── copilot.py           # Copilot chat endpoint, 5-stage harness invocation
-│   │   │   ├── contracts.py         # Data contract lifecycle (compile, approve, enforce)
-│   │   │   ├── medallion.py         # DuckDB lakehouse tier queries (Bronze PoLP, Silver, Gold, Quarantine)
-│   │   │   ├── hitl.py              # Human-in-the-Loop ticket approval / rejection drawer
-│   │   │   ├── audit.py             # SHA-256 cryptographic ledger endpoints & chain verifier
+│   │   │   ├── harness_router.py    # Financial Sentinel chat endpoint, 5-stage harness invocation
+│   │   │   ├── policy_router.py     # Data contract lifecycle (compile, approve, enforce)
+│   │   │   ├── medallion_router.py  # DuckDB lakehouse tier queries (Bronze PoLP, Silver, Gold, Quarantine)
+│   │   │   ├── hitl_router.py       # Human-in-the-Loop ticket approval / rejection drawer
+│   │   │   ├── audit_router.py      # SHA-256 cryptographic ledger endpoints & chain verifier
 │   │   │   └── health.py            # /api/health endpoint for Cloud Run liveness probes
 │   │   ├── agents/                  # Autonomous Gemini & Lakehouse Agents
 │   │   │   ├── policy_compiler.py   # Agent 1: Compiles legal text into Pydantic DataContracts
-│   │   │   ├── lakehouse_inspector.py # Agent 2: Enforces contracts on DuckDB & quarantines breaches
-│   │   │   ├── analyst_copilot.py   # Agent 3: Grounded financial copilot (Gemini 1.5 Flash)
-│   │   │   └── qa_guardian.py       # Agent 4: Continuous security regression test runner
+│   │   │   ├── medallion_lakehouse.py # Agent 2: Enforces contracts on DuckDB & quarantines breaches
+│   │   │   ├── financial_analyst_agent.py # Agent 3: Grounded Aegis Financial Sentinel (Gemini 1.5 Flash)
+│   │   │   └── regression_guardian_agent.py # Agent 4: Continuous security regression test runner
 │   │   ├── core/                    # Core Security, Privacy & Governance Engines
 │   │   │   ├── defense_harness.py   # 5-Stage Defense Harness (Ingress, Auth, CircuitBreaker, HITL, Egress)
 │   │   │   ├── pii_vault.py         # Dynamic JAPAC Tokenizer (NRIC/FIN, PAN, Aadhaar)
@@ -102,24 +102,24 @@ Google_AI_Builder_Cup_2026/
 │   │   ├── db/                      # In-Memory Lakehouse
 │   │   │   └── duckdb_client.py     # Embedded DuckDB client managing Bronze, Silver, Gold, Quarantine
 │   │   └── static/                  # Production-compiled React 18 SPA (pre-bundled!)
-│   ├── tests/                       # Pytest Test Suite (37/37 passing tests)
-│   │   ├── test_copilot_api.py      # API tests & security regression tests
-│   │   ├── test_data_contracts.py   # Contract validation & compilation tests
-│   │   ├── test_defense_harness.py  # 5-stage harness unit tests
-│   │   ├── test_medallion_db.py     # Bronze PoLP, Silver masking, Gold SLA tests
-│   │   └── test_pii_vault.py        # Tokenizer & cryptographic ledger integrity tests
+│   ├── tests/                       # Pytest Test Suite (49/49 passing tests)
+│   │   ├── test_harness.py          # API tests & security regression tests
+│   │   ├── test_data_contracts_and_polp.py # Contract validation & compilation tests
+│   │   ├── test_hitl.py             # 5-stage harness unit tests
+│   │   ├── test_medallion.py        # Bronze PoLP, Silver masking, Gold SLA tests
+│   │   └── test_regression_guardian.py # Regression guardian suite tests
 │   ├── requirements.txt             # Python dependencies
 │   └── Dockerfile                   # Hardened multi-stage Docker build (CIS Benchmark 4.1 non-root)
 ├── frontend/                        # React 18 + Vite + Tailwind CSS Source Code
 │   ├── src/
 │   │   ├── App.tsx                  # Root layout, persona switcher, navigation tabs
 │   │   ├── components/
-│   │   │   ├── CopilotConsole.tsx   # AI Copilot chat & real-time 5-stage radar display
+│   │   │   ├── HarnessPlayground.tsx # Aegis Financial Sentinel chat & real-time 5-stage radar display
 │   │   │   ├── PolicyStudio.tsx     # Policy-as-Code compilation studio & contract approval
 │   │   │   ├── MedallionLineage.tsx # Lakehouse visualizer (Bronze, Silver, Gold, Quarantine)
 │   │   │   ├── AuditLedger.tsx      # Cryptographic audit ledger & 1-click chain verifier
 │   │   │   ├── HITLDrawer.tsx       # Four-Eyes maker-checker approval drawer
-│   │   │   └── QAGuardian.tsx       # Continuous regression guardian vault
+│   │   │   └── RegressionStudio.tsx # Continuous regression guardian vault
 │   │   └── services/api.ts          # Typed API client
 │   └── package.json
 ├── scripts/                         # Operational & Deployment Automation
@@ -210,15 +210,15 @@ To understand how the system works end to end, run these 3 live scenarios:
 
 ### Demo 1: The 5-Stage Safety Harness & Four-Eyes HITL Escalation
 1. In the top navbar persona selector, choose **`Vikram Mehta (Senior Wealth Advisor)`**.
-2. Open Tab 1: **`AI Copilot & Live Defense`**.
+2. Open Tab 1: **`Financial Sentinel & Live Defense`**.
 3. Click the preset: **`Commercial Credit & Lease Payout`** (or submit: *"Please execute commercial lease deposit of S$ 75,000 via FAST to Sentosa Real Estate..."*).
 4. Watch the 5-Stage Harness evaluate the request:
    * **Stage 1 (Ingress):** Clearance verified (`WEALTH_ADVISOR`), prompt sanitized.
-   * **Stage 2 (Copilot):** Gemini 1.5 Flash proposes the payout transaction grounded on Gold facts.
+   * **Stage 2 (Financial Sentinel):** Gemini 1.5 Flash proposes the payout transaction grounded on Gold facts.
    * **Stage 3 (Circuit Breaker):** **Triggered!** `S$ 75,000` exceeds single-agent operational limits ($\text{S}\$ 10,000$). Execution is immediately halted; ticket `#HITL-SG-109X` is dispatched.
 5. In the top navbar, switch persona to **`Kenji Sato (Director of Risk)`**.
 6. Open the **HITL Approval Drawer** (amber button in header) and click **`[Approve Transaction]`**.
-7. Return to the Copilot and resubmit: the transaction settles immediately with Four-Eyes maker-checker verification permanently logged!
+7. Return to the Financial Sentinel and resubmit: the transaction settles immediately with Four-Eyes maker-checker verification permanently logged!
 
 ### Demo 2: Medallion Lakehouse Bronze PoLP Access Gating
 1. Switch persona to **`Rachel Lim (Junior Analyst)`**.

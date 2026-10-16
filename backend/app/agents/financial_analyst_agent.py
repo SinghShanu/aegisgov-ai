@@ -19,7 +19,7 @@ from ..engine.japac_currency import JAPACCurrencyEngine
 
 logger = logging.getLogger(__name__)
 
-class CopilotExecutionResponse(BaseModel):
+class SentinelExecutionResponse(BaseModel):
     status: str  # "COMPLETED", "DENIED_ACCESS", "BLOCKED_ATTACK", "PENDING_HITL_APPROVAL"
     reply: str
     access_decision: AccessDecision
@@ -29,9 +29,12 @@ class CopilotExecutionResponse(BaseModel):
     hitl_ticket_id: Optional[str] = None
     audit_entry_id: Optional[str] = None
 
+# Backward compatibility alias
+CopilotExecutionResponse = SentinelExecutionResponse
+
 class FinancialAnalystAgent:
     """
-    Agent 3: Enterprise Financial Copilot operating inside the defense-in-depth safety harness.
+    Agent 3: Aegis Financial Sentinel (Powered by Google Gemini) operating inside the defense-in-depth safety harness.
     Enforces RBAC/ABAC/TBAC, Ingress sanitization, Four-Eyes Circuit Breakers, HITL triggers,
     and Egress verification before returning results.
     """
@@ -42,7 +45,7 @@ class FinancialAnalystAgent:
         user: UserContext,
         prompt: str,
         target_action: Optional[str] = None
-    ) -> CopilotExecutionResponse:
+    ) -> SentinelExecutionResponse:
         
         # ----------------------------------------------------
         # Step 0: Dynamic Intent & Action Extraction (Deterministic)
@@ -92,7 +95,7 @@ class FinancialAnalystAgent:
                 decision="BLOCKED",
                 violating_policies=[access_decision.violating_policy or "RBAC-DENIAL"]
             )
-            return CopilotExecutionResponse(
+            return SentinelExecutionResponse(
                 status="DENIED_ACCESS",
                 reply=custom_reply,
                 access_decision=access_decision,
@@ -118,7 +121,7 @@ class FinancialAnalystAgent:
                 violating_policies=["SEC-HARNESS-001: Prompt Injection / Adversarial Jailbreak Attempt"],
                 metadata={"indicators": ingress_result.attack_indicators}
             )
-            return CopilotExecutionResponse(
+            return SentinelExecutionResponse(
                 status="BLOCKED_ATTACK",
                 reply=f"Security Alert: Your input was blocked by the AegisGov AI Safety Harness ({ingress_result.rejection_reason}). Incident recorded in the audit ledger.",
                 access_decision=access_decision,
@@ -193,7 +196,7 @@ class FinancialAnalystAgent:
                     f"All regulatory controls and Four-Eyes checks satisfied. Transaction completed successfully."
                 )
 
-                return CopilotExecutionResponse(
+                return SentinelExecutionResponse(
                     status="COMPLETED",
                     reply=reply_msg,
                     access_decision=access_decision,
@@ -208,7 +211,7 @@ class FinancialAnalystAgent:
                 amount_sgd=amount_sgd
             )
             if executed_ticket and "new" not in prompt.lower():
-                return CopilotExecutionResponse(
+                return SentinelExecutionResponse(
                     status="COMPLETED",
                     reply=(
                         f"Duplicate Transaction Notice (Replay Protection Active): "
@@ -228,7 +231,7 @@ class FinancialAnalystAgent:
                 amount_sgd=amount_sgd
             )
             if pending_ticket:
-                return CopilotExecutionResponse(
+                return SentinelExecutionResponse(
                     status="PENDING_HITL_APPROVAL",
                     reply=(
                         f"Four-Eyes Governance Gate Active: An authorization ticket (#{pending_ticket.ticket_id}) is ALREADY pending review "
@@ -257,14 +260,14 @@ class FinancialAnalystAgent:
                     requester_name=user.name,
                     requester_role=user.role.value,
                     requester_jurisdiction=user.jurisdiction.value,
-                    description=f"Copilot intercepted high-value {curr} payment instruction exceeding single-user autonomous threshold.",
+                    description=f"Financial Sentinel intercepted high-value {curr} payment instruction exceeding single-user autonomous threshold.",
                     proposed_action=f"Execute transfer of {JAPACCurrencyEngine.format(raw_amt, curr)} via FAST/PayNow rails",
                     amount_sgd=circuit_eval.amount_sgd,
                     risk_score=0.82,
                     risk_summary=circuit_eval.reason
                 )
 
-                return CopilotExecutionResponse(
+                return SentinelExecutionResponse(
                     status="PENDING_HITL_APPROVAL",
                     reply=(
                         f"Four-Eyes Governance Gate Activated: This transaction of {JAPACCurrencyEngine.format(raw_amt, curr)} "
@@ -294,7 +297,7 @@ class FinancialAnalystAgent:
         raw_reply = ""
         if settings.GEMINI_API_KEY:
             sys_context = f"""
-You are AegisGov Copilot, an enterprise financial assistant operating within a JAPAC regulated bank (MAS and RBI guidelines).
+You are Aegis Financial Sentinel (powered by Google Gemini), an enterprise financial intelligence agent operating within a JAPAC regulated bank (MAS and RBI guidelines).
 User Name: {user.name}
 User Role: {user.role.value}
 Clearance: {user.clearance.value}
@@ -359,7 +362,7 @@ Respond clearly, professionally, and ground all claims in the certified facts. N
             elif target_action == "export_unmasked_pii":
                 raw_reply = (
                     "Data Governance Notice: Customer identity documents (NRIC / PAN) are encrypted and tokenized in the AegisGov Security Vault. "
-                    "In compliance with Singapore PDPA and RBI guidelines, raw PII tokens cannot be decrypted in conversational copilot outputs."
+                    "In compliance with Singapore PDPA and RBI guidelines, raw PII tokens cannot be decrypted in conversational Sentinel outputs."
                 )
             elif re.search(r"\bcro\b", ingress_result.sanitized_prompt.lower()) or any(w in ingress_result.sanitized_prompt.lower() for w in ["chief risk officer", "regulatory audit", "cross-rail exposure", "capital safeguarded", "circuit breaker", "four-eyes", "dual-authorized"]):
                 raw_reply = (
@@ -387,7 +390,7 @@ Respond clearly, professionally, and ground all claims in the certified facts. N
         egress_result = EgressGuard.inspect(raw_reply, certified_facts=certified_facts)
 
         audit_entry = audit_ledger.log_event(
-            event_type="COPILOT_QUERY_COMPLETED",
+            event_type="SENTINEL_QUERY_COMPLETED",
             user_id=user.user_id,
             role=user.role.value,
             action_or_prompt=ingress_result.sanitized_prompt[:100],
@@ -400,7 +403,7 @@ Respond clearly, professionally, and ground all claims in the certified facts. N
             }
         )
 
-        return CopilotExecutionResponse(
+        return SentinelExecutionResponse(
             status="COMPLETED",
             reply=egress_result.sanitized_output,
             access_decision=access_decision,

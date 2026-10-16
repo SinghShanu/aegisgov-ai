@@ -125,7 +125,7 @@ export interface GoldMartRecord {
   pii_protection_sla: string;
 }
 
-export interface CopilotResponse {
+export interface SentinelExecutionResponse {
   status: 'COMPLETED' | 'DENIED_ACCESS' | 'BLOCKED_ATTACK' | 'PENDING_HITL_APPROVAL';
   reply: string;
   access_decision: {
@@ -160,6 +160,9 @@ export interface CopilotResponse {
   hitl_ticket_id?: string;
   audit_entry_id?: string;
 }
+
+// Backward compatibility alias
+export type CopilotResponse = SentinelExecutionResponse;
 
 export interface StreamEvent {
   transaction_id: string;

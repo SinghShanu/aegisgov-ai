@@ -48,6 +48,7 @@ PREDEFINED_USERS: Dict[str, UserContext] = {
         allowed_actions=[
             "view_gold_metrics",
             "view_silver_masked",
+            "query_financial_sentinel_basic",
             "query_financial_copilot_basic"
         ],
         max_transaction_limit_sgd=1000.00,
@@ -68,6 +69,7 @@ PREDEFINED_USERS: Dict[str, UserContext] = {
             "view_portfolio_aggregates",
             "propose_investment_plan",
             "initiate_payment_order",
+            "query_financial_sentinel_basic",
             "query_financial_copilot_basic"
         ],
         max_transaction_limit_sgd=10000.00,
@@ -90,6 +92,7 @@ PREDEFINED_USERS: Dict[str, UserContext] = {
             "approve_policy_as_code",
             "approve_hitl_ticket",
             "review_threat_radar",
+            "query_financial_sentinel_basic",
             "query_financial_copilot_basic"
         ],
         max_transaction_limit_sgd=0.00,
@@ -111,6 +114,7 @@ PREDEFINED_USERS: Dict[str, UserContext] = {
             "approve_hitl_ticket",
             "override_circuit_breaker",
             "review_threat_radar",
+            "query_financial_sentinel_basic",
             "query_financial_copilot_basic"
         ],
         max_transaction_limit_sgd=1000000.00,
@@ -130,6 +134,7 @@ PREDEFINED_USERS: Dict[str, UserContext] = {
             "view_silver_masked",
             "view_gold_metrics",
             "manage_pipeline_ingestion",
+            "query_financial_sentinel_basic",
             "query_financial_copilot_basic"
         ],
         max_transaction_limit_sgd=0.00,

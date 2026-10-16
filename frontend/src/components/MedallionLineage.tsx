@@ -330,7 +330,7 @@ export const MedallionLineage: React.FC<MedallionLineageProps> = ({
             {isBronzeBlocked
               ? '0 records (Access Blocked)'
               : activeTier === 'GOLD'
-              ? `${tierData.length} Materialized Data Marts (Pre-computed for CRO & AI Copilots)`
+              ? `${tierData.length} Materialized Data Marts (Pre-computed for CRO & Financial Sentinels)`
               : `Showing ${tierData.length} records`}
           </span>
         </div>

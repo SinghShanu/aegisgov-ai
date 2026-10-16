@@ -357,7 +357,7 @@ class MedallionLakehouse:
             {"id": "silver_curated", "label": "Silver Tier (PII-Masked & Curated)", "tier": "SILVER", "records": self.con.execute("SELECT count(*) FROM silver_transactions").fetchone()[0]},
             {"id": "quarantine_vault", "label": "Quarantine Vault (Contract Violations)", "tier": "QUARANTINE", "records": len(self.quarantine_vault)},
             {"id": "gold_certified", "label": "Gold Tier (Certified AI-Ready)", "tier": "GOLD"},
-            {"id": "ai_copilot", "label": "Enterprise Financial AI Copilot", "tier": "CONSUMER"}
+            {"id": "ai_sentinel", "label": "Aegis Financial Sentinel (Gemini)", "tier": "CONSUMER"}
         ]
         edges = [
             {"source": "source_streams", "target": "bronze_lake", "label": "Ingestion"},
@@ -365,7 +365,7 @@ class MedallionLakehouse:
             {"source": "policy_contract", "target": "silver_curated", "label": "Enforces Contracts"},
             {"source": "bronze_lake", "target": "quarantine_vault", "label": "Rejected Payloads"},
             {"source": "silver_curated", "target": "gold_certified", "label": "Certified Aggregation"},
-            {"source": "gold_certified", "target": "ai_copilot", "label": "Safe Grounded Retrieval"}
+            {"source": "gold_certified", "target": "ai_sentinel", "label": "Safe Grounded Retrieval"}
         ]
         return {"nodes": nodes, "edges": edges}
 

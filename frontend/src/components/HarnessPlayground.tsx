@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Shield, AlertOctagon, CheckCircle2, Lock, Eye, Zap, Sparkles, Terminal, Trash2, Clock, FlaskConical } from 'lucide-react';
-import { UserPersona, CopilotResponse } from '../types';
+import { UserPersona, SentinelExecutionResponse, CopilotResponse } from '../types';
 
 interface HarnessPlaygroundProps {
   currentUser: UserPersona;
@@ -13,7 +13,7 @@ interface ChatMessage {
   senderName: string;
   senderRole: string;
   prompt: string;
-  response: CopilotResponse;
+  response: SentinelExecutionResponse;
   timestamp: string;
 }
 
@@ -24,7 +24,7 @@ export const HarnessPlayground: React.FC<HarnessPlaygroundProps> = ({
 }) => {
   const [prompt, setPrompt] = useState('');
   const [loading, setLoading] = useState(false);
-  const [latestResponse, setLatestResponse] = useState<CopilotResponse | null>(null);
+  const [latestResponse, setLatestResponse] = useState<SentinelExecutionResponse | null>(null);
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
   const [scenarioBanner, setScenarioBanner] = useState<string | null>(null);
   const [scenarioLoading, setScenarioLoading] = useState(false);
@@ -170,7 +170,7 @@ export const HarnessPlayground: React.FC<HarnessPlaygroundProps> = ({
           prompt: query.trim()
         })
       });
-      const data: CopilotResponse = await res.json();
+      const data: SentinelExecutionResponse = await res.json();
       setLatestResponse(data);
 
       const newMessage: ChatMessage = {
@@ -211,7 +211,7 @@ export const HarnessPlayground: React.FC<HarnessPlaygroundProps> = ({
               <Sparkles className="w-4 h-4 text-indigo-600" />
               <span>Real-Life Finance Use Cases & High-ROI Scenarios</span>
             </div>
-            <span className="text-[11px] text-slate-500 font-medium">Click to test copilot defense</span>
+            <span className="text-[11px] text-slate-500 font-medium">Click to test sentinel defense</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -306,7 +306,12 @@ export const HarnessPlayground: React.FC<HarnessPlaygroundProps> = ({
             <div className="flex items-center space-x-2.5">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
               <div>
-                <span className="text-xs font-bold text-slate-900 block">Financial Copilot Chat</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold text-slate-900 block">Aegis Financial Sentinel Chat</span>
+                  <span className="text-[10px] bg-indigo-50 text-indigo-700 font-semibold px-1.5 py-0.2 rounded border border-indigo-200">
+                    Powered by Google Gemini
+                  </span>
+                </div>
                 <span className="text-[11px] text-slate-500">
                   Active Persona: <strong className="text-indigo-700">{currentUser.name}</strong> ({currentUser.role})
                 </span>
@@ -412,7 +417,7 @@ export const HarnessPlayground: React.FC<HarnessPlaygroundProps> = ({
             <input
               type="text"
               disabled={loading}
-              placeholder={`Ask copilot as ${currentUser.name}...`}
+              placeholder={`Ask Financial Sentinel as ${currentUser.name}...`}
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               onKeyDown={(e) => {

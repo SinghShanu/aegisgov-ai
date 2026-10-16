@@ -23,7 +23,7 @@ async def record_test_case(test_case: RegressionTestCase):
 
 @router.post("/run", response_model=RegressionSuiteReport)
 async def run_full_regression_suite():
-    """Executes all cataloged regression tests against the live copilot engine and generates a scorecard"""
+    """Executes all cataloged regression tests against the live Sentinel engine and generates a scorecard"""
     return await regression_guardian.run_full_suite()
 
 @router.post("/run/{test_id}", response_model=RegressionTestResult)

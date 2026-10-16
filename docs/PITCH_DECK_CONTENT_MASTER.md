@@ -88,7 +88,7 @@ SLIDE 4: OPPORTUNITIES & USP
 
 * **The Problem We Solve:**
   * **Policy-to-Code Delay:** Banks take 6 to 9 months to manually translate new regulatory guidelines into data validation code. AegisGov AI reduces this to **$< 2$ seconds**.
-  * **Rogue Agent Liability:** Without deterministic gates, financial copilots can hallucinate transactions or leak customer PII. AegisGov AI intercepts 100% of unauthorized transfers.
+  * **Rogue Agent Liability:** Without deterministic gates, autonomous financial agents can hallucinate transactions or leak customer PII. AegisGov AI intercepts 100% of unauthorized transfers.
 
 * **How AegisGov AI Differs From Existing Solutions:**
   * **Not a Generic Chatbot Wrapper:** Unlike shallow wrappers around LLMs, AegisGov AI controls the data tier, contract tier, execution tier, and egress tier.
@@ -119,8 +119,8 @@ SLIDE 5: LIST OF FEATURES OFFERED
    * **Silver:** Dynamic PII tokenization (NRIC/PAN masked into secure tokens).
    * **Quarantine Vault:** Auto-isolates malformed schemas and contract breaches ($124.5k safeguarded).
    * **Gold Datamart:** C-Suite Executive Leadership Cockpit & cryptographic regulatory attestations.
-3. **Financial Analyst Copilot (Agent 3):**
-   * Powered by **Gemini 1.5 Flash**.
+3. **Aegis Financial Sentinel (Agent 3):**
+   * Powered by **Google Gemini 1.5 Flash**.
    * Answers queries grounded *strictly* in certified Gold facts with automated citations.
 4. **5-Stage AI Defense Harness:**
    * **Stage 1 (Ingress):** PoLP RBAC verification & prompt injection scanner.
@@ -145,7 +145,7 @@ SLIDE 6: PROCESS FLOW / USE-CASE DIAGRAM
 ### Workflow Narrative:
 * **Step 1 (Ingestion):** Raw financial events (PayNow / UPI) and regulatory guidelines (MAS / RBI) enter the platform.
 * **Step 2 (Compilation):** Gemini 1.5 Pro compiles policies into executable data contracts; DuckDB cleans and tokenizes records into Silver/Gold tiers.
-* **Step 3 (Agent Request):** Employee asks Copilot: *"Process commercial lease deposit of S$ 75,000 via FAST to Sentosa Commercial Realty Hub"*.
+* **Step 3 (Agent Request):** Employee asks Financial Sentinel: *"Process commercial lease deposit of S$ 75,000 via FAST to Sentosa Commercial Realty Hub"*.
 * **Step 4 (Ingress Defense):** Ingress guard verifies user RBAC permissions and tokenizes any sensitive NRIC/PAN.
 * **Step 5 (Circuit Breaker Interception):** Transfer exceeds **S\$ 10,000 threshold**. Execution is instantly halted; status set to `PENDING_HITL_APPROVAL`.
 * **Step 6 (Dual-Custody Approval):** Senior Risk Officer inspects transaction in the HITL Drawer and grants cryptographic approval.
@@ -165,7 +165,7 @@ SLIDE 7: WIREFRAMES & INTERACTION CONSOLE
 
 ### Content / Layout:
 *(Place 3 UI screenshot mockups here)*
-1. **Policy Studio & Safety Harness:** Split-screen natural language policy input and real-time copilot defense playground.
+1. **Policy Studio & Safety Harness:** Split-screen natural language policy input and real-time financial sentinel defense playground.
 2. **Medallion Lakehouse Lineage:** Interactive data flow displaying Bronze (PoLP Blocked), Silver (Masked), Quarantine (Violations), and Gold (C-Suite CRO Cockpit).
 3. **HITL Approval Center & Regression Guardian:** Dual-custody four-eyes sign-off drawer and living regression test suite.
 
@@ -185,7 +185,7 @@ SLIDE 8: ARCHITECTURE DIAGRAM
 * **Layer 1: External Sourcing:** MAS FEAT, RBI Directives, SGD PayNow/FAST, INR UPI/IMPS.
 * **Layer 2: Agent 1 (Policy-as-Code):** Gemini 1.5 Pro generating Pydantic validation contracts.
 * **Layer 3: Agent 2 (Lakehouse):** Zero-egress DuckDB engine managing Bronze, Silver, Quarantine, and Gold Data Marts.
-* **Layer 4: Agent 3 (Copilot) & 5-Stage Harness:** PoLP Ingress $\rightarrow$ Gemini 1.5 Flash $\rightarrow$ Four-Eyes Gate $\rightarrow$ HITL $\rightarrow$ Egress Sanitizer.
+* **Layer 4: Agent 3 (Aegis Financial Sentinel) & 5-Stage Harness:** PoLP Ingress $\rightarrow$ Gemini 1.5 Flash $\rightarrow$ Four-Eyes Gate $\rightarrow$ HITL $\rightarrow$ Egress Sanitizer.
 * **Layer 5: Continuous Assurance (Agents 4 & 5):** Regression Guardian living test runner and SOC 2 compliance scanner.
 * **Layer 6: Governance Surface:** React 18 + Vite dashboard with SHA-256 cryptographic ledger and one-click regulatory attestations.
 
@@ -203,7 +203,7 @@ SLIDE 9: TECHNOLOGIES USED
 
 1. **Google AI & LLM Models:**
    * **Gemini 1.5 Pro:** Complex policy reasoning, long-context legal parsing, code compilation.
-   * **Gemini 1.5 Flash:** High-speed, sub-second grounded financial copilot tool execution.
+   * **Gemini 1.5 Flash:** High-speed, sub-second grounded financial sentinel tool execution.
 2. **Google Cloud Infrastructure:**
    * **Google Cloud Run:** Fully managed, auto-scaling serverless container execution (Singapore `asia-southeast1`).
    * **Vertex AI:** Enterprise Gemini API endpoints and safety filters.

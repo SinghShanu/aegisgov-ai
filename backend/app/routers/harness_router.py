@@ -3,9 +3,9 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 from ..access_control.user_contexts import PREDEFINED_USERS, UserContext
-from ..agents.financial_analyst_agent import FinancialAnalystAgent, CopilotExecutionResponse
+from ..agents.financial_analyst_agent import FinancialAnalystAgent, SentinelExecutionResponse, CopilotExecutionResponse
 
-router = APIRouter(prefix="/api/harness", tags=["Safety Harness & Copilot"])
+router = APIRouter(prefix="/api/harness", tags=["Safety Harness & Financial Sentinel"])
 
 class ChatRequest(BaseModel):
     user_persona_key: str  # e.g., "junior_analyst", "wealth_advisor", "compliance_officer", "risk_officer"
@@ -16,8 +16,8 @@ async def get_personas() -> Dict[str, Any]:
     """Returns available enterprise personas with their RBAC/ABAC/TBAC credentials"""
     return {k: u.dict() for k, u in PREDEFINED_USERS.items()}
 
-@router.post("/chat", response_model=CopilotExecutionResponse)
-async def chat_with_copilot(req: ChatRequest):
+@router.post("/chat", response_model=SentinelExecutionResponse)
+async def chat_with_sentinel(req: ChatRequest):
     """Executes employee prompt through the full 5-stage defense harness"""
     user = PREDEFINED_USERS.get(req.user_persona_key)
     if not user:

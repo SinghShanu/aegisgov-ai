@@ -41,7 +41,7 @@ class GCPProvider:
             GCPServiceDetail(
                 service_name="Vertex AI & Agent Development Kit (ADK)",
                 category="Agentic AI & Reasoning",
-                problem_addressed="Autonomous financial copilot reasoning, policy compilation, and continuous compliance auditing without hallucinations.",
+                problem_addressed="Autonomous financial sentinel reasoning, policy compilation, and continuous compliance auditing without hallucinations.",
                 gcp_product="Vertex AI (Gemini 2.0 Flash / Pro) + Reasoning Engine",
                 architecture_role="Powers Tri-Agent framework + SOC 2 Auditor with System Instructions and Grounding.",
                 operational_mode=mode_label,
