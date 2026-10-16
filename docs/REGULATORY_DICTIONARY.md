@@ -83,7 +83,7 @@ AegisGov AI evaluates three distinct access dimensions simultaneously:
 - **In Our Code:** 
   - `Vikram Mehta` (Senior Wealth Advisor) initiates a lease payment of **S$ 75,000**.
   - Since this exceeds his single-operator discretionary limit of **S$ 10,000**, Stage 3 halts execution and generates a **HITL Ticket**.
-  - `Sarah Chen` (Compliance Officer) reviews the transaction in the HITL Approval Center. Once approved, the transaction is marked as `DUAL_AUTHORIZED_SETTLED`.
+  - `Priya Sharma` (Principal Compliance Auditor) or `Kenji Sato` (Director of Risk) reviews the transaction in the HITL Approval Center. Once approved, the transaction is marked as `DUAL_AUTHORIZED_SETTLED`.
 
 ### 4. Circuit Breaker
 - **The Concept:** Borrowed from electrical engineering and financial trading exchanges. When a financial threshold or safety parameter is tripped, the circuit opens to prevent catastrophic damage (e.g. capital flight or flash crashes).

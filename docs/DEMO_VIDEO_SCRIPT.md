@@ -28,7 +28,7 @@
 
 | Timestamp | Visual Screen Action | Spoken Voiceover Script |
 | :--- | :--- | :--- |
-| **0:00 – 0:10** | **Screen:** Show Slide 1 or start directly on the sleek, live dashboard with the AegisGov AI branding and the Threat Radar. Top persona set to **Vikram Singhania (Senior Wealth Advisor)**. | *"Enterprise financial institutions across the Asia-Pacific face a critical dilemma: autonomous AI agents can unlock immense productivity, but compliance policies exist in 100-page legal documents—while banking systems execute in milliseconds."* |
+| **0:00 – 0:10** | **Screen:** Show Slide 1 or start directly on the sleek, live dashboard with the AegisGov AI branding and the Threat Radar. Top persona set to **Vikram Mehta (Senior Wealth Advisor)**. | *"Enterprise financial institutions across the Asia-Pacific face a critical dilemma: autonomous AI agents can unlock immense productivity, but compliance policies exist in 100-page legal documents—while banking systems execute in milliseconds."* |
 | **0:10 – 0:25** | **Screen:** Quick visual pan of the header badges: `MAS FEAT`, `MAS Notice 644`, `RBI Directives`, `Singapore PDPA`, `India DPDP`. | *"Without deterministic guardrails, autonomous financial agents risk catastrophic rogue fund movements, prompt injections, and multi-million-dollar regulatory fines. Introducing **AegisGov AI**: the sovereign multi-agent safety harness and Policy-as-Code engine engineered for JAPAC banking."* |
 
 ---
@@ -58,7 +58,7 @@
 | :--- | :--- | :--- |
 | **1:20 – 1:30** | **Screen:** Still in Financial Sentinel as Vikram, click **`Commercial Credit & Lease Payout`** (disbursing S$ 75,000 via FAST). | *"Next, what happens when an authorized advisor requests a legitimate high-value disbursement? We submit an SME commercial lease payout of S$ 75,000 via Singapore FAST."* |
 | **1:30 – 1:42** | **Screen:** Show the amber response: `PENDING_HITL_APPROVAL`. Point out the alert explaining that S$ 75k exceeds the single-signatory threshold (> S$ 10k). | *"Under MAS Notice 644 and RBI directives, single-agent autonomous execution is strictly capped at ten thousand Singapore dollars. Our **Circuit Breaker** halts execution immediately and generates a dual-custody ticket."* |
-| **1:42 – 1:55** | **Screen:** In the header persona selector, switch from **Vikram** to **Devin Vance (Senior Risk Officer)**. Open the **HITL Approval Center**, show the ticket, type remarks *"Approved following SME lease verification"*, and click **`Approve & Execute Settlement`**. | *"We switch persona to Senior Risk Officer Devin Vance, open the Human-in-the-Loop center, review the audit trail, and grant cryptographic four-eyes sign-off. Dual custody is enforced with zero exceptions."* |
+| **1:42 – 1:55** | **Screen:** In the header persona selector, switch from **Vikram Mehta** to **Kenji Sato (Director of Model & Financial Risk)**. Open the **HITL Approval Center**, show the ticket, type remarks *"Approved following SME lease verification"*, and click **`Approve & Execute Settlement`**. | *"We switch persona to Director of Risk Kenji Sato, open the Human-in-the-Loop center, review the audit trail, and grant cryptographic four-eyes sign-off. Dual custody is enforced with zero exceptions."* |
 
 ---
 
@@ -100,10 +100,10 @@
 
 ### 2. Tab Navigation Flow to Rehearse:
 ```
-1. Start: Financial Sentinel (Active: Vikram Singhania / Senior Wealth Advisor)
+1. Start: Financial Sentinel (Active: Vikram Mehta / Senior Wealth Advisor)
    └── Click: "Direct Prompt Injection & Jailbreak Attack" ──► Show Ingress Interception (BLOCKED_ATTACK)
    └── Click: "Commercial Credit & Lease Payout" ───────────► Show Circuit Breaker (PENDING_HITL_APPROVAL)
-2. Switch Persona to: Devin Vance (Senior Risk Officer)
+2. Switch Persona to: Kenji Sato (Director of Model & Financial Risk)
    └── Open: HITL Approval Center ─────────────────────────► Enter remarks ──► Approve Settlement
 3. Navigate: Medallion Lakehouse
    └── Click: 1. Bronze (Raw Lake) ─────────────────────────► Show PoLP HTTP 403 Forbidden Barrier

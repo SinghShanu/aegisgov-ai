@@ -519,8 +519,9 @@ export const RegressionGuardianStudio: React.FC = () => {
                   >
                     <option value="junior_analyst">Rachel Lim (Junior Analyst)</option>
                     <option value="wealth_advisor">Vikram Mehta (Senior Wealth Advisor)</option>
-                    <option value="compliance_officer">Priya Sharma (Compliance Auditor)</option>
-                    <option value="risk_officer">Marcus Vance (Chief Risk Officer)</option>
+                    <option value="compliance_officer">Priya Sharma (Principal Compliance Auditor)</option>
+                    <option value="risk_officer">Kenji Sato (Director of Model & Financial Risk)</option>
+                    <option value="data_engineer">Alex Wong (Principal Data Platform Engineer)</option>
                   </select>
                 </div>
 

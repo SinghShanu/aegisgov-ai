@@ -236,7 +236,7 @@ class FinancialAnalystAgent:
                     reply=(
                         f"Four-Eyes Governance Gate Active: An authorization ticket (#{pending_ticket.ticket_id}) is ALREADY pending review "
                         f"in the HITL Approval Center for this {JAPACCurrencyEngine.format(raw_amt, curr)} payment. "
-                        f"Please have a Compliance Officer (e.g., Priya Sharma) or Risk Officer (Marcus Vance) sign off on Ticket #{pending_ticket.ticket_id} "
+                        f"Please have a Compliance Officer (e.g., Priya Sharma) or Risk Officer (Kenji Sato) sign off on Ticket #{pending_ticket.ticket_id} "
                         f"before retrying execution."
                     ),
                     access_decision=access_decision,
