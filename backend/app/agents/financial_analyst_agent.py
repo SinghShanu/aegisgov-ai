@@ -275,6 +275,15 @@ class FinancialAnalystAgent:
                     description=f"Financial Sentinel intercepted high-value {curr} payment instruction exceeding single-user autonomous threshold.",
                     proposed_action=f"Execute transfer of {JAPACCurrencyEngine.format(raw_amt, curr)} via FAST/PayNow rails",
                     amount_sgd=circuit_eval.amount_sgd,
+                    payload={
+                        "beneficiary": "Sentosa Commercial Realty Hub" if "sentosa" in prompt.lower() else "Apex Commercial Holdings Pte Ltd",
+                        "recipient_account": "ACC-SG-DBS-9912" if "sentosa" in prompt.lower() else "ACC-SG-UOB-8821",
+                        "amount": raw_amt,
+                        "currency": curr,
+                        "amount_sgd": circuit_eval.amount_sgd,
+                        "payment_rail": "FAST" if curr == "SGD" else ("UPI" if curr == "INR" else "FEDWIRE"),
+                        "purpose": "Commercial Lease Deposit - Singapore SME Expansion" if "lease" in prompt.lower() else "High-Value Commercial Supplier Payout"
+                    },
                     risk_score=0.82,
                     risk_summary=circuit_eval.reason
                 )

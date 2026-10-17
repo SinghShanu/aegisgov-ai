@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ShieldCheck, ShieldX, AlertTriangle, CheckCircle2, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ShieldCheck, ShieldX, AlertTriangle, CheckCircle2, X, FileText, Code } from 'lucide-react';
 import { HITLTicket, UserPersona } from '../types';
 
 interface HITLApprovalCenterProps {
@@ -20,6 +20,18 @@ export const HITLApprovalCenter: React.FC<HITLApprovalCenterProps> = ({
   const [selectedTicket, setSelectedTicket] = useState<HITLTicket | null>(tickets[0] || null);
   const [remarks, setRemarks] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [payloadViewMode, setPayloadViewMode] = useState<'business' | 'json'>('business');
+
+  useEffect(() => {
+    if (!selectedTicket && tickets.length > 0) {
+      setSelectedTicket(tickets[0]);
+    } else if (selectedTicket) {
+      const refreshed = tickets.find(t => t.ticket_id === selectedTicket.ticket_id);
+      if (refreshed) {
+        setSelectedTicket(refreshed);
+      }
+    }
+  }, [tickets]);
 
   if (!isOpen) return null;
 
@@ -174,12 +186,81 @@ export const HITLApprovalCenter: React.FC<HITLApprovalCenterProps> = ({
 
                 {/* Proposed Payload Details */}
                 <div>
-                  <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Proposed Operation Parameters
-                  </h4>
-                  <pre className="bg-slate-900 text-emerald-400 rounded-xl p-3 text-[11px] font-mono overflow-x-auto max-h-36">
-                    {JSON.stringify(selectedTicket.payload, null, 2)}
-                  </pre>
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                      <span>Proposed Operation Parameters</span>
+                    </h4>
+                    <div className="flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-[10px]">
+                      <button
+                        type="button"
+                        onClick={() => setPayloadViewMode('business')}
+                        className={`px-2.5 py-1 rounded-md flex items-center gap-1 font-semibold transition ${
+                          payloadViewMode === 'business'
+                            ? 'bg-white text-indigo-700 shadow-2xs border border-slate-200/80'
+                            : 'text-slate-500 hover:text-slate-800'
+                        }`}
+                      >
+                        <FileText className="w-3 h-3" />
+                        <span>Business View</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setPayloadViewMode('json')}
+                        className={`px-2.5 py-1 rounded-md flex items-center gap-1 font-semibold transition ${
+                          payloadViewMode === 'json'
+                            ? 'bg-white text-indigo-700 shadow-2xs border border-slate-200/80'
+                            : 'text-slate-500 hover:text-slate-800'
+                        }`}
+                      >
+                        <Code className="w-3 h-3" />
+                        <span>Raw Contract JSON</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {payloadViewMode === 'business' ? (
+                    selectedTicket.payload && Object.keys(selectedTicket.payload).length > 0 ? (
+                      <div className="grid grid-cols-2 gap-2 bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-xs">
+                        {Object.entries(selectedTicket.payload).map(([k, v]) => {
+                          const label = k.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                          const isFullWidth = k === 'purpose' || k === 'columns_requested' || k === 'beneficiary';
+                          const displayVal = Array.isArray(v)
+                            ? v.join(', ')
+                            : typeof v === 'number' && k.includes('amount')
+                            ? `S$ ${Number(v).toLocaleString('en-US', { minimumFractionDigits: 2 })}`
+                            : String(v);
+                          return (
+                            <div key={k} className={isFullWidth ? "col-span-2" : "col-span-1"}>
+                              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500 block mb-0.5">
+                                {label}
+                              </span>
+                              <div className="font-mono font-semibold text-slate-800 text-[11px] bg-white px-2.5 py-1.5 rounded-lg border border-slate-200/80 shadow-2xs">
+                                {displayVal}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-xs text-slate-700">
+                        <div className="flex items-center gap-1.5 text-indigo-700 font-bold mb-1">
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          <span>Standard Core Banking Transaction Parameters</span>
+                        </div>
+                        <p className="text-[11px] text-slate-600 leading-relaxed">
+                          Action: <span className="font-semibold text-slate-800">{selectedTicket.proposed_action}</span>
+                          {selectedTicket.amount_sgd > 0 && (
+                            <> • Gross Value: <span className="font-semibold text-slate-900 font-mono">S$ {selectedTicket.amount_sgd.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span></>
+                          )}
+                          {' • '}Standard regulatory compliance rules and Four-Eyes checks mandated.
+                        </p>
+                      </div>
+                    )
+                  ) : (
+                    <pre className="bg-slate-900 text-emerald-400 rounded-xl p-3 text-[11px] font-mono overflow-x-auto max-h-40 border border-slate-800 shadow-inner">
+                      {JSON.stringify(selectedTicket.payload, null, 2)}
+                    </pre>
+                  )}
                 </div>
 
                 {/* Existing Review Info if already resolved */}
