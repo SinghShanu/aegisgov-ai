@@ -369,4 +369,11 @@ class MedallionLakehouse:
         ]
         return {"nodes": nodes, "edges": edges}
 
+    def reset(self):
+        """Drops and recreates bronze and silver tables, and clears quarantine vault"""
+        self.con.execute("DROP TABLE IF EXISTS bronze_transactions")
+        self.con.execute("DROP TABLE IF EXISTS silver_transactions")
+        self._init_tables()
+        self.quarantine_vault.clear()
+
 medallion_lakehouse = MedallionLakehouse()

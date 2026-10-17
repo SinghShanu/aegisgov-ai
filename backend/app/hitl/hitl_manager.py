@@ -218,4 +218,10 @@ class HITLManager:
         )
         return ticket
 
+    def reset(self):
+        """Resets all HITL tickets to initial pristine state with baseline demo seeds"""
+        self._tickets.clear()
+        self._counter = 1094
+        self._seed_sample_tickets()
+
 hitl_manager = HITLManager()

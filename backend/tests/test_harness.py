@@ -123,3 +123,28 @@ async def test_harness_router_sliding_tbac_session():
     resp = await chat_with_sentinel(req)
     assert resp.status == "BLOCKED_ATTACK"
     assert PREDEFINED_USERS["wealth_advisor"].token_issued_at > old_issued_at
+
+@pytest.mark.anyio
+async def test_reset_demo_state_endpoint():
+    from backend.app.routers.harness_router import reset_demo_state
+    from backend.app.hitl.hitl_manager import hitl_manager
+    from backend.app.hitl.hitl_schema import HITLTriggerType
+
+    # Modify state by creating a ticket
+    hitl_manager.create_ticket(
+        trigger_type=HITLTriggerType.HIGH_VALUE_FINANCIAL_ACTION,
+        requester_id="usr_test",
+        requester_name="Test",
+        requester_role="WEALTH_ADVISOR",
+        requester_jurisdiction="SG",
+        description="Test ticket",
+        proposed_action="Test action",
+        amount_sgd=99999.0
+    )
+    assert len(hitl_manager.list_tickets()) > 2
+
+    # Call reset
+    res = await reset_demo_state()
+    assert res["status"] == "SUCCESS"
+    assert res["active_hitl_tickets"] == 2
+    assert "pristine demo baseline" in res["message"]

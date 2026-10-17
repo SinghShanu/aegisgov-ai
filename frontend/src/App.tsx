@@ -20,7 +20,8 @@ import {
   FileCode,
   History,
   Cloud,
-  ChevronRight
+  ChevronRight,
+  CheckCircle2
 } from 'lucide-react';
 
 type MainConsole = 'sentinel_defense' | 'policy_lakehouse' | 'compliance_cloud' | 'regression';
@@ -121,6 +122,29 @@ export const App: React.FC = () => {
     await refreshTickets();
   };
 
+  const [isResetting, setIsResetting] = useState(false);
+  const [resetKey, setResetKey] = useState(0);
+  const [resetToast, setResetToast] = useState<string | null>(null);
+
+  const handleResetDemo = async () => {
+    setIsResetting(true);
+    try {
+      const res = await fetch('/api/harness/reset', { method: 'POST' });
+      if (res.ok) {
+        refreshTickets();
+        refreshStreamStatus();
+        setResetKey(prev => prev + 1);
+        setSelectedPersonaKey('wealth_advisor');
+        setResetToast('Demo state reset successfully! All orders, tickets, and logs restored to clean baseline.');
+        setTimeout(() => setResetToast(null), 6000);
+      }
+    } catch (err) {
+      console.error('Failed to reset demo state:', err);
+    } finally {
+      setIsResetting(false);
+    }
+  };
+
   const currentPersona = personas[selectedPersonaKey] || {
     user_id: 'usr_default',
     name: 'Wealth Advisor',
@@ -149,7 +173,17 @@ export const App: React.FC = () => {
         onToggleStream={handleToggleStream}
         onTriggerBurst={handleTriggerBurst}
         burstLoading={burstLoading}
+        onResetDemo={handleResetDemo}
+        isResetting={isResetting}
       />
+
+      {resetToast && (
+        <div className="bg-emerald-600 text-white text-xs font-semibold px-4 py-2 text-center flex items-center justify-center gap-2 shadow-sm transition">
+          <CheckCircle2 className="w-4 h-4 text-emerald-200 shrink-0" />
+          <span>{resetToast}</span>
+          <button onClick={() => setResetToast(null)} className="ml-2 text-emerald-200 hover:text-white font-bold">✕</button>
+        </div>
+      )}
 
       {/* Main 4-Console Navigation Strip */}
       <div className="border-b border-slate-200 bg-white px-6 py-2.5 sticky top-[69px] z-30 shadow-xs">
@@ -259,9 +293,12 @@ export const App: React.FC = () => {
 
             {sentinelSubView === 'sentinel' && (
               <HarnessPlayground
+                key={resetKey}
                 currentUser={currentPersona}
                 selectedPersonaKey={selectedPersonaKey}
                 onRefreshTickets={refreshTickets}
+                onResetDemo={handleResetDemo}
+                isResetting={isResetting}
               />
             )}
             {sentinelSubView === 'threats' && <ThreatRadar />}

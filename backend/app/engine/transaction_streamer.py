@@ -334,4 +334,14 @@ class TransactionStreamer:
             "recent_events": self.recent_events[:15]
         }
 
+    def reset(self):
+        """Stops stream and resets all counters and telemetry events"""
+        self.stop()
+        self.total_generated = 0
+        self.total_promoted_silver = 0
+        self.total_quarantined = 0
+        self.total_hitl_triggered = 0
+        self.rail_counts = {"FAST": 0, "PAYNOW": 0, "UPI": 0, "IMPS": 0, "SWIFT": 0}
+        self.recent_events.clear()
+
 transaction_streamer = TransactionStreamer()

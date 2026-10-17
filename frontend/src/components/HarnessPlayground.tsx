@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Shield, AlertOctagon, CheckCircle2, Lock, Eye, Zap, Sparkles, Terminal, Trash2, Clock, FlaskConical, ShieldAlert, ShieldCheck } from 'lucide-react';
+import { Send, Shield, AlertOctagon, CheckCircle2, Lock, Eye, Zap, Sparkles, Terminal, Trash2, Clock, FlaskConical, ShieldAlert, ShieldCheck, RotateCcw } from 'lucide-react';
 import { UserPersona, SentinelExecutionResponse, CopilotResponse } from '../types';
 
 interface HarnessPlaygroundProps {
   currentUser: UserPersona;
   selectedPersonaKey: string;
   onRefreshTickets: () => void;
+  onResetDemo?: () => void;
+  isResetting?: boolean;
 }
 
 interface ChatMessage {
@@ -20,7 +22,9 @@ interface ChatMessage {
 export const HarnessPlayground: React.FC<HarnessPlaygroundProps> = ({
   currentUser,
   selectedPersonaKey,
-  onRefreshTickets
+  onRefreshTickets,
+  onResetDemo,
+  isResetting = false
 }) => {
   const [prompt, setPrompt] = useState('');
   const [loading, setLoading] = useState(false);
@@ -317,16 +321,29 @@ export const HarnessPlayground: React.FC<HarnessPlaygroundProps> = ({
                 </span>
               </div>
             </div>
-            {chatHistory.length > 0 && (
-              <button
-                onClick={handleClearChat}
-                className="flex items-center space-x-1 text-xs text-slate-400 hover:text-rose-600 transition px-2 py-1 rounded-md hover:bg-slate-50"
-                title="Clear conversation"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-                <span>Clear</span>
-              </button>
-            )}
+            <div className="flex items-center space-x-2">
+              {onResetDemo && (
+                <button
+                  onClick={onResetDemo}
+                  disabled={isResetting}
+                  className="flex items-center space-x-1 text-xs text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 transition px-2 py-1 rounded-md border border-rose-200/80 disabled:opacity-50"
+                  title="Reset demo state (wipes executed tickets & restarts fresh)"
+                >
+                  <RotateCcw className={`w-3.5 h-3.5 ${isResetting ? 'animate-spin' : ''}`} />
+                  <span>{isResetting ? 'Resetting...' : 'Reset Demo'}</span>
+                </button>
+              )}
+              {chatHistory.length > 0 && (
+                <button
+                  onClick={handleClearChat}
+                  className="flex items-center space-x-1 text-xs text-slate-400 hover:text-rose-600 transition px-2 py-1 rounded-md hover:bg-slate-50"
+                  title="Clear conversation view"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Clear</span>
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Messages Scroll Area */}

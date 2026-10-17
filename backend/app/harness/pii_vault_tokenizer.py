@@ -73,4 +73,8 @@ class PIITokenVault:
         entry = self._vault.get(token_id)
         return entry["original"] if entry else None
 
+    def reset(self):
+        """Clears all stored PII tokens from memory vault"""
+        self._vault.clear()
+
 pii_vault = PIITokenVault()

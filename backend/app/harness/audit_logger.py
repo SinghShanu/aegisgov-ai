@@ -95,6 +95,9 @@ class AuditLedger:
     def get_entries(self, limit: int = 50) -> List[AuditEntry]:
         return list(reversed(self._chain))[:limit]
 
+    def get_chain(self) -> List[AuditEntry]:
+        return self._chain
+
     def verify_chain_integrity(self) -> Dict[str, Any]:
         """Validates all cryptographic hashes in sequence to prove tamper evidence"""
         if len(self._chain) <= 1:
@@ -134,5 +137,10 @@ class AuditLedger:
             "latest_hash": self._chain[-1].entry_hash,
             "message": "All cryptographic links and block signatures verified. 100% Tamper-Evident."
         }
+
+    def reset(self):
+        """Resets audit ledger chain to initial genesis block"""
+        self._chain.clear()
+        self._seed_genesis()
 
 audit_ledger = AuditLedger()

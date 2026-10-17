@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, ShieldAlert, ChevronDown, Globe2, Play, Pause, Zap } from 'lucide-react';
+import { Shield, ShieldAlert, ChevronDown, Globe2, Play, Pause, Zap, RotateCcw } from 'lucide-react';
 import { UserPersona, StreamStatus } from '../types';
 
 interface HeaderProps {
@@ -12,6 +12,8 @@ interface HeaderProps {
   onToggleStream?: () => void;
   onTriggerBurst?: () => void;
   burstLoading?: boolean;
+  onResetDemo?: () => void;
+  isResetting?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -23,7 +25,9 @@ export const Header: React.FC<HeaderProps> = ({
   streamStatus,
   onToggleStream,
   onTriggerBurst,
-  burstLoading = false
+  burstLoading = false,
+  onResetDemo,
+  isResetting = false
 }) => {
   const currentPersona = personas[selectedPersonaKey];
 
@@ -154,6 +158,19 @@ export const Header: React.FC<HeaderProps> = ({
               {pendingHitlCount}
             </span>
           </button>
+
+          {/* Reset Demo State Button */}
+          {onResetDemo && (
+            <button
+              onClick={onResetDemo}
+              disabled={isResetting}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-rose-50/90 hover:bg-rose-100 text-rose-700 border border-rose-200/90 transition shadow-2xs disabled:opacity-50"
+              title="Reset entire demo state (clears executed orders, restores initial tickets and audit ledger)"
+            >
+              <RotateCcw className={`w-3.5 h-3.5 text-rose-600 ${isResetting ? 'animate-spin' : ''}`} />
+              <span className="hidden md:inline">{isResetting ? 'Resetting...' : 'Reset Demo'}</span>
+            </button>
+          )}
 
           {/* Vertical Separator */}
           <div className="h-6 w-px bg-slate-200 hidden md:block" />
