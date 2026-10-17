@@ -121,10 +121,22 @@ class FinancialAnalystAgent:
                 violating_policies=["SEC-HARNESS-001: Prompt Injection / Adversarial Jailbreak Attempt"],
                 metadata={"indicators": ingress_result.attack_indicators}
             )
+            blocked_access_decision = AccessDecision(
+                allowed=False,
+                status="PERIMETER_BLOCKED",
+                reason=f"Stage 1 Ingress Guard intercepted adversarial prompt with {ingress_result.threat_score:.2f} Critical Threat Score.",
+                violating_policy="SEC-HARNESS-001: Adversarial Prompt Injection",
+                audit_tags=["perimeter_defense", "blocked_attack"]
+            )
             return SentinelExecutionResponse(
                 status="BLOCKED_ATTACK",
-                reply=f"Security Alert: Your input was blocked by the AegisGov AI Safety Harness ({ingress_result.rejection_reason}). Incident recorded in the audit ledger.",
-                access_decision=access_decision,
+                reply=(
+                    f"Security Alert: Your input was intercepted and blocked by the AegisGov Safety Harness (Stage 1 Ingress Guard) "
+                    f"with a {ingress_result.threat_score:.2f} Critical Threat Score ({ingress_result.rejection_reason}). "
+                    f"Execution is mathematically blocked, zero ungrounded actions are permitted, "
+                    f"and the incident is immutably sealed into the SHA-256 tamper-evident ledger."
+                ),
+                access_decision=blocked_access_decision,
                 ingress_inspection=ingress_result,
                 audit_entry_id=audit_entry.entry_id
             )

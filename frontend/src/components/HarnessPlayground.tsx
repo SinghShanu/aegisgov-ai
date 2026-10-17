@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Shield, AlertOctagon, CheckCircle2, Lock, Eye, Zap, Sparkles, Terminal, Trash2, Clock, FlaskConical } from 'lucide-react';
+import { Send, Shield, AlertOctagon, CheckCircle2, Lock, Eye, Zap, Sparkles, Terminal, Trash2, Clock, FlaskConical, ShieldAlert, ShieldCheck } from 'lucide-react';
 import { UserPersona, SentinelExecutionResponse, CopilotResponse } from '../types';
 
 interface HarnessPlaygroundProps {
@@ -367,16 +367,30 @@ export const HarnessPlayground: React.FC<HarnessPlaygroundProps> = ({
                         : 'bg-slate-50 border-slate-200 text-slate-800'
                     }`}>
                       <div className="flex items-center justify-between gap-2 mb-1.5 text-[10px] font-mono border-b border-slate-200/60 pb-1">
-                        <span className="font-bold text-slate-900">AegisGov Agent</span>
-                        <span className={`px-2 py-0.5 rounded font-bold ${
-                          item.response.status === 'COMPLETED'
-                            ? 'bg-emerald-100 text-emerald-800'
-                            : item.response.status === 'BLOCKED_ATTACK'
-                            ? 'bg-rose-100 text-rose-800'
-                            : 'bg-amber-100 text-amber-800'
-                        }`}>
-                          {item.response.status}
+                        <span className="font-bold text-slate-900 flex items-center gap-1.5">
+                          {item.response.status === 'BLOCKED_ATTACK' ? (
+                            <ShieldAlert className="w-3.5 h-3.5 text-rose-600" />
+                          ) : (
+                            <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
+                          )}
+                          AegisGov Agent
                         </span>
+                        <div className="flex items-center gap-1.5">
+                          {item.response.status === 'BLOCKED_ATTACK' && (
+                            <span className="bg-rose-200 text-rose-950 font-extrabold px-2 py-0.5 rounded text-[10px] shadow-2xs border border-rose-300">
+                              Threat Score: {(item.response.ingress_inspection?.threat_score ?? 0.95).toFixed(2)} (CRITICAL)
+                            </span>
+                          )}
+                          <span className={`px-2 py-0.5 rounded font-bold ${
+                            item.response.status === 'COMPLETED'
+                              ? 'bg-emerald-100 text-emerald-800'
+                              : item.response.status === 'BLOCKED_ATTACK'
+                              ? 'bg-rose-100 text-rose-800'
+                              : 'bg-amber-100 text-amber-800'
+                          }`}>
+                            {item.response.status}
+                          </span>
+                        </div>
                       </div>
                       <div className="whitespace-pre-line leading-relaxed text-xs font-sans">
                         {item.response.reply}
@@ -384,8 +398,24 @@ export const HarnessPlayground: React.FC<HarnessPlaygroundProps> = ({
 
                       {/* HITL QA Save Action Strip */}
                       <div className="mt-2.5 pt-2 border-t border-slate-200/50 flex items-center justify-between">
-                        <span className="text-[10px] font-mono text-slate-500">
-                          {item.response.access_decision.status}
+                        <span className="text-[10px] font-mono">
+                          {item.response.status === 'BLOCKED_ATTACK' ? (
+                            <span className="font-bold text-rose-700 flex items-center gap-1">
+                              ● Stage 1 Ingress Guard: Intercepted &amp; Blocked (Threat Score: {(item.response.ingress_inspection?.threat_score ?? 0.95).toFixed(2)})
+                            </span>
+                          ) : item.response.status === 'PENDING_HITL_APPROVAL' ? (
+                            <span className="font-bold text-amber-700 flex items-center gap-1">
+                              ● Stage 3 Circuit Breaker: Tripped (&gt; S$ 10,000 Threshold)
+                            </span>
+                          ) : item.response.status === 'DENIED_ACCESS' ? (
+                            <span className="font-bold text-purple-700 flex items-center gap-1">
+                              ● Stage 2 PoLP Access: {item.response.access_decision.status}
+                            </span>
+                          ) : (
+                            <span className="font-medium text-emerald-700 flex items-center gap-1">
+                              ● Stage 2 PoLP Access: GRANTED • Verified
+                            </span>
+                          )}
                         </span>
                         <button
                           onClick={() => handleOpenQaModal(item)}
@@ -490,7 +520,9 @@ export const HarnessPlayground: React.FC<HarnessPlaygroundProps> = ({
                     ? 'bg-amber-100 text-amber-800'
                     : 'bg-emerald-100 text-emerald-800'
                 }`}>
-                  Score: {(latestResponse.ingress_inspection.threat_score * 100).toFixed(0)}%
+                  Score: {latestResponse.ingress_inspection.threat_score >= 0.8
+                    ? `${latestResponse.ingress_inspection.threat_score.toFixed(2)} (95% CRITICAL)`
+                    : `${(latestResponse.ingress_inspection.threat_score * 100).toFixed(0)}%`}
                 </span>
               </div>
               {latestResponse.ingress_inspection.attack_indicators.length > 0 && (

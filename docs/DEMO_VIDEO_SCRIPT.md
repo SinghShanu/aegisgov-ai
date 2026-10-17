@@ -28,8 +28,8 @@
 
 | Timestamp | Visual Screen Action | Spoken Voiceover Script |
 | :--- | :--- | :--- |
-| **0:00 – 0:10** | **Screen:** Show Slide 1 or start directly on the sleek, live dashboard with the AegisGov AI branding and the Threat Radar. Top persona set to **Vikram Mehta (Senior Wealth Advisor)**. | *"Enterprise financial institutions across the Asia-Pacific face a critical dilemma: autonomous AI agents can unlock immense productivity, but compliance policies exist in 100-page legal documents—while banking systems execute in milliseconds."* |
-| **0:10 – 0:25** | **Screen:** Quick visual pan of the header badges: `MAS FEAT`, `MAS Notice 644`, `RBI Directives`, `Singapore PDPA`, `India DPDP`. | *"Without deterministic guardrails, autonomous financial agents risk catastrophic rogue fund movements, prompt injections, and multi-million-dollar regulatory fines. Introducing **AegisGov AI**: the sovereign multi-agent safety harness and Policy-as-Code engine engineered for JAPAC banking."* |
+| **0:00 – 0:12** | **Screen:** Start on the sleek, live dashboard with the AegisGov AI branding and the Threat Radar. Top persona set to **Vikram Mehta (Senior Wealth Advisor)**. | *"Hello judges, my name is **Shanu Singh**, and on behalf of **Team AegisGov**, welcome to **AegisGov AI**. We are competing in the **Enterprise BFSI & FinTech** domain."* |
+| **0:12 – 0:25** | **Screen:** Gentle visual pan of the header badges: `MAS FEAT`, `MAS Notice 644`, `RBI Directives`, `Singapore PDPA`, `India DPDP`. | *"Enterprise banks across JAPAC face a dilemma: AI agents unlock immense productivity, but banking compliance policies exist in 100-page legal documents—while payment rails execute in milliseconds. AegisGov AI is our sovereign multi-agent safety harness and Policy-as-Code engine engineered to make autonomous banking safe, compliant, and audit-ready."* |
 
 ---
 

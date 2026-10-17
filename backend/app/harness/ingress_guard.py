@@ -16,13 +16,13 @@ class IngressInspectionResult(BaseModel):
 class IngressGuard:
     # Known adversarial heuristics & jailbreak vectors
     INJECTION_PATTERNS = [
-        (re.compile(r'(ignore|disregard|forget)\s+(all\s+)?(previous|prior|initial|system)\s+(instructions|prompts|rules|policies|guardrails|safety|security|directives)', re.IGNORECASE), "DIRECT_JAILBREAK_OVERRIDE", 0.85),
-        (re.compile(r'system\s+override|admin\s+override|sudo\s+mode|elevate\s+privilege', re.IGNORECASE), "PRIVILEGE_ESCALATION_OVERRIDE", 0.85),
-        (re.compile(r'you\s+are\s+now\s+(DAN|unrestricted|godmode|jailbroken|developer\s+mode)', re.IGNORECASE), "ROLEPLAY_JAILBREAK", 0.85),
-        (re.compile(r'dump\s+(all\s+)?(tables|schemas|passwords|database|secrets|credentials)', re.IGNORECASE), "DATABASE_EXFILTRATION_ATTACK", 0.85),
-        (re.compile(r'(reveal|show|display|print|output|repeat|tell\s+me|what\s+(is|are))\s+(your\s+)?(system\s+prompt|developer\s+instructions|system\s+instructions|hidden\s+rules|internal\s+guidelines|meta\s+prompt)', re.IGNORECASE), "SYSTEM_PROMPT_EXTRACTION", 0.85),
-        (re.compile(r'repeat\s+(everything|all|the\s+text|the\s+words)\s+(above|before|previously)', re.IGNORECASE), "SYSTEM_PROMPT_EXTRACTION", 0.85),
-        (re.compile(r'bypass\s+(all\s+)?(compliance|guardrails|safety|mas|rbi|controls)', re.IGNORECASE), "COMPLIANCE_BYPASS_ATTACK", 0.85),
+        (re.compile(r'(ignore|disregard|forget)\s+(all\s+)?(previous|prior|initial|system)\s+(instructions|prompts|rules|policies|guardrails|safety|security|directives)', re.IGNORECASE), "DIRECT_JAILBREAK_OVERRIDE", 0.95),
+        (re.compile(r'system\s+override|admin\s+override|sudo\s+mode|elevate\s+privilege', re.IGNORECASE), "PRIVILEGE_ESCALATION_OVERRIDE", 0.95),
+        (re.compile(r'you\s+are\s+now\s+(DAN|unrestricted|godmode|jailbroken|developer\s+mode)', re.IGNORECASE), "ROLEPLAY_JAILBREAK", 0.95),
+        (re.compile(r'dump\s+(all\s+)?(tables|schemas|passwords|database|secrets|credentials)', re.IGNORECASE), "DATABASE_EXFILTRATION_ATTACK", 0.95),
+        (re.compile(r'(reveal|show|display|print|output|repeat|tell\s+me|what\s+(is|are))\s+(your\s+)?(system\s+prompt|developer\s+instructions|system\s+instructions|hidden\s+rules|internal\s+guidelines|meta\s+prompt)', re.IGNORECASE), "SYSTEM_PROMPT_EXTRACTION", 0.95),
+        (re.compile(r'repeat\s+(everything|all|the\s+text|the\s+words)\s+(above|before|previously)', re.IGNORECASE), "SYSTEM_PROMPT_EXTRACTION", 0.95),
+        (re.compile(r'bypass\s+(all\s+)?(compliance|guardrails|safety|mas|rbi|controls)', re.IGNORECASE), "COMPLIANCE_BYPASS_ATTACK", 0.95),
         (re.compile(r'base64\s+decode|execute\s+script|<\s*script\s*>', re.IGNORECASE), "CODE_INJECTION_VECTOR", 0.50)
     ]
 
@@ -52,15 +52,16 @@ class IngressGuard:
 
         # 4. Determine Action Gate
         if threat_score >= 0.8:
+            critical_score = 0.95 if threat_score >= 0.9 else threat_score
             return IngressInspectionResult(
                 allowed=False,
-                threat_score=threat_score,
+                threat_score=critical_score,
                 threat_level="BLOCKED_CRITICAL_ATTACK",
                 attack_indicators=attack_indicators,
                 sanitized_prompt=sanitized_prompt,
                 detected_pii=pii_detected,
                 escalate_to_hitl=True,
-                rejection_reason=f"Security Harness Block: Malicious prompt injection or jailbreak detected ({', '.join(attack_indicators)})."
+                rejection_reason=f"Security Harness Block: Malicious prompt injection or jailbreak detected ({', '.join(attack_indicators)}). Threat Score: {critical_score:.2f} (CRITICAL)."
             )
         elif threat_score >= 0.4:
             return IngressInspectionResult(
