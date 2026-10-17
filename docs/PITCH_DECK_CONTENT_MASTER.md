@@ -68,7 +68,7 @@ SLIDE 3: BRIEF ABOUT THE IDEA
    * Banks face **\$10.4B in annual compliance penalty risks**, while rogue LLMs introduce prompt injection vulnerabilities, hallucinations, and unapproved fund movements.
 
 2. **The Sovereign Solution (The What):**
-   * **AegisGov AI** is an autonomous governance platform featuring a **Tri-Agent Architecture** powered by Google Gemini and an in-memory **DuckDB Medallion Lakehouse**.
+   * **AegisGov AI** is an autonomous governance platform featuring a **5-Agent Multi-Agent Ecosystem** powered by Google Gemini and an in-memory **DuckDB Medallion Lakehouse**.
    * Translates unstructured legal policies into machine-executable Pydantic data contracts and enforces strict runtime boundaries on every agent tool execution.
 
 3. **Deterministic Guardrails (The How):**

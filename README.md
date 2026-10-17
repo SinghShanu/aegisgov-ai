@@ -1,7 +1,7 @@
 # AegisGov AI: JAPAC BFSI Enterprise Policy-as-Code & Multi-Agent Safety Harness
 
 [![Google Cloud AI Builder Cup 2026](https://img.shields.io/badge/Google%20Cloud-AI%20Builder%20Cup%202026-4285F4?logo=google-cloud&logoColor=white)](https://hack2skill.com)
-[![Track](https://img.shields.io/badge/Track-Future%20of%20Work%20%26%20Enterprise%20Productivity-0ea5e9)](#)
+[![Category](https://img.shields.io/badge/Category-BFSI%20%7C%20Banking%2C%20Financial%20Services%20%26%20Insurance-0ea5e9)](#)
 [![Deployment](https://img.shields.io/badge/Deployed%20on-Google%20Cloud%20Run-34A853?logo=google-cloud&logoColor=white)](#)
 [![Regionalization](https://img.shields.io/badge/Currencies-SGD%20%7C%20INR%20%7C%20JPY-F59E0B)](#)
 [![Compliance](https://img.shields.io/badge/Regulatory-MAS%20FEAT%20%7C%20RBI%20%7C%20PDPA%20%7C%20DPDP-10B981)](#)
@@ -19,7 +19,7 @@ Enterprise banks and financial services institutions across JAPAC face a trillio
 2. **Data Leakage & Cross-Border Sovereign Violations:** Raw transactional records contain cleartext Singapore NRIC/FIN, Indian PAN, Aadhaar, and credit card numbers. Without dynamic tokenization, sensitive customer data leaks directly into internal LLM context windows.
 3. **Unregulated Autonomous Actions:** Autonomous agents given API access to core banking or payment rails can initiate catastrophic high-value transactions or fall prey to prompt injections, context poisoning, and hallucinated financial advice.
 
-**AegisGov AI solves this with a Tri-Agent Architecture and a multi-layered governance harness.**
+**AegisGov AI solves this with a 5-Agent Multi-Agent Ecosystem and a multi-layered governance harness.**
 
 ---
 
@@ -71,7 +71,7 @@ flowchart TD
     subgraph Lane3["🛡️ SWIMLANE 3: 5-STAGE AI SAFETY HARNESS (AGENT 3)"]
         direction TB
         S6["<b>Step 6: User Query Ingress (Stage 1)</b><br/>RBAC/ABAC Clearance Validated · Ephemeral TBAC Token · Injection & Jailbreak Defense"]
-        S7["<b>Step 7: Aegis Financial Sentinel Execution (Stage 2)</b><br/>Gemini 1.5 Flash grounded strictly on Certified Gold Facts"]
+        S7["<b>Step 7: Aegis Financial Sentinel Execution (Stage 2)</b><br/>Gemini 2.0 Flash grounded strictly on Certified Gold Facts"]
         S8{"<b>Step 8: Circuit Breaker Evaluation (Stage 3)</b><br/>Action Value > S$10,000 or ₹5,00,000?"}
         S9_HITL["👥 <b>Step 9: Dual-Custody HITL Approval (Stage 4)</b><br/>Execution Halted · Four-Eyes Sign-Off Required by Risk Officer"]
         S10_Egress["🔒 <b>Step 10: Egress Guard Validation (Stage 5)</b><br/>MAS FEAT Bias Scanner · Secret & Data Leak Defense"]
@@ -141,7 +141,7 @@ flowchart TD
 | **04** | **Lakehouse Inspector** | **Agent 2** (DuckDB) | Validates schemas & dynamically masks NRIC/PAN | Clean Silver Tier (or Quarantine Vault if breached) |
 | **05** | **Certification & Datamarts** | **Agent 2** (DuckDB) | Materializes Gold Data Marts & C-Suite KPIs | Certified Gold Facts, CRO Dashboard & Regulatory Attestation |
 | **06** | **Ingress Guard** | Stage 1 Defense | Verifies user credentials, clears tokens, screens prompt | Ephemeral Capability Token (PoLP), Sanitized Query |
-| **07** | **Aegis Financial Sentinel** | **Agent 3** (Gemini 1.5 Flash)| Generates grounded analytical insights & actions | Action Proposal strictly grounded in Gold Facts |
+| **07** | **Aegis Financial Sentinel** | **Agent 3** (Gemini 2.0 Flash)| Generates grounded analytical insights & actions | Action Proposal strictly grounded in Gold Facts |
 | **08** | **Circuit Breaker** | Stage 3 Defense | Evaluates financial thresholds (> S\$10K / ₹5L) | Gate decision: Fast-track or Halt execution |
 | **09** | **HITL Approval** | Stage 4 Dual Custody | Four-Eyes approval gate by Senior Risk Officer | Dual-custody sign-off or action abort |
 | **10** | **Egress Guard** | Stage 5 Defense | Scans for MAS FEAT algorithmic bias & secret leaks | Final certified safe response payload |
@@ -249,7 +249,7 @@ gcloud config set project aegisgov-ai-2026
 * **Persona:** Select *Vikram Mehta (Senior Wealth Advisor)* in the header.
 * **Action:** In the **Financial Sentinel** tab, click **"Commercial Credit & Lease Payout"** (or submit: *"Please execute commercial lease deposit of S$ 75,000 via FAST to Sentosa Commercial Realty Hub for Singapore SME expansion."*).
 * **Observation:** The transaction exceeds the S$ 10,000 autonomous ceiling under MAS Notice 644 / RBI Master Direction. The **Circuit Breaker** halts autonomous settlement and creates pending ticket `#HITL-SG-...` with status `PENDING_HITL_APPROVAL`.
-* **HITL Sign-Off:** Switch persona to *Kenji Sato (Director of Model & Financial Risk)* or *Priya Sharma (Principal Compliance Auditor)* in the header. Open the **HITL Approval Center**, inspect the dual-custody parameters, enter approval remarks, and click **"Approve & Execute Settlement"**.
+* **HITL Sign-Off:** Switch persona to *Kenji Sato (Director of Model & Financial Risk)* or *Priya Sharma (Principal Compliance Auditor)* in the header. Open the **HITL Approval Center**, inspect the dual-custody parameters (in Business View or Raw Contract JSON), enter approval remarks, and click **"Approve & Authorize Action"**.
 
 ### 🔒 Test Scenario 3: Principle of Least Privilege (PoLP) & Dynamic PII Masking
 * **Persona:** Select *Rachel Lim (Junior Analyst)* or *Vikram Mehta (Senior Wealth Advisor)*.

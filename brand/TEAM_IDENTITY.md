@@ -1,7 +1,7 @@
 # 🛡️ Team AegisGov — Official Identity & Brand Kit
 
 **Competition:** Google Cloud AI Builder Cup 2026 (JAPAC)  
-**Track:** Future of Work & Enterprise Productivity  
+**Category / Domain:** Banking, Financial Services & Insurance (BFSI) & FinTech  
 **Project:** AegisGov AI — JAPAC BFSI Enterprise Policy-as-Code & Multi-Agent Safety Harness  
 
 ---
