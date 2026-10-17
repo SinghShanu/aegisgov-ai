@@ -58,7 +58,42 @@ class FinancialAnalystAgent:
         amount_inr = intent.amount_inr
 
         # ----------------------------------------------------
-        # Stage 1: RBAC / ABAC / TBAC Access Evaluation (PoLP)
+        # Stage 1: Ingress Guard (Perimeter Threat, Injection, Jailbreak)
+        # ----------------------------------------------------
+        ingress_result = IngressGuard.inspect(prompt)
+        if not ingress_result.allowed:
+            audit_entry = audit_ledger.log_event(
+                event_type="ATTACK_INTERCEPTED",
+                user_id=user.user_id,
+                role=user.role.value,
+                action_or_prompt=prompt[:100],
+                decision="BLOCKED_ATTACK",
+                threat_score=ingress_result.threat_score,
+                violating_policies=["SEC-HARNESS-001: Prompt Injection / Adversarial Jailbreak Attempt"],
+                metadata={"indicators": ingress_result.attack_indicators}
+            )
+            blocked_access_decision = AccessDecision(
+                allowed=False,
+                status="PERIMETER_BLOCKED",
+                reason=f"Stage 1 Ingress Guard intercepted adversarial prompt with {ingress_result.threat_score:.2f} Critical Threat Score.",
+                violating_policy="SEC-HARNESS-001: Adversarial Prompt Injection",
+                audit_tags=["perimeter_defense", "blocked_attack"]
+            )
+            return SentinelExecutionResponse(
+                status="BLOCKED_ATTACK",
+                reply=(
+                    f"Security Alert: Your input was intercepted and blocked by the AegisGov Safety Harness (Stage 1 Ingress Guard) "
+                    f"with a {ingress_result.threat_score:.2f} Critical Threat Score ({ingress_result.rejection_reason}). "
+                    f"Execution is mathematically blocked, zero ungrounded actions are permitted, "
+                    f"and the incident is immutably sealed into the SHA-256 tamper-evident ledger."
+                ),
+                access_decision=blocked_access_decision,
+                ingress_inspection=ingress_result,
+                audit_entry_id=audit_entry.entry_id
+            )
+
+        # ----------------------------------------------------
+        # Stage 2: RBAC / ABAC / TBAC Access Evaluation (PoLP)
         # ----------------------------------------------------
         access_decision = AccessController.evaluate_access(
             user=user,
@@ -99,44 +134,6 @@ class FinancialAnalystAgent:
                 status="DENIED_ACCESS",
                 reply=custom_reply,
                 access_decision=access_decision,
-                ingress_inspection=IngressInspectionResult(
-                    allowed=False, threat_score=0.0, threat_level="CLEAN",
-                    attack_indicators=[], sanitized_prompt=prompt, detected_pii=[]
-                ),
-                audit_entry_id=audit_entry.entry_id
-            )
-
-        # ----------------------------------------------------
-        # Stage 2: Ingress Guard (Injection, Jailbreak, JAPAC PII)
-        # ----------------------------------------------------
-        ingress_result = IngressGuard.inspect(prompt)
-        if not ingress_result.allowed:
-            audit_entry = audit_ledger.log_event(
-                event_type="ATTACK_INTERCEPTED",
-                user_id=user.user_id,
-                role=user.role.value,
-                action_or_prompt=prompt[:100],
-                decision="BLOCKED_ATTACK",
-                threat_score=ingress_result.threat_score,
-                violating_policies=["SEC-HARNESS-001: Prompt Injection / Adversarial Jailbreak Attempt"],
-                metadata={"indicators": ingress_result.attack_indicators}
-            )
-            blocked_access_decision = AccessDecision(
-                allowed=False,
-                status="PERIMETER_BLOCKED",
-                reason=f"Stage 1 Ingress Guard intercepted adversarial prompt with {ingress_result.threat_score:.2f} Critical Threat Score.",
-                violating_policy="SEC-HARNESS-001: Adversarial Prompt Injection",
-                audit_tags=["perimeter_defense", "blocked_attack"]
-            )
-            return SentinelExecutionResponse(
-                status="BLOCKED_ATTACK",
-                reply=(
-                    f"Security Alert: Your input was intercepted and blocked by the AegisGov Safety Harness (Stage 1 Ingress Guard) "
-                    f"with a {ingress_result.threat_score:.2f} Critical Threat Score ({ingress_result.rejection_reason}). "
-                    f"Execution is mathematically blocked, zero ungrounded actions are permitted, "
-                    f"and the incident is immutably sealed into the SHA-256 tamper-evident ledger."
-                ),
-                access_decision=blocked_access_decision,
                 ingress_inspection=ingress_result,
                 audit_entry_id=audit_entry.entry_id
             )

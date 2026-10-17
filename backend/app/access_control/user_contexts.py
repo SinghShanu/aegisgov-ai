@@ -35,7 +35,7 @@ class UserContext(BaseModel):
     can_approve_hitl: bool = False
     session_token: str
     token_issued_at: float = Field(default_factory=time.time)
-    token_ttl_seconds: int = 1800  # 30 minutes (TBAC)
+    token_ttl_seconds: int = 28800  # 8 hours standard enterprise workday session (TBAC)
 
 # Pre-defined enterprise personas for demo & testing
 PREDEFINED_USERS: Dict[str, UserContext] = {
@@ -55,7 +55,7 @@ PREDEFINED_USERS: Dict[str, UserContext] = {
         max_transaction_limit_inr=50000.00,
         can_approve_hitl=False,
         session_token="tbac_tok_rachel_lim_9921",
-        token_ttl_seconds=1800
+        token_ttl_seconds=28800
     ),
     "wealth_advisor": UserContext(
         user_id="usr_in_082",
@@ -76,7 +76,7 @@ PREDEFINED_USERS: Dict[str, UserContext] = {
         max_transaction_limit_inr=500000.00,
         can_approve_hitl=False,
         session_token="tbac_tok_vikram_mehta_4418",
-        token_ttl_seconds=3600
+        token_ttl_seconds=28800
     ),
     "compliance_officer": UserContext(
         user_id="usr_sg_002",
@@ -99,7 +99,7 @@ PREDEFINED_USERS: Dict[str, UserContext] = {
         max_transaction_limit_inr=0.00,
         can_approve_hitl=True,
         session_token="tbac_tok_priya_sharma_0012",
-        token_ttl_seconds=7200
+        token_ttl_seconds=28800
     ),
     "risk_officer": UserContext(
         user_id="usr_sg_005",
@@ -121,7 +121,7 @@ PREDEFINED_USERS: Dict[str, UserContext] = {
         max_transaction_limit_inr=50000000.00,
         can_approve_hitl=True,
         session_token="tbac_tok_kenji_sato_7781",
-        token_ttl_seconds=7200
+        token_ttl_seconds=28800
     ),
     "data_engineer": UserContext(
         user_id="usr_sg_088",
@@ -141,6 +141,6 @@ PREDEFINED_USERS: Dict[str, UserContext] = {
         max_transaction_limit_inr=0.00,
         can_approve_hitl=False,
         session_token="tbac_tok_alex_wong_7719",
-        token_ttl_seconds=3600
+        token_ttl_seconds=28800
     )
 }

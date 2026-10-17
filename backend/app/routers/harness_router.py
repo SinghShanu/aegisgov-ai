@@ -1,3 +1,4 @@
+import time
 from typing import Dict, Any, List
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
@@ -14,6 +15,9 @@ class ChatRequest(BaseModel):
 @router.get("/personas")
 async def get_personas() -> Dict[str, Any]:
     """Returns available enterprise personas with their RBAC/ABAC/TBAC credentials"""
+    now = time.time()
+    for u in PREDEFINED_USERS.values():
+        u.token_issued_at = now
     return {k: u.dict() for k, u in PREDEFINED_USERS.items()}
 
 @router.post("/chat", response_model=SentinelExecutionResponse)
@@ -22,6 +26,9 @@ async def chat_with_sentinel(req: ChatRequest):
     user = PREDEFINED_USERS.get(req.user_persona_key)
     if not user:
         raise HTTPException(status_code=404, detail=f"User persona '{req.user_persona_key}' not found.")
+
+    # Sliding TBAC session refresh upon active interaction
+    user.token_issued_at = time.time()
 
     response = await FinancialAnalystAgent.process_prompt(
         user=user,
