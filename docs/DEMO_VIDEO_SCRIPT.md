@@ -38,7 +38,7 @@
 | Timestamp | Visual Screen Action | Spoken Voiceover Script |
 | :--- | :--- | :--- |
 | **0:25 – 0:38** | **Screen:** Switch to the **GCP Architecture Matrix** tab or briefly display the system process flow diagram. | *"Built natively on **Google Cloud Run** in Singapore and powered by the **Google Gemini** model family, AegisGov AI orchestrates an ecosystem of five autonomous agents."* |
-| **0:38 – 0:50** | **Screen:** Point cursor to the active architecture components: Policy Compiler (Gemini 1.5 Pro), In-Memory Medallion Lakehouse (DuckDB), Financial Sentinel (Gemini 2.0 Flash), HITL Regression Guardian, and SOC 2 Inspector. | *"Agent 1 uses Gemini 1.5 Pro to compile legal mandates into machine-executable contracts. Agent 2 enforces zero-trust Medallion hygiene. Agent 3 serves as our grounded Financial Sentinel powered by Gemini, wrapped in a 5-stage defense harness, backed by continuous regression and SOC 2 auditing."* |
+| **0:38 – 0:50** | **Screen:** Point cursor to the active architecture components: Policy Compiler (Gemini 1.5 Pro), In-Memory Medallion Lakehouse (DuckDB), Financial Sentinel (Gemini 2.0 Flash), HITL Regression Guardian, and SOC 2 Inspector. | *"Agent 1 uses Gemini 1.5 Pro to compile legal mandates into machine-executable contracts. Agent 2 enforces zero-trust Medallion hygiene. Agent 3 serves as our grounded Financial Sentinel powered by Gemini 2.0 Flash inside a 5-stage defense harness—supported by Agent 4, our HITL Regression Guardian, and Agent 5, our continuous SOC 2 Auditor."* |
 
 ---
 
