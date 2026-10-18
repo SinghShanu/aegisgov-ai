@@ -251,7 +251,7 @@ We enforce a strict **4-Layer Account Isolation Framework** to guarantee that al
              │
              ▼
 [ Layer 1: scripts/verify_gcp_account.sh ] ──► Fails if active account != GCP_DEPLOY_ACCOUNT
-             │ (Matches shanusingh684@gmail.com)
+             │ (Matches configured GCP_DEPLOY_ACCOUNT)
              ▼
 [ Layer 2: Explicit CLI Flags ] ──────────────► Hardcodes --account and --project on all gcloud calls
              │
@@ -267,7 +267,7 @@ Before running any deployment, always run the account verification check:
 ```bash
 ./scripts/verify_gcp_account.sh
 ```
-* If your active `gcloud` account is not `shanusingh684@gmail.com`, the script **immediately halts execution** with a clear resolution command (`gcloud config set account ...`).
+* If your active `gcloud` account does not match `GCP_DEPLOY_ACCOUNT`, the script **immediately halts execution** with a clear resolution command (`gcloud config set account ...`).
 * When ready to deploy:
   ```bash
   ./scripts/deploy.sh

@@ -28,10 +28,10 @@ Rather than relying on the `default` gcloud configuration (which can switch ambi
 gcloud config configurations create aegisgov-freetier
 
 # 2. Authenticate strictly with your secondary account
-gcloud auth login shanusingh684@gmail.com
+gcloud auth login your-free-tier-email@gmail.com
 
 # 3. Bind the configuration to your secondary account and free-tier project
-gcloud config set account shanusingh684@gmail.com
+gcloud config set account your-free-tier-email@gmail.com
 gcloud config set project aegisgov-ai-2026
 gcloud config set compute/region asia-southeast1
 gcloud config set run/region asia-southeast1
@@ -53,7 +53,7 @@ In your local [`.env`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/.env)
 
 ```ini
 # Designated Free-Tier Account (All deployments will be strictly locked to this account)
-GCP_DEPLOY_ACCOUNT="shanusingh684@gmail.com"
+GCP_DEPLOY_ACCOUNT="your-free-tier-email@gmail.com"
 GCP_PROJECT_ID="aegisgov-ai-2026"
 GCP_LOCATION="asia-southeast1"
 ```
@@ -71,14 +71,14 @@ Before executing any deployment, run our pre-flight verification script:
 - If your **secondary account** is active:
   ```
   ✅ VERIFICATION PASSED!
-  Active account matches designated free-tier account: shanusingh684@gmail.com
+  Active account matches designated free-tier account: your-free-tier-email@gmail.com
   Safe to proceed with deployment.
   ```
 - If your **main personal account** is active:
   ```
   🚨 CRITICAL SAFETY ALERT: ACCOUNT MISMATCH DETECTED!
   Your currently active gcloud account is: main-personal-email@gmail.com
-  Your intended free-tier account is    : shanusingh684@gmail.com
+  Your intended free-tier account is    : your-free-tier-email@gmail.com
 
   🛑 DEPLOYMENT BLOCKED TO PREVENT CHARGES ON YOUR MAIN ACCOUNT.
   ```
@@ -95,7 +95,7 @@ Always deploy using the automated safe deployment script:
 
 ### What this script guarantees:
 1. **Automated Pre-Flight Gate:** Aborts immediately if the active gcloud account does not match `GCP_DEPLOY_ACCOUNT`.
-2. **Explicit Parameter Binding:** Passes `--account="shanusingh684@gmail.com"` and `--project="aegisgov-ai-2026"` explicitly to `gcloud builds submit` and `gcloud run deploy`. This ensures that even if gcloud switches ambient context, the commands will only execute against the secondary account.
+2. **Explicit Parameter Binding:** Passes `--account="your-free-tier-email@gmail.com"` and `--project="aegisgov-ai-2026"` explicitly to `gcloud builds submit` and `gcloud run deploy`. This ensures that even if gcloud switches ambient context, the commands will only execute against the secondary account.
 3. **Free-Tier Protection Caps:** Automatically applies `--max-instances=2`, `--memory=512Mi`, and `--cpu=1` to keep Cloud Run strictly within Google Cloud's monthly Free Tier allowance (2 million requests/month, 180,000 vCPU-seconds free).
 
 ---

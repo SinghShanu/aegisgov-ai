@@ -322,6 +322,6 @@ SLIDE 15 & 16: CONCLUSION & GOOGLE CLOUD BRANDING
 ### Slide Title:
 **AegisGov AI: Safe, Sovereign AI for Modern Banking**
 
-* **Team Contact:** Shanu Singh (`shanusingh684@gmail.com`)  
+* **Team Lead:** Shanu Singh ([GitHub](https://github.com/SinghShanu))  
 * **Built With:** Google Gemini 1.5 Pro · Gemini 1.5 Flash · Google Cloud Run · Vertex AI  
 * *Destination: Singapore Grand Finale 2026*  
