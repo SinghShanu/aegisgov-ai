@@ -297,7 +297,7 @@ def main():
     env_cfg = load_env(os.path.join(root_dir, ".env"))
 
     project = args.project or env_cfg.get("GCP_PROJECT_ID", "aegisgov-ai-2026")
-    account = args.account or env_cfg.get("GCP_DEPLOY_ACCOUNT", "shanusingh684@gmail.com")
+    account = args.account or env_cfg.get("GCP_DEPLOY_ACCOUNT", "")
     region = args.region or env_cfg.get("GCP_LOCATION", "asia-southeast1")
     service = args.service
 

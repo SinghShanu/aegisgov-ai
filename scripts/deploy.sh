@@ -22,7 +22,7 @@ if [ -f "${ROOT_DIR}/.env" ]; then
     done < "${ROOT_DIR}/.env"
 fi
 
-TARGET_ACCOUNT="${GCP_DEPLOY_ACCOUNT:-shanusingh684@gmail.com}"
+TARGET_ACCOUNT="${GCP_DEPLOY_ACCOUNT:-}"
 TARGET_PROJECT="${GCP_PROJECT_ID:-aegisgov-ai-2026}"
 REGION="${GCP_LOCATION:-asia-southeast1}"
 REPO_NAME="aegisgov-repo"

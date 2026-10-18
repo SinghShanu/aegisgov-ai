@@ -32,7 +32,12 @@ zip -r "${OUTPUT_ZIP}" . \
     -x "*.pyc" \
     -x ".DS_Store" \
     -x "*/.DS_Store" \
-    -x "aegisgov-ai-shareable-bundle.zip"
+    -x "aegisgov-ai-shareable-bundle.zip" \
+    -x "*.eml" \
+    -x "*.pdf" \
+    -x "*.bak" \
+    -x "*.pptx" \
+    -x "*.odp"
 
 echo ""
 echo "✅ Shareable bundle created successfully!"
