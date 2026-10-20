@@ -58,17 +58,17 @@ In traditional banking, regulatory teams write 100-page compliance manuals (MAS 
 Before exploring the code, review the core diagrams and documentation blueprints:
 
 1. **Enterprise System Architecture:**
-   * Vector Diagram: [`docs/assets/system-architecture.svg`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/assets/system-architecture.svg)
-   * Interactive Inspection Viewer: [`docs/assets/system-architecture.html`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/assets/system-architecture.html) *(Features dark/light themes, component inspection, and edge tracing).*
+   * Vector Diagram: [`docs/assets/system-architecture.svg`](assets/system-architecture.svg)
+   * Interactive Inspection Viewer: [`docs/assets/system-architecture.html`](assets/system-architecture.html) *(Features dark/light themes, component inspection, and edge tracing).*
 2. **End-to-End Swimlane Process Flow:**
-   * Vector Graphic: [`docs/assets/process-flow-diagram.svg`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/assets/process-flow-diagram.svg)
-   * Markdown Specification: See [`README.md`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/README.md#L38-L124) for the 12-Step Sequential Execution Flowchart.
+   * Vector Graphic: [`docs/assets/process-flow-diagram.svg`](assets/process-flow-diagram.svg)
+   * Markdown Specification: See [`README.md`](../README.md#L38-L124) for the 12-Step Sequential Execution Flowchart.
 3. **Master Pitch Deck Blueprint:**
-   * Presentation Content Guide: [`docs/PITCH_DECK_CONTENT_MASTER.md`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/PITCH_DECK_CONTENT_MASTER.md) *(Slide-by-slide copy deck mapped to the official AI Builder Cup template).*
+   * Presentation Content Guide: [`docs/PITCH_DECK_CONTENT_MASTER.md`](PITCH_DECK_CONTENT_MASTER.md) *(Slide-by-slide copy deck mapped to the official AI Builder Cup template).*
 4. **Safe Cloud Deployment Runbook:**
-   * Account Isolation Guide: [`docs/SAFE_CLOUD_DEPLOYMENT.md`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/SAFE_CLOUD_DEPLOYMENT.md) *(Guarantees deployment exclusively to free-tier account).*
+   * Account Isolation Guide: [`docs/SAFE_CLOUD_DEPLOYMENT.md`](SAFE_CLOUD_DEPLOYMENT.md) *(Guarantees deployment exclusively to free-tier account).*
 5. **JAPAC Regulatory Dictionary:**
-   * Compliance Lexicon: [`docs/REGULATORY_DICTIONARY.md`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/REGULATORY_DICTIONARY.md) *(MAS Notice 644, FEAT, RBI, PDPA, FAST, PayNow, UPI).*
+   * Compliance Lexicon: [`docs/REGULATORY_DICTIONARY.md`](REGULATORY_DICTIONARY.md) *(MAS Notice 644, FEAT, RBI, PDPA, FAST, PayNow, UPI).*
 
 ---
 
@@ -142,7 +142,7 @@ You can get the entire system running locally in **under 3 minutes**.
 ### 🖥️ Option A: Windows (1-Click or Manual Setup)
 
 #### 1-Click Automated Setup (Windows)
-Double-click [`scripts/run_local.bat`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/scripts/run_local.bat) in File Explorer, or open PowerShell and run:
+Double-click [`scripts/run_local.bat`](../scripts/run_local.bat) in File Explorer, or open PowerShell and run:
 ```powershell
 .\scripts\run_local.ps1
 ```
@@ -282,7 +282,7 @@ Now that you are up to speed with the architecture, here are the highest-impact 
 
 1. **BigQuery BigLake / Iceberg Table Mirroring:** Exploring a periodic background sync from our in-memory DuckDB Gold tier to BigQuery external tables for long-term historical analytics.
 2. **Cloud Pub/Sub Streaming Connectors:** Adding a Cloud Pub/Sub subscriber option to `transaction_streamer.py` to ingest real-time mock Swift/FAST streams in Google Cloud.
-3. **Pitch Deck & Video Demo Review:** Reviewing [`docs/PITCH_DECK_CONTENT_MASTER.md`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/docs/PITCH_DECK_CONTENT_MASTER.md) and assisting with the 3–5 minute presentation demo script.
+3. **Pitch Deck & Video Demo Review:** Reviewing [`docs/PITCH_DECK_CONTENT_MASTER.md`](PITCH_DECK_CONTENT_MASTER.md) and assisting with the 3–5 minute presentation demo script.
 4. **Custom Data Contract Rule Generators:** Adding domain-specific banking rules (e.g., cross-border FX slippage caps or sanctions list matching) to `policy_compiler.py`.
 
 Welcome to **Team AegisGov**! Let's build the gold standard for sovereign AI governance in institutional finance! 🚀

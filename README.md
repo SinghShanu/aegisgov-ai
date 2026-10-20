@@ -191,8 +191,9 @@ Every prompt, evaluation, tool call, and HITL decision is hashed using **SHA-256
 
 ### 1. Clone & Set Up Backend
 ```zsh
-# Navigate to repository
-cd /Users/shanusingh/Google_AI_Builder_Cup_2026
+# Clone & navigate to repository
+git clone https://github.com/SinghShanu/aegisgov-ai.git
+cd aegisgov-ai
 
 # Activate existing virtual environment
 source backend/venv/bin/activate
@@ -206,7 +207,7 @@ cp .env.example .env
 ```zsh
 PYTHONPATH=. backend/venv/bin/pytest backend/tests -v
 ```
-All **49 unit and integration tests** verify RBAC/ABAC/TBAC access controls, JAPAC PII tokenization, prompt injection mitigations, Four-Eyes circuit breakers, Medallion Bronze/Silver/Quarantine/Gold pipelines, living regression catalogs, and continuous SOC 2 audits.
+All **54 unit and integration tests** verify RBAC/ABAC/TBAC access controls, JAPAC PII tokenization, prompt injection mitigations, Four-Eyes circuit breakers, Medallion Bronze/Silver/Quarantine/Gold pipelines, living regression catalogs, and continuous SOC 2 audits.
 
 ### 3. Build & Run Application
 ```zsh

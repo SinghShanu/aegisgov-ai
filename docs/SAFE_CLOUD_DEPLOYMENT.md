@@ -49,7 +49,7 @@ gcloud config configurations activate aegisgov-freetier
 
 ## 2. Set Up Your Local `.env`
 
-In your local [`.env`](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/.env) file:
+In your local [`.env`](../.env) file:
 
 ```ini
 # Designated Free-Tier Account (All deployments will be strictly locked to this account)

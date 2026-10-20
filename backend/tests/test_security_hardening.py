@@ -15,6 +15,7 @@ def test_http_security_headers_present():
     assert response.headers.get("X-XSS-Protection") == "1; mode=block"
     assert "strict-origin" in response.headers.get("Referrer-Policy", "")
     assert "max-age=31536000" in response.headers.get("Strict-Transport-Security", "")
+    assert response.headers.get("Server") == "AegisGov-Secure-Gateway"
 
 def test_path_traversal_protection():
     """Verify that requests with directory traversal characters cannot escape frontend dist"""
@@ -55,3 +56,28 @@ def test_production_environment_auto_disables_debug():
 
     dev_settings = Settings(ENVIRONMENT="development", DEBUG=True)
     assert dev_settings.DEBUG is True
+
+def test_payload_size_limit_rejection():
+    """Verify that oversized requests exceeding 1MB are rejected with HTTP 413 (CWE-400)"""
+    headers = {"content-length": str(2 * 1024 * 1024)}
+    response = client.post("/api/harness/run", json={"test": "data"}, headers=headers)
+    assert response.status_code == 413
+    assert "Payload Too Large" in response.json()["detail"]
+
+def test_rate_limiting_guard():
+    """Verify that excessive automated requests trigger HTTP 429 rate limit responses"""
+    simulated_headers = {
+        "x-test-rate-limit": "true",
+        "x-forwarded-for": "198.51.100.99"
+    }
+    
+    # Send 10 reset calls (limit is 10)
+    for _ in range(10):
+        res = client.post("/api/harness/reset", headers=simulated_headers)
+        assert res.status_code == 200
+
+    # The 11th call must be blocked with HTTP 429
+    blocked_res = client.post("/api/harness/reset", headers=simulated_headers)
+    assert blocked_res.status_code == 429
+    assert "Rate limit exceeded" in blocked_res.json()["detail"]
+    assert blocked_res.headers.get("Retry-After") == "60"

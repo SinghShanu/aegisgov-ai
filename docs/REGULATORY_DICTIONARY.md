@@ -87,7 +87,7 @@ AegisGov AI evaluates three distinct access dimensions simultaneously:
 
 ### 4. Circuit Breaker
 - **The Concept:** Borrowed from electrical engineering and financial trading exchanges. When a financial threshold or safety parameter is tripped, the circuit opens to prevent catastrophic damage (e.g. capital flight or flash crashes).
-- **In Our Code:** A deterministic code gate in [circuit_breaker.py](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/backend/app/harness/circuit_breaker.py) that inspects the extracted transaction amount:
+- **In Our Code:** A deterministic code gate in [`circuit_breaker.py`](../backend/app/harness/circuit_breaker.py) that inspects the extracted transaction amount:
   - If $\text{amount} > \text{S}\$ 10,000$ or $\text{amount} > \text{₹} 5,00,000$, it trips the circuit and escalates to HITL.
 
 ### 5. Ingress vs. Egress Guards
@@ -127,7 +127,7 @@ A data design pattern that organizes data into progressive refinement tiers:
 4. **Quarantine Tier (Security Vault):** An isolated holding area for transactions flagged as malicious, high-risk fraud, or schema contract violations. Quarantined records are barred from advancing to Silver or Gold.
 
 ### 2. Policy-as-Code (PaC) & Data Contracts
-- **The Concept:** Traditional compliance relies on 100-page policy manuals written in legal English that developers must manually interpret. **Policy-as-Code** uses an AI compiler (Gemini Pro in [policy_compiler.py](file:///Users/shanusingh/Google_AI_Builder_Cup_2026/backend/app/agents/policy_compiler.py)) to parse statutory text (e.g. MAS Notice 644) and generate machine-executable JSON schemas called **Data Contracts**.
+- **The Concept:** Traditional compliance relies on 100-page policy manuals written in legal English that developers must manually interpret. **Policy-as-Code** uses an AI compiler (Gemini Pro in [`policy_compiler.py`](../backend/app/agents/policy_compiler.py)) to parse statutory text (e.g. MAS Notice 644) and generate machine-executable JSON schemas called **Data Contracts**.
 - **Data Contract:** A formal agreement specifying what columns are required, their data types, nullability rules, and specific PII masking algorithms (e.g. `MASK_MIDDLE` or `VAULT_TOKENIZE`). The data pipeline refuses to promote any record that violates the contract.
 
 ### 3. Grounding (Eliminating Hallucinations)
